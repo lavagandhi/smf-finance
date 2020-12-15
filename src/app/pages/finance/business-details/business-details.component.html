@@ -1,0 +1,52 @@
+
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitBusinessForm(validateForm)" nzLayout="horizontal">
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-item>
+      <nz-form-label nzRequired class="p-0" [nzSpan]="24"
+        >Nature of Business</nz-form-label
+      >
+      <nz-form-control nzHasFeedback
+				nzErrorTip="Please input your Nature of Business!" [nzSpan]="24">
+        <input nz-input formControlName="natureofbusiness" placeholder="Nature of Business" name="" />
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <div nz-col nzSpan="12">
+    <nz-form-item>
+      <nz-form-label nzRequired class="p-0" [nzSpan]="24">Year of Experience</nz-form-label>
+      <nz-form-control nzHasFeedback
+				nzErrorTip="Please input your Year of Experience!" [nzSpan]="24">
+        <input nz-input formControlName="yearofexperience" type="number" placeholder="Year of Experience" name="" />
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</div>
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="24">
+    <nz-form-item>
+      <nz-form-label nzRequired class="p-0" [nzSpan]="24">Distance from Residence</nz-form-label>
+      <nz-form-control nzHasFeedback
+				nzErrorTip="Please input your Distance from Residence!" [nzSpan]="24">
+        <input nz-input formControlName="distanceresidence" placeholder="Distance from Residence" name="" />
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</div>
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="24">
+    <nz-form-item>
+      <nz-form-label nzRequired class="p-0" [nzSpan]="24">Address</nz-form-label>
+      <nz-form-control nzHasFeedback
+				nzErrorTip="Please input your Address!" [nzSpan]="24">
+        <textarea
+          formControlName="address"
+          nz-input
+          rows="2"
+          placeholder="write any thing"
+        ></textarea>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</div>
+</form>

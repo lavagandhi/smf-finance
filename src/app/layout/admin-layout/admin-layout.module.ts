@@ -1,0 +1,35 @@
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AdminLayoutRoutingModule } from './admin-layout-routing.module';
+import { FormsModule } from '@angular/forms';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { AdminLayoutComponent } from './admin-layout.component';
+import { IconsProviderModule } from 'src/app/icons-provider.module';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { FinanceModule } from 'src/app/pages/finance/finance.module';
+import { GroupModule } from 'src/app/pages/group/group.module';
+import { DashboardModule } from 'src/app/pages/dashboard/dashboard.module';
+import { CenterModule } from 'src/app/pages/center/center.module';
+
+@NgModule({
+	imports: [
+		CommonModule,
+		AdminLayoutRoutingModule,
+		FormsModule,
+		IconsProviderModule,
+		NzLayoutModule,
+		NzMenuModule,
+		SharedModule,
+		FinanceModule,
+		GroupModule,
+		DashboardModule,
+		CenterModule
+	],
+	declarations: [AdminLayoutComponent, ],
+	providers: [{ provide: NZ_I18N, useValue: en_US }],
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+export class AdminLayoutModule {}

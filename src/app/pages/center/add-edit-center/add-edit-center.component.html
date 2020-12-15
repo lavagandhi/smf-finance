@@ -1,0 +1,37 @@
+<div nz-row [nzGutter]="32">
+  <div nz-col nzSpan="24">
+    <nz-page-header nzBackIcon>
+      <nz-page-header-title> {{title}} </nz-page-header-title>
+    </nz-page-header>
+  </div>
+  
+</div>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitCenterForm(validateForm)" nzLayout="horizontal">
+<div nz-row [nzGutter]="32">
+  <div nz-col nzSpan="24">
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Center Name</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Center Name!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="centername" id="centername" />
+        </nz-form-control>
+      </nz-form-item>  
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Center Address</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your center Name!" [nzSm]="14" [nzXs]="24" >
+          <textarea
+          formControlName="centeraddress"
+          nz-input
+          rows="2"
+          placeholder="write any thing"
+        ></textarea>
+        </nz-form-control>
+      </nz-form-item>     
+      <nz-form-item nz-row class="register-area">
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary" [disabled]="!validateForm">{{btnName}}</button>
+          <button nz-button (click)="resetForm($event)">Reset</button>
+        </nz-form-control>
+      </nz-form-item>
+  </div>
+</div>
+</form>

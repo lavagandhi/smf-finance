@@ -1,0 +1,30 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitIncomeForm(validateForm)" nzLayout="horizontal">
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-item>
+      <nz-form-label nzRequired class="p-0" [nzSpan]="24"
+        >No of family members including applicant</nz-form-label
+      >
+      <nz-form-control nzHasFeedback
+      nzErrorTip="Please input your No of family!" [nzSpan]="24">
+        <input nz-input formControlName="nooffamilymember" placeholder="No of family members including applicant" name="" />
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <div nz-col nzSpan="12">
+    <nz-form-item>
+      <nz-form-label nzRequired class="p-0" [nzSpan]="24"
+        >Approximate Yearly Family Income</nz-form-label
+      >
+      <nz-form-control nzHasFeedback
+      nzErrorTip="Please input your Approximate Yearly Family Income!" [nzSpan]="24">
+        <nz-select nzShowSearch formControlName="approximateyear" nzAllowClear nzPlaceHolder="Select approximate year">
+          <nz-option nzLabel="male" nzValue="male"></nz-option>
+          <nz-option nzLabel="female" nzValue="female"></nz-option>
+          <nz-option nzLabel="transgender" nzValue="transgender"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</div>
+</form>

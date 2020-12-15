@@ -1,0 +1,35 @@
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="24">
+    <nz-page-header>
+      <nz-page-header-title>Applicant</nz-page-header-title>
+     
+    </nz-page-header>
+  </div>  
+</div>
+
+<nz-steps [nzCurrent]="current" nzProgressDot>
+  <nz-step nzTitle="Applicant Details"></nz-step>
+  <nz-step nzTitle="Co-Applicant Details"></nz-step>
+  <nz-step nzTitle="Business Details"></nz-step>
+  <nz-step nzTitle="Income Details"></nz-step>
+  <nz-step nzTitle="Bank Account Details"></nz-step>
+</nz-steps>
+
+<div class="steps-content">
+  <app-applicant-details *ngIf="current === 0"></app-applicant-details>
+  <app-co-applicant-details *ngIf="current === 1"></app-co-applicant-details>
+  <app-business-details *ngIf="current === 2"></app-business-details>
+  <app-income-details *ngIf="current === 3"></app-income-details>
+  <app-bank-details *ngIf="current === 4"></app-bank-details>
+  </div>
+<div class="steps-action">
+  <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+    <span>Previous</span>
+  </button>
+  <button nz-button nzType="default" (click)="next()" *ngIf="current < 4">
+    <span>Next</span>
+  </button>
+  <button nz-button nzType="primary" (click)="done()" *ngIf="current === 4">
+    <span>Done</span>
+  </button>
+</div>

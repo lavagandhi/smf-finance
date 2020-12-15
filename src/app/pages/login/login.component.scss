@@ -1,0 +1,54 @@
+.login-form-margin {
+	margin-bottom: 16px;
+}
+
+.login-form-forgot {
+	float: right;
+}
+
+.login-form-button {
+	width: 100%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+nz-content {
+	padding: 0 50px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+nz-card {
+	width: 100%;
+	border-radius: 8px;
+}
+
+nz-footer {
+	text-align: center;
+}
+nz-row {
+	width: 100%;
+}
+
+.inner-content {
+	width: 420px;
+	display: flex;
+	justify-content: center;
+	box-shadow: 0px 0px 12px rgb(0 21 41 / 19%);
+}
+nz-layout {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	// background-image: url('../../../assets//img/bg.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.login-head {
+	text-align: center;
+	margin-top: 5px;
+	font-size: 24px;
+	margin-bottom: 30px;
+}
+
