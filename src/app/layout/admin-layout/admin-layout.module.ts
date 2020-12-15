@@ -13,6 +13,8 @@ import { FinanceModule } from 'src/app/pages/finance/finance.module';
 import { GroupModule } from 'src/app/pages/group/group.module';
 import { DashboardModule } from 'src/app/pages/dashboard/dashboard.module';
 import { CenterModule } from 'src/app/pages/center/center.module';
+import { PaymentModule } from 'src/app/pages/payment/payment.module';
+import { LoanProcessModule } from 'src/app/pages/loan-process/loan-process.module';
 
 @NgModule({
 	imports: [
@@ -26,7 +28,9 @@ import { CenterModule } from 'src/app/pages/center/center.module';
 		FinanceModule,
 		GroupModule,
 		DashboardModule,
-		CenterModule
+		CenterModule,
+		PaymentModule,
+		LoanProcessModule
 	],
 	declarations: [AdminLayoutComponent, ],
 	providers: [{ provide: NZ_I18N, useValue: en_US }],

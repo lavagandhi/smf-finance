@@ -28,6 +28,20 @@ export const routes: Routes = [
 				(m) => m.CenterModule
 			),
 	},
+	{
+		path: 'loan-process',
+		loadChildren: () =>
+			import('./../../pages/loan-process/loan-process.module').then(
+				(m) => m.LoanProcessModule
+			),
+	},
+	{
+		path: 'payment',
+		loadChildren: () =>
+			import('./../../pages/payment/payment.module').then(
+				(m) => m.PaymentModule
+			),
+	},
 ];
 
 @NgModule({

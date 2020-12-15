@@ -17,7 +17,7 @@ export class AdminLayoutComponent implements OnInit {
 		{
 			text: 'Applicant',
 			url: '/applicant',
-			icon: 'dollar',
+			icon: 'user-add',
 		},
 		{
 			text: 'Group',
@@ -28,6 +28,16 @@ export class AdminLayoutComponent implements OnInit {
 			text: 'Center',
 			url: '/center/view',
 			icon: 'block',
+		},
+		{
+			text: 'Loan Process',
+			url: '/loan-process/view',
+			icon: 'credit-card',
+		},
+		{
+			text: 'Payment',
+			url: '/payment/create',
+			icon: 'dollar',
 		},
 	];
 	constructor(private tokenservice: TokenService) {}
