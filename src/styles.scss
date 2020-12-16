@@ -9,3 +9,26 @@ nz-date-picker {
       padding: 0px !important;
       margin-bottom: 20px !important;
   }
+  .card-scroll {
+		height: calc(100vh - 182px);
+		overflow-y: auto;
+}
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #ffffff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}

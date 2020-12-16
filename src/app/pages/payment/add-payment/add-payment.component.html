@@ -1,3 +1,42 @@
-<p>
-  add-payment works!
-</p>
+<div nz-row [nzGutter]="32">
+  <div nz-col nzSpan="24">
+    <nz-page-header>
+      <nz-page-header-title> {{title}} </nz-page-header-title>
+    </nz-page-header>
+  </div>
+  
+</div>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm)" nzLayout="horizontal">
+<div nz-row [nzGutter]="32">
+  <div nz-col nzSpan="24" class="card-scroll">
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Center ID</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Center ID!" [nzSm]="14" [nzXs]="24" >
+          <nz-select nzShowSearch nzAllowClear formControlName="centerid" nzPlaceHolder="Select Center">
+            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>  
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Group ID</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Group ID!" [nzSm]="14" [nzXs]="24" >
+          <nz-select nzShowSearch nzAllowClear formControlName="groupid" nzPlaceHolder="Select Group">
+            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>  
+ 
+      <nz-form-item nz-row class="register-area">
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary" [disabled]="!validateForm">{{btnName}}</button>
+          <button nz-button (click)="resetForm($event)">Reset</button>
+        </nz-form-control>
+      </nz-form-item>
+  </div>
+</div>
+</form>

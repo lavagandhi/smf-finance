@@ -10,6 +10,7 @@ import { CoApplicantDetailsComponent } from './co-applicant-details/co-applicant
 import { BankDetailsComponent } from './bank-details/bank-details.component';
 import { IncomeDetailsComponent } from './income-details/income-details.component';
 import { BusinessDetailsComponent } from './business-details/business-details.component';
+import { ViewApplicantComponent } from './view-applicant/view-applicant.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { BusinessDetailsComponent } from './business-details/business-details.co
     IconsProviderModule,
     FinanceRoutingModule
   ],
-  declarations: [AddFinanceComponent, ApplicantDetailsComponent, CoApplicantDetailsComponent, BankDetailsComponent, IncomeDetailsComponent, BusinessDetailsComponent, BankDetailsComponent],
+  declarations: [AddFinanceComponent, ViewApplicantComponent, ApplicantDetailsComponent, CoApplicantDetailsComponent, BankDetailsComponent, IncomeDetailsComponent, BusinessDetailsComponent, BankDetailsComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class FinanceModule { }

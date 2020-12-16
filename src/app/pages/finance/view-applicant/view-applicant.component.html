@@ -1,9 +1,9 @@
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="24">
     <nz-page-header>
-      <nz-page-header-title>Loan Process List</nz-page-header-title>
+      <nz-page-header-title>Applicant List</nz-page-header-title>
       <nz-page-header-extra>
-        <button nz-button nzType="primary" (click)="create()">Add Loan Process</button>
+        <button nz-button nzType="primary" (click)="create()">Add Applicant</button>
       </nz-page-header-extra>
     </nz-page-header>
   </div>  
@@ -14,25 +14,25 @@
     <nz-table #basicTable [nzData]="listOfData">
       <thead>
         <tr>
-          <th>Loan Get Location</th>
-          <th>Loan Get Reason</th>
-          <th>Amount</th>
-          <th>Installment</th>
-          <th>Duration</th>
-          <th>Payment Installment</th>
-          <th>Request Loan Amount</th>
+          <th>Loan Account Number</th>
+          <th>Gold Loan Branch</th>
+          <th>Micro Pin Branch</th>
+          <th>Existing Center</th>
+          <th>Center Group</th>
+          <th>Existing Group</th>
+          <th>Center Address</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of basicTable.data">
-          <td>{{ data.loangetlocation }}</td>
-          <td>{{ data.loangetreason }}</td>
-          <td>{{ data.amount }}</td>
-          <td>{{ data.installment }}</td>
-          <td>{{ data.duration }}</td>
-          <td>{{ data.paymentinstallment }}</td>
-          <td>{{ data.requestedloanamount }}</td>
+          <td>{{ data.loanaccountno }}</td>
+          <td>{{ data.goldloanbranch }}</td>
+          <td>{{ data.micropinbranch }}</td>
+          <td>{{ data.existingcenter }}</td>
+          <td>{{ data.centergroup }}</td>
+          <td>{{ data.existinggroup }}</td>
+          <td>{{ data.centeraddress }}</td>
           <td>
             <a (click)="edit(data.id)"><i nz-icon nzType="edit" nzTheme="outline"></i></a>
             <nz-divider nzType="vertical"></nz-divider>

@@ -1,3 +1,169 @@
-<p>
-  add-edit-loan-process works!
-</p>
+<div nz-row [nzGutter]="32">
+  <div nz-col nzSpan="24">
+    <nz-page-header nzBackIcon>
+      <nz-page-header-title> {{title}} </nz-page-header-title>
+    </nz-page-header>
+  </div>
+  
+</div>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm)" nzLayout="horizontal">
+<div nz-row [nzGutter]="32">
+  <div nz-col nzSpan="24" class="card-scroll">
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Loan Get Location</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Loan Get Location!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="loangetlocation" />
+        </nz-form-control>
+      </nz-form-item>  
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Loan Get Reason</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Loan Get Reason!" [nzSm]="14" [nzXs]="24" >
+          <textarea
+          formControlName="loangetreason"
+          nz-input
+          rows="2"
+          placeholder="write any thing"
+        ></textarea>
+        </nz-form-control>
+      </nz-form-item>  
+      
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Amount</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Amount!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="amount" />
+        </nz-form-control>
+      </nz-form-item>  
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Installment</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Installment!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="installment" />
+        </nz-form-control>
+      </nz-form-item>  
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Duration</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Duration!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="duration" />
+        </nz-form-control>
+      </nz-form-item>  
+
+      
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Payment Installment</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Payment Installment!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="paymentinstallment" />
+        </nz-form-control>
+      </nz-form-item>  
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Requested Loan Amount</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Requested Loan Amount!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="requestedloanamount" />
+        </nz-form-control>
+      </nz-form-item>  
+
+
+
+      
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Purpose</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Purpose!" [nzSm]="14" [nzXs]="24" >
+          <textarea
+          formControlName="purpose"
+          nz-input
+          rows="2"
+          placeholder="write any thing"
+        ></textarea>
+        </nz-form-control>
+      </nz-form-item>  
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Repayment Requested</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Repayment Requested!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="repaymentrequested" />
+        </nz-form-control>
+      </nz-form-item>  
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Per Annum Interest</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Per Annum Interest!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="perannuminterest" />
+        </nz-form-control>
+      </nz-form-item> 
+      
+      
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Processing Fee</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Processing Fee!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="processingfee" />
+        </nz-form-control>
+      </nz-form-item> 
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Insurance</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Insurance!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="insurance" />
+        </nz-form-control>
+      </nz-form-item> 
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Group ID</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Group ID!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="groupid" />
+        </nz-form-control>
+      </nz-form-item>  
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Paided Asal</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Paided Asal!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="paidedasal" />
+        </nz-form-control>
+      </nz-form-item>  
+      
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Pending Installment</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Pending Installment!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="pendinginstallment" />
+        </nz-form-control>
+      </nz-form-item>  
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Remain Asal</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Remain Asal!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="remainasal" />
+        </nz-form-control>
+      </nz-form-item>  
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Remain Interest</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Remain Interest!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="remaininterest" />
+        </nz-form-control>
+      </nz-form-item>  
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Remain Insurance</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Remain Insurance!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="remaininsurance" />
+        </nz-form-control>
+      </nz-form-item>  
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Install Monthly</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Install Monthly!" [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="installmonthly" />
+        </nz-form-control>
+      </nz-form-item>  
+ 
+      <nz-form-item nz-row class="register-area">
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary" [disabled]="!validateForm">{{btnName}}</button>
+          <button nz-button (click)="resetForm($event)">Reset</button>
+        </nz-form-control>
+      </nz-form-item>
+  </div>
+</div>
+</form>

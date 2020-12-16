@@ -6,6 +6,7 @@ import { ViewLoanProcessComponent } from './view-loan-process/view-loan-process.
 const routes: Routes = [
 	{ path: '', pathMatch: 'full', redirectTo: 'view' },
 	{ path: 'create', component: AddEditLoanProcessComponent },
+	{ path: 'edit/:id', component: AddEditLoanProcessComponent },
 	{ path: 'view', component: ViewLoanProcessComponent },
 ];
 
