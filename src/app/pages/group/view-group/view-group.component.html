@@ -17,6 +17,7 @@
         <tr>
           <th>Group Name</th>
           <th>Group Address</th>
+          <th>Center Name</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -24,6 +25,7 @@
         <tr *ngFor="let data of basicTable.data">
           <td>{{ data.name }}</td>
           <td>{{ data.address }}</td>
+          <td>Center Name</td>
           <td>
             <a (click)="edit(data.id)"><i nz-icon nzType="edit" nzTheme="outline"></i></a>
             <nz-divider nzType="vertical"></nz-divider>

@@ -52,6 +52,10 @@ export class AddFinanceComponent implements OnInit {
         this.index = 'fifth-content';
         break;
       }
+      case 5: {
+        this.index = 'sixth-content';
+        break;
+      }
       default: {
         this.index = 'error';
       }

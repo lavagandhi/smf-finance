@@ -20,7 +20,8 @@ export class AddEditGroupComponent implements OnInit {
   ngOnInit() {
     this.validateForm = this.fb.group({
 			groupname: [null, [Validators.required]],
-			groupaddress: [null, [Validators.required]],      
+			groupaddress: [null, [Validators.required]],   
+			centername: [null, [Validators.required]],   
     });
     
     this.activatedRoute.params.subscribe((params) => {
@@ -28,8 +29,10 @@ export class AddEditGroupComponent implements OnInit {
       this.title = 'Edit';
       this.btnName = 'Update';
       this.validateForm.patchValue({
-        centername: 'John Brown',
-        centeraddress: 'New York No. 1 Lake Park'
+        groupname: 'John Brown',
+		groupaddress: 'New York No. 1 Lake Park',
+		centername: 1,
+		
         
       });
     }

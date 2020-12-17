@@ -13,6 +13,7 @@
   <nz-step nzTitle="Business Details"></nz-step>
   <nz-step nzTitle="Income Details"></nz-step>
   <nz-step nzTitle="Bank Account Details"></nz-step>
+  <nz-step nzTitle="Image Upload"></nz-step>
 </nz-steps>
 
 <div class="steps-content">
@@ -21,15 +22,16 @@
   <app-business-details *ngIf="current === 2"></app-business-details>
   <app-income-details *ngIf="current === 3"></app-income-details>
   <app-bank-details *ngIf="current === 4"></app-bank-details>
+  <app-image-upload *ngIf="current === 5"></app-image-upload>
   </div>
 <div class="steps-action">
   <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
     <span>Previous</span>
   </button>
-  <button nz-button nzType="default" (click)="next()" *ngIf="current < 4">
+  <button nz-button nzType="default" (click)="next()" *ngIf="current < 5">
     <span>Next</span>
   </button>
-  <button nz-button nzType="primary" (click)="done()" *ngIf="current === 4">
+  <button nz-button nzType="primary" (click)="done()" *ngIf="current === 5">
     <span>Done</span>
   </button>
 </div>

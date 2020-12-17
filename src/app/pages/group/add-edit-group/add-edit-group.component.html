@@ -9,6 +9,24 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitGroupForm(validateForm)" nzLayout="horizontal">
 <div nz-row [nzGutter]="32">
   <div nz-col nzSpan="24">
+
+  
+  <nz-form-item>
+    <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Center Name</nz-form-label>
+    <nz-form-control nzHasFeedback nzErrorTip="Please input your Group Name!" [nzSm]="14" [nzXs]="24" >
+      <nz-select
+    nzShowSearch
+    nzAllowClear
+    formControlName="centername"
+    nzPlaceHolder="Select center"
+  >
+    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+  </nz-select>
+    </nz-form-control>
+  </nz-form-item>  
+
       <nz-form-item>
         <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Group Name</nz-form-label>
         <nz-form-control nzHasFeedback nzErrorTip="Please input your Group Name!" [nzSm]="14" [nzXs]="24" >

@@ -1,0 +1,52 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitUploadForm(validateForm)" nzLayout="horizontal">
+  
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-item>
+      <nz-form-label nzRequired class="p-0" [nzSpan]="24"
+        >Applicant Photo Upload</nz-form-label
+      >
+      <nz-form-control [nzSpan]="24" nzHasFeedback
+      nzErrorTip="Please upload image !">
+      <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
+      <button nz-button><i nz-icon nzType="upload"></i>Select File</button>
+    </nz-upload>
+    <button
+      nz-button
+      [nzType]="'primary'"
+      [nzLoading]="uploading"
+      (click)="handleUpload()"
+      [disabled]="fileList.length == 0"
+      style="margin-top: 16px"
+    >
+      {{ uploading ? 'Uploading' : 'Start Upload' }}
+    </button>
+      
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <div nz-col nzSpan="12">
+    <nz-form-item>
+      <nz-form-label nzRequired class="p-0" [nzSpan]="24"
+        >Co-Applicant Photo Upload</nz-form-label
+      >
+      <nz-form-control [nzSpan]="24" nzHasFeedback
+      nzErrorTip="Please upload image !">
+      <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
+      <button nz-button><i nz-icon nzType="upload"></i>Select File</button>
+    </nz-upload>
+    <button
+      nz-button
+      [nzType]="'primary'"
+      [nzLoading]="uploading"
+      (click)="handleUpload()"
+      [disabled]="fileList.length == 0"
+      style="margin-top: 16px"
+    >
+      {{ uploading ? 'Uploading' : 'Start Upload' }}
+    </button>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</div>
+</form>
