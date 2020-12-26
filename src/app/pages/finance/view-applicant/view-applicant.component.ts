@@ -64,6 +64,10 @@ export class ViewApplicantComponent implements OnInit {
     this.router.navigate(['/applicant/edit/' + id]);
   }
 
+  view(id): void {
+    this.router.navigate(['/applicant/view-details/' + id]);
+  }
+
   delete(id): void {
     this.modal.confirm({
       nzTitle: 'Are you sure delete?',
