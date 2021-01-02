@@ -132,13 +132,15 @@
       <nz-table #basicTable [nzData]="listOfData">
         <thead>
           <tr>
-            <th>Loan Account Number</th>
-            <th>Gold Loan Branch</th>
-            <th>Micro Pin Branch</th>
-            <th>Existing Center</th>
-            <th>Center Group</th>
-            <th>Existing Group</th>
-            <th>Center Address</th>
+            <th>Pmt No.</th>
+            <th>Payment Date</th>
+            <th>Beginning Balance</th>
+            <th>Monthly Payment</th>
+            <th>Principal</th>
+            <th>Interest</th>
+            <th>Ending Balance</th>
+            <th>Interest</th>
+            <th>Days</th>
           </tr>
         </thead>
         <tbody>
@@ -149,6 +151,8 @@
             <td>{{ data.existingcenter }}</td>
             <td>{{ data.centergroup }}</td>
             <td>{{ data.existinggroup }}</td>
+            <td>{{ data.centeraddress }}</td>
+            <td>{{ data.centeraddress }}</td>
             <td>{{ data.centeraddress }}</td>
           </tr>
         </tbody>
