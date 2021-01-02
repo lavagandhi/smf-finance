@@ -42,6 +42,27 @@ export const routes: Routes = [
 				(m) => m.PaymentModule
 			),
 	},
+	{
+		path: 'export',
+		loadChildren: () =>
+			import('./../../pages/export/export.module').then(
+				(m) => m.ExportModule
+			),
+	},
+	{
+		path: 'report',
+		loadChildren: () =>
+			import('./../../pages/report/report.module').then(
+				(m) => m.ReportModule
+			),
+	},
+	{
+		path: 'emi',
+		loadChildren: () =>
+			import('./../../pages/emi-calculator/emi-calculator.module').then(
+				(m) => m.EmiCalculatorModule
+			),
+	},
 ];
 
 @NgModule({

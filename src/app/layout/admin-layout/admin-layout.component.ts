@@ -39,6 +39,21 @@ export class AdminLayoutComponent implements OnInit {
 			url: '/payment/create',
 			icon: 'dollar',
 		},
+		{
+			text: 'EMI Calculator',
+			url: '/emi/create',
+			icon: 'calculator',
+		},
+		{
+			text: 'Export',
+			url: '/export/create',
+			icon: 'export',
+		},
+		{
+			text: 'Report',
+			url: '/report/create',
+			icon: 'file-excel',
+		},
 	];
 	constructor(private tokenservice: TokenService) {}
 

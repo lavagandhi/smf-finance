@@ -15,6 +15,9 @@ import { DashboardModule } from 'src/app/pages/dashboard/dashboard.module';
 import { CenterModule } from 'src/app/pages/center/center.module';
 import { PaymentModule } from 'src/app/pages/payment/payment.module';
 import { LoanProcessModule } from 'src/app/pages/loan-process/loan-process.module';
+import { ExportModule } from 'src/app/pages/export/export.module';
+import { ReportModule } from 'src/app/pages/report/report.module';
+import { EmiCalculatorModule } from 'src/app/pages/emi-calculator/emi-calculator.module';
 
 @NgModule({
 	imports: [
@@ -30,7 +33,10 @@ import { LoanProcessModule } from 'src/app/pages/loan-process/loan-process.modul
 		DashboardModule,
 		CenterModule,
 		PaymentModule,
-		LoanProcessModule
+		LoanProcessModule,
+		ExportModule,
+		ReportModule,
+		EmiCalculatorModule
 	],
 	declarations: [AdminLayoutComponent, ],
 	providers: [{ provide: NZ_I18N, useValue: en_US }],

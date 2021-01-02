@@ -41,6 +41,7 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+
 export const SHARED_ZORRO_MODULES = [
 	NzFormModule,
 	NzDescriptionsModule,

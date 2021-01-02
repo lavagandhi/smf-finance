@@ -11,7 +11,9 @@ nz-date-picker {
   }
   .card-scroll {
 		height: calc(100vh - 182px);
-		overflow-y: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 12px;
 }
 /* width */
 ::-webkit-scrollbar {
