@@ -6,155 +6,37 @@
   </div>
   
 </div>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm)" nzLayout="horizontal">
+<div nz-row [nzGutter]="32">
+  <div nz-col nzSpan="24" class="card-scroll">
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Center ID</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Center ID!" [nzSm]="14" [nzXs]="24" >
+          <nz-select nzShowSearch nzAllowClear formControlName="centerid" nzPlaceHolder="Select Center">
+            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>  
 
-<form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm)">
-  <nz-form-item>
-    <nz-form-control nzErrorTip="Please input your username!">
-      <nz-select nzShowSearch nzAllowClear formControlName="centerid" nzPlaceHolder="Select Center">
-        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-      </nz-select>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control nzErrorTip="Please input your Password!">
-      <nz-select nzShowSearch nzAllowClear formControlName="groupid" nzPlaceHolder="Select Group">
-        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-      </nz-select>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control>
-      <button nz-button nzType="primary">Search</button>
-    </nz-form-control>
-  </nz-form-item>
-</form><br>
-
-
-
-<div nz-row [nzGutter]="16">
-  <div nz-col nzSpan="24">
-    <nz-table #basicTable [nzData]="listOfData">
-      <thead>
-        <tr>
-          <th>Loan Account Number</th>
-          <th>Gold Loan Branch</th>
-          <th>Micro Pin Branch</th>
-          <th>Existing Center</th>
-          <th>Center Group</th>
-          <th>Existing Group</th>
-          <th>Center Address</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of basicTable.data">
-          <td>{{ data.loanaccountno }}</td>
-          <td>{{ data.goldloanbranch }}</td>
-          <td>{{ data.micropinbranch }}</td>
-          <td>{{ data.existingcenter }}</td>
-          <td>{{ data.centergroup }}</td>
-          <td>{{ data.existinggroup }}</td>
-          <td>{{ data.centeraddress }}</td>
-          <td>
-            <a (click)="showModal()"><i nz-icon nzType="dollar" nzTheme="outline"></i> Payment</a>
-          </td>
-        </tr>
-      </tbody>
-    </nz-table>
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Group ID</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Group ID!" [nzSm]="14" [nzXs]="24" >
+          <nz-select nzShowSearch nzAllowClear formControlName="groupid" nzPlaceHolder="Select Group">
+            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>  
+ 
+      <nz-form-item nz-row class="register-area">
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary" [disabled]="!validateForm">{{btnName}}</button>
+          <button nz-button (click)="resetForm($event)">Reset</button>
+        </nz-form-control>
+      </nz-form-item>
   </div>
 </div>
-
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Add Payment" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-  <ng-container *nzModalContent>
-    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitBankForm(validateForm)" nzLayout="horizontal">
-      <div nz-row [nzGutter]="12">
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-              >Name of the Bank</nz-form-label
-            >
-            <nz-form-control nzHasFeedback
-            nzErrorTip="Please input your Bank!" [nzSpan]="24">
-              <input nz-input formControlName="nameofthebank" placeholder="Name of the Bank" name="" />
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-              >Branch</nz-form-label
-            >
-            <nz-form-control nzHasFeedback nzErrorTip="Please input your Branch!" [nzSpan]="24">
-              <input nz-input formControlName="branch" placeholder="Branch" name="" />
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-      </div>
-      <div nz-row [nzGutter]="12">
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-              >Account No</nz-form-label
-            >
-            <nz-form-control nzHasFeedback
-            nzErrorTip="Please input your Account No!" [nzSpan]="24">
-              <input nz-input formControlName="accountno" placeholder="Account No" name="" />
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label nzRequired class="p-0" [nzSpan]="24">IFSC Code </nz-form-label>
-            <nz-form-control nzHasFeedback
-            nzErrorTip="Please input your IFSC Code!" [nzSpan]="24">
-              <input nz-input formControlName="ifsccode" placeholder="IFSC Code" name="" />
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-      </div>
-      <div nz-row [nzGutter]="12">
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label nzRequired class="p-0" [nzSpan]="24">Type of Account</nz-form-label>
-            <nz-form-control nzHasFeedback
-            nzErrorTip="Please input your Type of Account!" [nzSpan]="24">
-              <nz-select formControlName="typeofaccount" nzShowSearch nzAllowClear nzPlaceHolder="Select Type of Account">
-                <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-              </nz-select>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label nzRequired class="p-0" [nzSpan]="24">Mode of Operation</nz-form-label>
-            <nz-form-control nzHasFeedback
-            nzErrorTip="Please input your Mode of Operation!" [nzSpan]="24">
-              <nz-select formControlName="modeofoperation" nzShowSearch nzAllowClear nzPlaceHolder="Select Mode of Operation">
-                <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-              </nz-select>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-      </div>
-      <div nz-row [nzGutter]="12">
-        <div nz-col nzSpan="24">
-          <nz-form-item>
-            <nz-form-label nzRequired class="p-0" [nzSpan]="24">Name</nz-form-label>
-            <nz-form-control nzHasFeedback
-            nzErrorTip="Please input your Name!" [nzSpan]="24">
-              <input nz-input formControlName="name" placeholder="Name" name="" />
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-      </div> 
-      </form>
-  </ng-container>
-</nz-modal>
+</form>

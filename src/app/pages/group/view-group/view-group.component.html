@@ -7,7 +7,7 @@
       </nz-page-header-extra>
     </nz-page-header>
   </div>
-  
+
 </div>
 
 <div nz-row [nzGutter]="16">
@@ -16,20 +16,20 @@
       <thead>
         <tr>
           <th>Group Name</th>
-          <th>Group Address</th>
           <th>Center Name</th>
+          <th>No of Members</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of basicTable.data">
-          <td>{{ data.name }}</td>
-          <td>{{ data.address }}</td>
-          <td>Center Name</td>
+          <td>{{ data.groupname }}</td>
+          <td>{{ data.centername }}</td>
+          <td>{{ data.noofmember }}</td>
           <td>
-            <a (click)="edit(data.id)"><i nz-icon nzType="edit" nzTheme="outline"></i></a>
+            <a (click)="edit(data.groupid)"><i nz-icon nzType="edit" nzTheme="outline"></i></a>
             <nz-divider nzType="vertical"></nz-divider>
-            <a (click)="delete(data.id)"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
+            <a (click)="delete(data.groupid)"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
           </td>
         </tr>
       </tbody>

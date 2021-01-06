@@ -1,35 +1,74 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import {
-	FormBuilder,
-	FormControl,
-	FormGroup,
-	Validators,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
 } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ApplicantCreateService } from 'src/app/services/applicant-create/applicant-create.service';
+import { CoApplicantService } from 'src/app/services/co-applicant/co-applicant.service';
+import { DropdownService } from 'src/app/services/dropdown/dropdown.service';
+import { SuccessService } from 'src/app/services/success.service';
+import { TokenService } from 'src/app/services/token.service';
 @Component({
   selector: 'app-co-applicant-details',
   templateUrl: './co-applicant-details.component.html',
   styleUrls: ['./co-applicant-details.component.scss']
 })
 export class CoApplicantDetailsComponent implements OnInit {
-
- 
-  constructor(private fb: FormBuilder,) { }
+  data: any = [];
+  id: any;
+  dropDownLists: any;
+  applicantid: any;
+  constructor(private fb: FormBuilder,
+    private coApplicantService: CoApplicantService,
+    private successService: SuccessService,
+    private tokenservice: TokenService,
+    private dropdownservice: DropdownService,
+    private activatedRoute: ActivatedRoute) {
+    this.applicantid = this.activatedRoute.snapshot.paramMap.get('id');
+  }
   validateForm: FormGroup;
 
+  @Output() parentdata: EventEmitter<boolean> = new EventEmitter<boolean>();
   ngOnInit() {
+    this.id = sessionStorage.getItem("id");
+
+    this.dropdownservice.getEducation().subscribe(data => {
+      this.dropDownLists = data;
+    });
+
     this.validateForm = this.fb.group({
-			name: [null, [Validators.required]],
-			gender: [null, [Validators.required]],
-			relationship: [null, [Validators.required]],
-		});
+      coapplicantname: [null, [Validators.required]],
+      gender: [null, [Validators.required]],
+      relationtype: [null, [Validators.required]],
+      dob: [null, [Validators.required]]
+    });
+    this.validateForm.valueChanges.subscribe(() => {
+      if (this.validateForm.valid) {
+        this.parentdata.emit(false);
+      }
+    });
   }
 
-  submitCoApplicantForm(form: FormGroup): void {
+  submitCoApplicantForm() {
     for (const key in this.validateForm.controls) {
       if (this.validateForm.controls.hasOwnProperty(key)) {
         this.validateForm.controls[key].markAsDirty();
         this.validateForm.controls[key].updateValueAndValidity();
       }
+    }
+    if (this.validateForm.valid) {
+      let sendData = {
+        ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
+      }
+      this.coApplicantService.coapplicantCreate(sendData).subscribe(data => {
+        if (data) {
+          this.tokenservice.savesteps('co-applicant', (data.coapplicantid));
+          this.successService.ResponseMessage("success", "Co Applicant added");
+        }
+      })
     }
   }
 

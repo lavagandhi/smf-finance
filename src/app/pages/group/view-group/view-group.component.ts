@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { GroupService } from 'src/app/services/group/group.service';
+import { CenterService } from 'src/app/services/center/center.service';
+import { SuccessService } from 'src/app/services/success.service';
 interface Person {
   id: string;
   name: string;
@@ -13,49 +16,55 @@ interface Person {
 })
 export class ViewGroupComponent implements OnInit {
 
-  listOfData: Person[] = [
-    {
-      id: '1',
-      name: 'John Brown',
-      address: 'New York No. 1 Lake Park'
-    },
-    {
-      id: '2',
-      name: 'Jim Green',
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      id: '3',
-      name: 'Joe Black',
-      address: 'Sidney No. 1 Lake Park'
-    }
-  ];
+  listOfData: any = [];
 
-  constructor(private router: Router, private modal: NzModalService,) { }
+  constructor(
+    private router: Router,
+    private modal: NzModalService,
+    private groupService: GroupService,
+    private centerservice: CenterService,
+    private successService: SuccessService
+  ) { }
 
   ngOnInit() {
+    this.centerservice.getCenter().subscribe(centerdata => {
+      this.groupService.getGroup().subscribe(data => {
+        this.listOfData = data.map(m => {
+          let centerobj = centerdata.find(f => f.centerid === m.centerid);
+
+          if (centerobj)
+            return { ...m, centername: centerobj.centername };
+          return { ...m };
+        })
+      })
+    })
   }
 
   create(): void {
-		this.router.navigate(['/group/create']);
+    this.router.navigate(['/group/create']);
   }
-  
-  edit(id): void {
-		this.router.navigate(['/center/edit/' + id]);
-	}
 
-	delete(id): void {
-		this.modal.confirm({
-			nzTitle: 'Are you sure delete?',
-			nzOkText: 'Yes',
-			nzOkType: 'danger',
-			nzOnOk: () => {
-          console.log('success')
-			},
-			nzCancelText: 'No',
-			nzOnCancel: () => {},
-		});
-	}
+  edit(id): void {
+    this.router.navigate(['/group/edit/' + id]);
+  }
+
+  delete(id): void {
+    this.modal.confirm({
+      nzTitle: 'Are you sure delete?',
+      nzOkText: 'Yes',
+      nzOkType: 'danger',
+      nzOnOk: () => {
+        this.groupService.deleteGroup(id).subscribe(data => {
+          if (data) {
+            this.successService.ResponseMessage("success", "Group Deleted");
+            this.ngOnInit();
+          }
+        })
+      },
+      nzCancelText: 'No',
+      nzOnCancel: () => { },
+    });
+  }
 
 
 }

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { ApplicantCreateService } from 'src/app/services/applicant-create/applicant-create.service';
+import { SuccessService } from 'src/app/services/success.service';
+import { TokenService } from 'src/app/services/token.service';
 interface Person {
   id: string;
   loanaccountno: string;
@@ -19,42 +22,20 @@ interface Person {
 })
 export class ViewApplicantComponent implements OnInit {
 
-  listOfData: Person[] = [
-    {
-      id: '1',
-      loanaccountno: 'John Brown',
-      goldloanbranch: 'New York',
-      micropinbranch: 'New York',
-      existingcenter: 'New York',
-      centergroup: 'New York',
-      existinggroup: 'New York',
-      centeraddress: 'New York',
-    },
-    {
-      id: '2',
-      loanaccountno: 'Jim Green',
-      goldloanbranch: 'London',
-      micropinbranch: 'London',
-      existingcenter: 'London',
-      centergroup: 'London',
-      existinggroup: 'London',
-      centeraddress: 'London',
-    },
-    {
-      id: '3',
-      loanaccountno: 'Joe Black',
-      goldloanbranch: 'Sidney',
-      micropinbranch: 'Sidney',
-      existingcenter: 'Sidney',
-      centergroup: 'Sidney',
-      existinggroup: 'Sidney',
-      centeraddress: 'Sidney',
-    },
-  ];
+  listOfData = [];
 
-  constructor(private router: Router, private modal: NzModalService) {}
+  constructor(
+    private tokenservice:TokenService,
+    private router: Router, 
+    private modal: NzModalService,
+    private applicantCreateService: ApplicantCreateService,
+    private successService: SuccessService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.applicantCreateService.getAllapplicant().subscribe(data => {
+      this.listOfData = data;
+    })
+  }
 
   create(): void {
     this.router.navigate(['/applicant/create']);
@@ -64,20 +45,21 @@ export class ViewApplicantComponent implements OnInit {
     this.router.navigate(['/applicant/edit/' + id]);
   }
 
-  view(id): void {
-    this.router.navigate(['/applicant/view-details/' + id]);
-  }
-
   delete(id): void {
     this.modal.confirm({
       nzTitle: 'Are you sure delete?',
       nzOkText: 'Yes',
       nzOkType: 'danger',
       nzOnOk: () => {
-        console.log('success');
+        this.applicantCreateService.deleteapplicant(id).subscribe(data => {
+          if (data) {
+            this.successService.ResponseMessage("success", "Applicant Deleted");
+            this.ngOnInit();
+          }
+        })
       },
       nzCancelText: 'No',
-      nzOnCancel: () => {},
+      nzOnCancel: () => { },
     });
   }
 

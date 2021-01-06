@@ -1,4 +1,4 @@
-<form nz-form [formGroup]="validateForm" (ngSubmit)="submitIncomeForm(validateForm)" nzLayout="horizontal">
+<form nz-form [formGroup]="validateForm"  nzLayout="horizontal">
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="12">
     <nz-form-item>
@@ -19,9 +19,8 @@
       <nz-form-control nzHasFeedback
       nzErrorTip="Please input your Approximate Yearly Family Income!" [nzSpan]="24">
         <nz-select nzShowSearch formControlName="approximateyear" nzAllowClear nzPlaceHolder="Select approximate year">
-          <nz-option nzLabel="male" nzValue="male"></nz-option>
-          <nz-option nzLabel="female" nzValue="female"></nz-option>
-          <nz-option nzLabel="transgender" nzValue="transgender"></nz-option>
+       
+          <nz-option *ngFor="let dataedu of dropdownValue.FamilyIncome" [nzLabel]="dataedu.name" [nzValue]="dataedu.name"></nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>

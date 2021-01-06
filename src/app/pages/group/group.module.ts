@@ -9,11 +9,11 @@ import { ViewGroupComponent } from './view-group/view-group.component';
 
 @NgModule({
   imports: [
-    FormsModule,
     CommonModule,
-    GroupRoutingModule,
+    FormsModule,
     SharedModule,
     IconsProviderModule,
+    GroupRoutingModule,
   ],
   declarations: [AddEditGroupComponent, ViewGroupComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

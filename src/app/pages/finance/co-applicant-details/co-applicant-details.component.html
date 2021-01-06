@@ -1,4 +1,4 @@
-<form nz-form [formGroup]="validateForm" (ngSubmit)="submitCoApplicantForm(validateForm)" nzLayout="horizontal">
+<form nz-form [formGroup]="validateForm"  nzLayout="horizontal">
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="12">
     <nz-form-item>
@@ -7,7 +7,7 @@
       >
       <nz-form-control [nzSpan]="24" nzHasFeedback
 				nzErrorTip="Please input your Name!">
-        <input nz-input placeholder="Name" formControlName="name" name="" />
+        <input nz-input placeholder="Name" formControlName="coapplicantname" name="" />
       </nz-form-control>
     </nz-form-item>
   </div>
@@ -19,9 +19,8 @@
       <nz-form-control [nzSpan]="24" nzHasFeedback
 				nzErrorTip="Please input your Gender!">
         <nz-select nzShowSearch nzAllowClear formControlName="gender" nzPlaceHolder="Select gender">
-          <nz-option nzLabel="male" nzValue="male"></nz-option>
-          <nz-option nzLabel="female" nzValue="female"></nz-option>
-          <nz-option nzLabel="transgender" nzValue="transgender"></nz-option>
+          <nz-option [nzLabel]="list.name" [nzValue]="list.name" *ngFor="let list of dropDownLists.Gender">
+          </nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>
@@ -33,9 +32,10 @@
       <nz-form-label nzRequired class="p-0" [nzSpan]="24"
         >Relationship with Applicant</nz-form-label
       >
-      <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please input your Relationship with Applicant!">
-        <input nz-input formControlName="relationship" placeholder="Relationship with Applicant" name="" />
+      <nz-form-control [nzSpan]="24" nzHasFeedback>
+        <nz-select nzShowSearch nzAllowClear formControlName="relationtype" placeholder="Relationship with Applicant">      
+          <nz-option [nzLabel]="list.name" [nzValue]="list.name" *ngFor="let list of dropDownLists.Relationship"></nz-option>
+        </nz-select>
       </nz-form-control>
     </nz-form-item>
   </div>
@@ -44,7 +44,7 @@
       <nz-form-label nzRequired class="p-0" [nzSpan]="24">Age & DOB</nz-form-label>
       <nz-form-control [nzSpan]="24" nzHasFeedback
 				nzErrorTip="Please input your Secondary ID Number!">
-        <nz-date-picker></nz-date-picker>
+        <nz-date-picker formControlName="dob"></nz-date-picker>
       </nz-form-control>
     </nz-form-item>
   </div>

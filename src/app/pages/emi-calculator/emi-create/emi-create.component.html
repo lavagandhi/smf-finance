@@ -4,156 +4,103 @@
       <nz-page-header-title> {{title}} </nz-page-header-title>
     </nz-page-header>
   </div>
-  
+
 </div>
 
 <div class="card-scroll">
 
-<form nz-form [formGroup]="validateForm"   (ngSubmit)="submitForm(validateForm)" nzLayout="horizontal">
-  <div nz-row [nzGutter]="12">
-    <div nz-col nzSpan="12">
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" nzLayout="horizontal">
+    <div nz-row [nzGutter]="12">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired class="p-0" [nzSpan]="24">Loan Amount</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Please input your Loan Amount!" [nzSpan]="24">
+            <nz-select nzShowSearch nzAllowClear formControlName="loanamount" nzPlaceHolder="Select a Given Amount">
+              <nz-option [nzLabel]="list.name" [nzValue]="list.name" *ngFor="let list of dropDownLists.Amount">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired class="p-0" [nzSpan]="24">Annual Interest</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Please input your Annual Interest Rate!" [nzSpan]="24">
+            <input nz-input type="number" formControlName="annualinterestrate" placeholder="Annual Interest" name="" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="12">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired class="p-0" [nzSpan]="24">Loan Duration</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Please input your Loan Period 1 Year!" [nzSpan]="24">
+            <nz-select nzShowSearch nzAllowClear formControlName="loanperiod" nzPlaceHolder="Select a Given Amount">
+              <nz-option [nzLabel]="list.name" [nzValue]="list.id" *ngFor="let list of dropDownLists.Duration"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired class="p-0" [nzSpan]="24">Loan Repayment</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Please input your Total Interest!" [nzSpan]="24">
+            <nz-select nzShowSearch nzAllowClear formControlName="repayment" nzPlaceHolder="Select a Given Amount">
+              <nz-option [nzLabel]="list.name" [nzValue]="list.id" *ngFor="let list of dropDownLists.Repayment"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="12">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired class="p-0" [nzSpan]="24">Start Date of Loan</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Please input your Start Date of Loan!" [nzSpan]="24">
+            <nz-date-picker formControlName="emistartdate" (ngModelChange)="onChange($event)"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div class="position-right">
       <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >Name of the Borrower</nz-form-label
-        >
-        <nz-form-control nzHasFeedback
-        nzErrorTip="Please input your Bank!" [nzSpan]="24">
-          <input nz-input formControlName="nameoftheborrower" placeholder="Name of the Borrower" name="" />
+        <nz-form-control>
+          <button nz-button nzType="primary">Calculate</button>
         </nz-form-control>
       </nz-form-item>
     </div>
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >Loan Account Number</nz-form-label
-        >
-        <nz-form-control nzHasFeedback nzErrorTip="Please input your Loan Account Number!" [nzSpan]="24">
-          <input nz-input formControlName="loanaccountno" placeholder="Loan Account Number" name="" />
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-  </div>
-  <div nz-row [nzGutter]="12">
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >Loan Amount</nz-form-label
-        >
-        <nz-form-control nzHasFeedback
-        nzErrorTip="Please input your Loan Amount!" [nzSpan]="24">
-          <input nz-input formControlName="loanamount" placeholder="Loan Amount" name="" />
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Processing Fee </nz-form-label>
-        <nz-form-control nzHasFeedback
-        nzErrorTip="Please input your Processing Fee!" [nzSpan]="24">
-          <input nz-input formControlName="processingfee" placeholder="Processing Fee" name="" />
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-  </div>
-  <div nz-row [nzGutter]="12">
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Annual Interest Rate</nz-form-label>
-        <nz-form-control nzHasFeedback
-        nzErrorTip="Please input your Annual Interest Rate!" [nzSpan]="24">
-        <input nz-input formControlName="annualinterestrate" placeholder="Processing Fee" name="" />
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Insurance</nz-form-label>
-        <nz-form-control nzHasFeedback
-        nzErrorTip="Please input your Insurance!" [nzSpan]="24">
-        <input nz-input formControlName="insurance" placeholder="Insurance" name="" />
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-  </div>
-  <div nz-row [nzGutter]="12">
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Loan Period 1 Year</nz-form-label>
-        <nz-form-control nzHasFeedback
-        nzErrorTip="Please input your Loan Period 1 Year!" [nzSpan]="24">
-        <input nz-input formControlName="loanperiod" placeholder="Loan Period 1 Year" name="" />
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Total Interest</nz-form-label>
-        <nz-form-control nzHasFeedback
-        nzErrorTip="Please input your Total Interest!" [nzSpan]="24">
-        <input nz-input formControlName="totalinterest" placeholder="Total Interest" name="" />
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-  </div>
-  <div nz-row [nzGutter]="12">
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Start Date of Loan</nz-form-label>
-        <nz-form-control nzHasFeedback
-        nzErrorTip="Please input your Start Date of Loan!" [nzSpan]="24">
-        <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
-        <!-- <input nz-input formControlName="startdateloan" placeholder="Start Date of Loan" name="" /> -->
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Total Cost of Plan</nz-form-label>
-        <nz-form-control nzHasFeedback
-        nzErrorTip="Please input your Total Cost of Plan!" [nzSpan]="24">
-        <input nz-input formControlName="totalcostofplan" placeholder="Total Cost of Plan" name="" />
-        </nz-form-control>
-      </nz-form-item>
-      
-    </div>
-  </div>
-  <nz-form-item>
-    <nz-form-control>
-      <button nz-button nzType="primary">Search</button>
-    </nz-form-control>
-  </nz-form-item>
   </form>
-
-
-
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="24">
       <nz-table #basicTable [nzData]="listOfData">
         <thead>
           <tr>
-            <th>Pmt No.</th>
-            <th>Payment Date</th>
-            <th>Beginning Balance</th>
-            <th>Monthly Payment</th>
+            <th>sl.no</th>
+            <th>Installment Date</th>
+            <th>Installment Amt</th>
             <th>Principal</th>
-            <th>Interest</th>
-            <th>Ending Balance</th>
-            <th>Interest</th>
+            <th>Int</th>
+            <th>Balance</th>
+            <th>Collected Date</th>
+            <th>Collected Amt</th>
             <th>Days</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of basicTable.data">
-            <td>{{ data.loanaccountno }}</td>
-            <td>{{ data.goldloanbranch }}</td>
-            <td>{{ data.micropinbranch }}</td>
-            <td>{{ data.existingcenter }}</td>
-            <td>{{ data.centergroup }}</td>
-            <td>{{ data.existinggroup }}</td>
-            <td>{{ data.centeraddress }}</td>
-            <td>{{ data.centeraddress }}</td>
-            <td>{{ data.centeraddress }}</td>
+          <tr *ngFor="let data of basicTable.data; let i=index">
+            <td>{{ i+1 }}</td>
+            <td>{{ data.installmentdate | date:'dd-MM-yyyy' }} ({{data.installmentday}})</td>
+            <td>{{ data.installmentamount }}</td>
+            <td>{{ data.principal }}</td>
+            <td>{{ data.int }}</td>
+            <td>{{ data.balance }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
         </tbody>
       </nz-table>

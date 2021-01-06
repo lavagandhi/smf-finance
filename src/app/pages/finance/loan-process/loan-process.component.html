@@ -1,0 +1,78 @@
+<form nz-form [formGroup]="validateForm" nzLayout="horizontal">
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="12" >
+      <nz-form-item>
+        <nz-form-label  class="p-0" nzRequired [nzSpan]="24">Amount</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please Select your Amount!" [nzSpan]="24">
+          <nz-select nzShowSearch nzAllowClear formControlName="loanamount" nzPlaceHolder="Select a Given Amount">
+            <nz-option [nzLabel]="list.name" [nzValue]="list.name" *ngFor="let list of dropDownLists.Amount">
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="12" >
+      <nz-form-item>
+        <nz-form-label  class="p-0" nzRequired [nzSpan]="24">Repayment</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Installment!" [nzSpan]="24">
+          <nz-select nzShowSearch nzAllowClear formControlName="repayment" nzPlaceHolder="Select a Given Amount">
+            <nz-option [nzLabel]="list.name" [nzValue]="list.name" *ngFor="let list of dropDownLists.Repayment">
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="12" >
+      <nz-form-item>
+        <nz-form-label  class="p-0" nzRequired [nzSpan]="24">Duration</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Duration!" [nzSpan]="24">
+          <nz-select nzShowSearch nzAllowClear formControlName="duration" nzPlaceHolder="Select a Given Amount">
+            <nz-option [nzLabel]="list.name" [nzValue]="list.name" *ngFor="let list of dropDownLists.Duration">
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+    </div>
+
+    <div nz-col nzSpan="12" >
+      <nz-form-item>
+        <nz-form-label  class="p-0" nzRequired [nzSpan]="24">Per Annum Interest</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Per Annum Interest!" [nzSpan]="24">
+          <input nz-input formControlName="interest" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="12" >
+      <nz-form-item>
+        <nz-form-label  class="p-0" nzRequired [nzSpan]="24">Processing Fee</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Processing Fee!" [nzSpan]="24">
+          <input nz-input formControlName="processfee" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="12" >
+      <nz-form-item>
+        <nz-form-label  class="p-0" nzRequired [nzSpan]="24">Insurance</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Insurance!" [nzSpan]="24">
+          <input nz-input formControlName="insurance" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="12" >
+      <nz-form-item>
+        <nz-form-label  class="p-0" nzRequired [nzSpan]="24">Purpose</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Purpose!" [nzSpan]="24">
+          <textarea formControlName="purpose" nz-input rows="2" placeholder="write any thing"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+</form>

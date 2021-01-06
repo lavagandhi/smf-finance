@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { CenterService } from 'src/app/services/center/center.service';
+import { SuccessService } from 'src/app/services/success.service';
 interface Person {
   id: string;
   name: string;
@@ -12,50 +14,44 @@ interface Person {
   styleUrls: ['./view-center.component.scss']
 })
 export class ViewCenterComponent implements OnInit {
+  listOfData: any = [];
 
-
-  listOfData: Person[] = [
-    {
-      id: '1',
-      name: 'John Brown',
-      address: 'New York No. 1 Lake Park'
-    },
-    {
-      id: '2',
-      name: 'Jim Green',
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      id: '3',
-      name: 'Joe Black',
-      address: 'Sidney No. 1 Lake Park'
-    }
-  ];
-
-  constructor(private router: Router, private modal: NzModalService,) { }
+  constructor(
+    private router: Router,
+    private successService: SuccessService,
+    private centerService: CenterService,
+    private modal: NzModalService
+  ) { }
 
   ngOnInit() {
+    this.centerService.getCenter().subscribe(data => {
+        this.listOfData = data;
+    })
   }
 
   create(): void {
-		this.router.navigate(['/center/create']);
+    this.router.navigate(['/center/create']);
   }
-  
+
   edit(id): void {
-		this.router.navigate(['/center/edit/' + id]);
-	}
+    this.router.navigate(['/center/edit/' + id]);
+  }
 
-	delete(id): void {
-		this.modal.confirm({
-			nzTitle: 'Are you sure delete?',
-			nzOkText: 'Yes',
-			nzOkType: 'danger',
-			nzOnOk: () => {
-          console.log('success')
-			},
-			nzCancelText: 'No',
-			nzOnCancel: () => {},
-		});
-	}
-
+  delete(id): void {
+    this.modal.confirm({
+      nzTitle: 'Are you sure delete?',
+      nzOkText: 'Yes',
+      nzOkType: 'danger',
+      nzOnOk: () => {
+        this.centerService.deletecenter(id).subscribe(data => {
+          if (data) {
+            this.successService.ResponseMessage("success", "Center Deleted");
+            this.ngOnInit();
+          }
+        })
+      },
+      nzCancelText: 'No',
+      nzOnCancel: () => { },
+    });
+  }
 }

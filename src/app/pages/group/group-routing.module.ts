@@ -7,6 +7,7 @@ const routes: Routes = [
 	{ path: '', pathMatch: 'full', redirectTo: 'view' },
 	{ path: 'create', component: AddEditGroupComponent },
 	{ path: 'view', component: ViewGroupComponent },
+	{ path: 'edit/:id', component: AddEditGroupComponent },
 ];
 
 @NgModule({

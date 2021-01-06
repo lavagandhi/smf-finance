@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
 import { filter } from 'rxjs/operators';
@@ -50,7 +50,5 @@ export class ImageUploadComponent implements OnInit {
         }
       );
   }
-
-  
 
 }

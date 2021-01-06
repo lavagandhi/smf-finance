@@ -26,19 +26,17 @@
       </thead>
       <tbody>
         <tr *ngFor="let data of basicTable.data">
-          <td>{{ data.loanaccountno }}</td>
-          <td>{{ data.goldloanbranch }}</td>
-          <td>{{ data.micropinbranch }}</td>
-          <td>{{ data.existingcenter }}</td>
-          <td>{{ data.centergroup }}</td>
-          <td>{{ data.existinggroup }}</td>
-          <td>{{ data.centeraddress }}</td>
+          <td>{{ data.applicantid }}</td>
+          <td>{{ data.applicantname }}</td>
+          <td>{{ data.sidno }}</td>
+          <td>{{ data.mobileno }}</td>
+          <td>{{ data.groupid }}</td>
+          <td>{{ data.pidtype }}</td>
+          <td>{{ data.permanentaddress }}</td>
           <td>
-            <a (click)="edit(data.id)"><i nz-icon nzType="edit" nzTheme="outline"></i></a>
+            <a (click)="edit(data.applicantid)"><i nz-icon nzType="edit" nzTheme="outline"></i></a>
             <nz-divider nzType="vertical"></nz-divider>
-            <a (click)="delete(data.id)"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
-            <nz-divider nzType="vertical"></nz-divider>
-            <a (click)="view(data.id)"><i nz-icon nzType="eye" nzTheme="outline"></i></a>
+            <a (click)="delete(data.applicantid)"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
           </td>
         </tr>
       </tbody>

@@ -10,25 +10,25 @@
 <nz-steps [nzCurrent]="current" nzProgressDot>
   <nz-step nzTitle="Applicant Details"></nz-step>
   <nz-step nzTitle="Co-Applicant Details"></nz-step>
+  <nz-step nzTitle="Loan Process"></nz-step>
   <nz-step nzTitle="Business Details"></nz-step>
-  <nz-step nzTitle="Income Details"></nz-step>
   <nz-step nzTitle="Bank Account Details"></nz-step>
   <nz-step nzTitle="Image Upload"></nz-step>
 </nz-steps>
 
 <div class="steps-content">
-  <app-applicant-details *ngIf="current === 0"></app-applicant-details>
-  <app-co-applicant-details *ngIf="current === 1"></app-co-applicant-details>
-  <app-business-details *ngIf="current === 2"></app-business-details>
-  <app-income-details *ngIf="current === 3"></app-income-details>
-  <app-bank-details *ngIf="current === 4"></app-bank-details>
-  <app-image-upload *ngIf="current === 5"></app-image-upload>
+  <app-applicant-details *ngIf="current === 0" (parentdata)="submitedata($event)"></app-applicant-details>
+  <app-co-applicant-details *ngIf="current === 1" (parentdata)="submitedata($event)"></app-co-applicant-details>
+  <app-loan-process *ngIf="current === 2" (parentdata)="submitedata($event)"></app-loan-process>
+  <app-business-details *ngIf="current === 3" (parentdata)="submitedata($event)"></app-business-details>
+  <app-bank-details *ngIf="current === 4" (parentdata)="submitedata($event)"></app-bank-details>
+  <app-image-upload *ngIf="current === 5" ></app-image-upload>
   </div>
 <div class="steps-action">
-  <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+  <button nz-button nzType="default" (click)="pre()" *ngIf="(current > 0)">
     <span>Previous</span>
   </button>
-  <button nz-button nzType="default" (click)="next()" *ngIf="current < 5">
+  <button nz-button nzType="default" (click)="next()">
     <span>Next</span>
   </button>
   <button nz-button nzType="primary" (click)="done()" *ngIf="current === 5">

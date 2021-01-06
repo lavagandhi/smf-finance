@@ -12,11 +12,8 @@ import {
   styleUrls: ['./export-form.component.scss']
 })
 export class ExportFormComponent implements OnInit {
-
-
-
   title = 'Export';
-
+  listOfData:Array<any> = [];
   constructor(private fb: FormBuilder,) { }
   validateForm: FormGroup;
 

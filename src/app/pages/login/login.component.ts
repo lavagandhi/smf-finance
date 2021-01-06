@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SuccessService } from 'src/app/services/success.service';
 // import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -13,15 +14,14 @@ export class LoginComponent implements OnInit {
 
 	constructor(
 		private fb: FormBuilder,
-		// private authservice: AuthService,
-		private router: Router
+		private router: Router,
+		private successService : SuccessService,
 	) {}
 
 	ngOnInit(): void {
 		this.validateForm = this.fb.group({
 			userName: [null, [Validators.required]],
 			password: [null, [Validators.required]],
-			remember: [true],
 		});
 	}
 
@@ -32,20 +32,12 @@ export class LoginComponent implements OnInit {
 				this.validateForm.controls[i].updateValueAndValidity();
 			}
 		}
-
-		// this.authservice
-		// 	.login({
-		// 		useremail: this.validateForm.value.userName,
-		// 		password: this.validateForm.value.password,
-		// 	})
-		// 	.subscribe(
-		// 		(x) => {
-		// 			if (x.data.accessToken !== '') {
-		// 				this.router.navigateByUrl('/dashboard');
-		// 				this.authservice.setlogin(x.data.accessToken, x.data.refreshToken);
-		// 			}
-		// 		},
-		// 		(error) => {}
-		// 	);
+		if(this.validateForm.value.userName === "admin" && this.validateForm.value.password === "admin"){
+			this.router.navigateByUrl('/dashboard');
+			this.successService.ResponseMessage("success","Login Successfully....!!!!!")
+		}
+		else{
+			this.successService.ResponseMessage("error","Enter valid username and password")
+		}
 	}
 }

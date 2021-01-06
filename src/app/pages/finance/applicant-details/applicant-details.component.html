@@ -1,28 +1,24 @@
-<form nz-form [formGroup]="validateForm" (ngSubmit)="submitApplicantForm(validateForm)" nzLayout="horizontal">
+<form nz-form [formGroup]="validateForm" nzLayout="horizontal">
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="12">
       <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Name</nz-form-label>
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please choose your Name!">
-          <input nz-input placeholder="Name" formControlName="name" name="" />
+        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Center Name</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please choose your Center!">
+          <nz-select nzShowSearch nzAllowClear formControlName="centerid" nzPlaceHolder="Select a Center"
+            (ngModelChange)="selectCenter($event)">
+            <nz-option [nzLabel]="center.centername" [nzValue]="center.centerid"
+              *ngFor="let center of CenterlistOfData"></nz-option>
+          </nz-select>
         </nz-form-control>
       </nz-form-item>
     </div>
     <div nz-col nzSpan="12">
       <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Education</nz-form-label>
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please choose your Education!">
-          <nz-select
-            nzShowSearch
-            nzAllowClear
-            formControlName="education"
-            nzPlaceHolder="Select a education"
-          >
-            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+        <nz-form-label nzRequired class="p-0" [nzSpan]="24"> Group Name</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please choose your Group">
+          <nz-select nzShowSearch nzAllowClear formControlName="groupid" nzPlaceHolder="Select a Groupname">
+            <nz-option [nzLabel]="group.groupname" [nzValue]="group.groupid" *ngFor="let group of GrouplistOfData">
+            </nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -31,32 +27,43 @@
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="12">
       <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >Marriage Details</nz-form-label
-        >
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please choose your Marriage Details !">
-          <nz-select
-            nzShowSearch
-            nzAllowClear
-            formControlName="marriagedetails"
-            nzPlaceHolder="Select a marriage details"
-          >
-            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Name</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please choose your Name!">
+          <input nz-input placeholder="Name" formControlName="applicantname" name="" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Education</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please choose your Education!">
+          <nz-select nzShowSearch nzAllowClear formControlName="education" nzPlaceHolder="Select a education">
+            <nz-option *ngFor="let dataedu of dropdownlist?.education" [nzLabel]="dataedu.name"
+              [nzValue]="dataedu.name"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Marriage Details</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please choose your Marriage Details !">
+          <nz-select nzShowSearch nzAllowClear formControlName="marriagedetail"
+            nzPlaceHolder="Select a marriage details">
+
+            <nz-option *ngFor="let dataedu of dropdownlist?.MarriageDetails" [nzLabel]="dataedu.name"
+              [nzValue]="dataedu.name"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
     </div>
     <div nz-col nzSpan="12">
       <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >Husband/Father Name</nz-form-label
-        >
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please input your Husband/Father Name !">
-          <input nz-input formControlName="husbandfathername" placeholder="Husband/Father Name" name="" />
+        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Husband/Father Name</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please input your Husband/Father Name !">
+          <input nz-input formControlName="husbandname" placeholder="Husband/Father Name" name="" />
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -65,17 +72,11 @@
     <div nz-col nzSpan="12">
       <nz-form-item>
         <nz-form-label nzRequired class="p-0" [nzSpan]="24">Religion</nz-form-label>
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please choose your Religion!">
-          <nz-select
-            nzShowSearch
-            nzAllowClear
-            formControlName="religion"
-            nzPlaceHolder="Select a religion"
-          >
-            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please choose your Religion!">
+          <nz-select nzShowSearch nzAllowClear formControlName="religion" nzPlaceHolder="Select a religion">
+            <nz-option *ngFor="let dataedu of dropdownlist?.religion" [nzLabel]="dataedu.name"
+              [nzValue]="dataedu.name">
+            </nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -83,12 +84,10 @@
     <div nz-col nzSpan="12">
       <nz-form-item>
         <nz-form-label nzRequired class="p-0" [nzSpan]="24">Caste</nz-form-label>
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please choose your Caste Name!">
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please choose your Caste Name!">
           <nz-select nzShowSearch nzAllowClear formControlName="caste" nzPlaceHolder="Select a caste">
-            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+            <nz-option *ngFor="let dataedu of dropdownlist?.caste" [nzLabel]="dataedu.name" [nzValue]="dataedu.name">
+            </nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -97,53 +96,18 @@
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="12">
       <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Phone Number</nz-form-label>
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please input your Phone No !">
-          <input nz-input formControlName="phoneno" placeholder="Phone Number" name="" />
+        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Mobile Number</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please input your Mobile No !">
+          <input nz-input formControlName="mobileno" placeholder="Mobile Number" name="" />
         </nz-form-control>
       </nz-form-item>
     </div>
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >Telephone Number</nz-form-label
-        >
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please input your Telephone no!">
-          <input nz-input formControlName="telephone" placeholder="Telephone Number" name="" />
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-  </div>
-  <div nz-row [nzGutter]="16">
+
     <div nz-col nzSpan="12">
       <nz-form-item>
         <nz-form-label nzRequired class="p-0" [nzSpan]="24">Present Address</nz-form-label>
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please input your Present Address!">
-          <textarea
-            nz-input
-            formControlName="presentaddress"
-            rows="2"
-            placeholder="write any thing"
-          ></textarea>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >Permanent Address</nz-form-label
-        >
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please input your Permanent Address!">
-          <textarea
-            formControlName="permanentaddress"
-            nz-input
-            rows="2"
-            placeholder="write any thing"
-          ></textarea>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please input your Present Address!">
+          <textarea nz-input formControlName="presentaddress" rows="2" placeholder="write any thing"></textarea>
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -151,116 +115,45 @@
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="12">
       <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24">State(Present)</nz-form-label>
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please input your State Name!">
-          <input nz-input formControlName="statepresent" Address placeholder="Present State" name="" />
+        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Permanent Address</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please input your Permanent Address!">
+          <textarea formControlName="permanentaddress" nz-input rows="2" placeholder="write any thing"></textarea>
         </nz-form-control>
       </nz-form-item>
     </div>
+
     <div nz-col nzSpan="12">
       <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >State(permanent)</nz-form-label
-        >
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please input your Permanent State!">
-          <input nz-input formControlName="statepermanent" placeholder="Permanent State" name="" />
+        <nz-form-label nzRequired class="p-0" [nzSpan]="24">No.of year of stay in Present Area</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please input your No.of year of stay in Present Area!">
+          <input nz-input type="number" formControlName="noofyearstayed"
+            placeholder="No.of year of stay in Present Area" name="" />
         </nz-form-control>
       </nz-form-item>
     </div>
   </div>
   <div nz-row [nzGutter]="16">
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >Pincode(Present)</nz-form-label
-        >
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please input your Permanent Pincode!">
-          <input nz-input formControlName="pincodepresent" placeholder="Permanent Pincode" name="" />
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >Pincode(Permanent)</nz-form-label
-        >
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please input your Permanent Pincode!">
-          <input nz-input formControlName="pincodepermanent" placeholder="Permanent Pincode" name="" />
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-  </div>
-  <div nz-row [nzGutter]="16">
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >No.of year of stay in Present Area</nz-form-label
-        >
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please input your No.of year of stay in Present Area!">
-          <input
-            nz-input
-            formControlName="noofyearstay"
-            placeholder="No.of year of stay in Present Area"
-            name=""
-          />
-        </nz-form-control>
-      </nz-form-item>
-    </div>
     <div nz-col nzSpan="12">
       <nz-form-item>
         <nz-form-label nzRequired class="p-0" [nzSpan]="24">House Status</nz-form-label>
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please choose your House Status!">
-          <nz-select
-            nzShowSearch
-            nzAllowClear
-            formControlName="housestatus"
-            nzPlaceHolder="Select House Status"
-          >
-            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please choose your House Status!">
+          <nz-select nzShowSearch nzAllowClear formControlName="housestatus" nzPlaceHolder="Select House Status">
+            <nz-option *ngFor="let dataedu of dropdownlist?.HouseStatus" [nzLabel]="dataedu.name"
+            [nzValue]="dataedu.name"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
     </div>
-  </div>
-  <div nz-row [nzGutter]="16">
+
     <div nz-col nzSpan="12">
       <nz-form-item>
         <nz-form-label nzRequired class="p-0" [nzSpan]="24">Primary ID Type</nz-form-label>
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please input your Primary ID!">
-          <nz-select
-            nzShowSearch
-            formControlName="primaryid"
-            nzAllowClear
-            nzPlaceHolder="Select Primary ID"
-          >
-            <nz-option nzLabel="uid" nzValue="uid"></nz-option>
-            <nz-option nzLabel="electionid" nzValue="electionid"></nz-option>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please input your Primary ID!">
+          <nz-select nzShowSearch formControlName="pidtype" nzAllowClear nzPlaceHolder="Select Primary ID">
+
+            <nz-option *ngFor="let dataedu of dropdownlist?.PrimaryId" [nzLabel]="dataedu.name"
+              [nzValue]="dataedu.name"></nz-option>
           </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >Primary ID Number</nz-form-label
-        >
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please input your Primary ID Number!">
-          <input
-            nz-input
-            formControlName="primaryidnumber"
-            placeholder="Primary ID Type UID / Election ID"
-            name=""
-          />
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -268,37 +161,43 @@
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="12">
       <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >Secondary ID Type</nz-form-label
-        >
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please choose your Secondary ID!">
-          <nz-select
-            nzShowSearch
-            nzAllowClear
-            formControlName="secondaryid"
-            nzPlaceHolder="Select Secondary ID"
-          >
-            <nz-option nzLabel="rationcard" nzValue="rationcard"></nz-option>
-            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-          </nz-select>
+        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Primary ID Number</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please input your Primary ID Number!">
+          <input nz-input formControlName="pidno" placeholder="Primary ID Type UID / Election ID" name="" />
         </nz-form-control>
       </nz-form-item>
     </div>
     <div nz-col nzSpan="12">
       <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >Secondary ID Number</nz-form-label
-        >
-        <nz-form-control [nzSpan]="24" nzHasFeedback
-				nzErrorTip="Please input your Secondary ID Number!">
-          <input
-            nz-input
-            formControlName="secondaryidnumber"
-            placeholder="Secondary ID Type Ration Card / Bank Passbook / Others"
-            name=""
-          />
+        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Secondary ID Type</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please choose your Secondary ID!">
+          <nz-select nzShowSearch nzAllowClear formControlName="sidtype" nzPlaceHolder="Select Secondary ID">
+
+            <nz-option *ngFor="let dataedu of dropdownlist?.SecondaryId" [nzLabel]="dataedu.name"
+              [nzValue]="dataedu.name"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Secondary ID Number</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please input your Secondary ID Number!">
+          <input nz-input formControlName="sidno" placeholder="Secondary ID Type Ration Card / Bank Passbook / Others"
+            name="" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Financial Category</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please choose your Secondary ID!">
+          <nz-select nzShowSearch nzAllowClear formControlName="fintype" nzPlaceHolder="Select Secondary ID">
+            <nz-option *ngFor="let dataedu of dropdownlist?.FinancialCategory" [nzLabel]="dataedu.name"
+              [nzValue]="dataedu.name"></nz-option>
+          </nz-select>
         </nz-form-control>
       </nz-form-item>
     </div>
