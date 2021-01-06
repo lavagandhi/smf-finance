@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { SuccessService } from './success.service';
+import { GroupService } from './group.service';
 
-describe('Service: Success', () => {
+describe('Service: Group', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SuccessService],
+      providers: [GroupService]
     });
   });
 
-  it('should ...', inject([SuccessService], (service: SuccessService) => {
+  it('should ...', inject([GroupService], (service: GroupService) => {
     expect(service).toBeTruthy();
   }));
 });

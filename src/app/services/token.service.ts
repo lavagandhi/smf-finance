@@ -17,11 +17,17 @@ const refreshtokenkeys = [
 ];
 const storagekeys = [...accesstokenkeys, ...refreshtokenkeys];
 
+const applicant = "4e02771b55c0041180efc9fca6e04a77";
+const coapplicant = "c9d3e6282e45587e39440399dedaab0d"; 
+const loan = "8b9c2bba829069d84f1e77c3f25cb5ca";
+const business = "f5d7e2532cc9ad16bc2a41222d76f269";
+const bank = "75f20e5c5ab60b3fd65855a4097c04a5";
 @Injectable({
 	providedIn: 'root',
 })
+
 export class TokenService {
-	constructor(private router: Router) {}
+	constructor(private router: Router) { }
 
 	clearaccesstokens = (): void => {
 		accesstokenkeys.forEach((element) => {
@@ -46,6 +52,50 @@ export class TokenService {
 		window.sessionStorage.setItem(PAYLOAD_KEY, tokens[1]);
 		window.sessionStorage.setItem(HASH_KEY, tokens[2]);
 	};
+
+	savesteps = (key: string, value: string): void => {
+		switch(key) {
+			case 'applicant':
+				window.localStorage.setItem(applicant, value);
+				break;
+			case 'co-applicant':
+				window.localStorage.setItem(coapplicant, value);
+				break;
+			case 'loan':
+				window.localStorage.setItem(loan, value);
+				break;
+			case 'business':
+				window.localStorage.setItem(business, value);
+				break;
+			case 'bank':
+				window.localStorage.setItem(bank, value);
+				break;
+			default:
+		}
+	}
+
+	getstep = (key: string): void => {
+		let value;
+		switch(key) {
+			case 'applicant':
+				value = window.localStorage.getItem(applicant);
+				break;
+			case 'co-applicant':
+				value = window.localStorage.getItem(coapplicant);
+				break;
+			case 'loan':
+				value = window.localStorage.getItem(loan);
+				break;
+			case 'business':
+				value = window.localStorage.getItem(business);
+				break;
+			case 'bank':
+				value = window.localStorage.getItem(bank);
+				break;
+			default:
+		}
+		return value;
+	}
 
 	saverefreshtoken = (refreshtoken: string): void => {
 		this.clearrefreshtokens();
@@ -72,6 +122,7 @@ export class TokenService {
 		this.cleartokens();
 		this.router.navigateByUrl('/auth/login');
 	}
+
 	getrefreshtoken = (): string =>
 		`${sessionStorage.getItem(REFRESH_ALG_KEY)}.${sessionStorage.getItem(
 			REFRESH_PAYLOAD_KEY
