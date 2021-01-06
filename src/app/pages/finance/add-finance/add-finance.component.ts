@@ -56,7 +56,7 @@ export class AddFinanceComponent implements OnInit {
     } else if (this.index === 'Fourth-content') {
       this.businessDetailsComponent.submitBusinessForm();
       this.nextButtonCheck();
-    } else if (this.index === 'sixth-content') {
+    } else if (this.index === 'fifth-content') {
       this.bankDetailsComponent.submitBankForm();
       this.nextButtonCheck();
     }

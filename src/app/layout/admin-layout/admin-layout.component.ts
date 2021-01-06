@@ -13,11 +13,10 @@ export class AdminLayoutComponent implements OnInit {
 			text: 'Dashboard',
 			url: '/dashboard',
 			icon: 'dashboard',
-		},
-		{
-			text: 'Applicant',
-			url: '/applicant',
-			icon: 'user-add',
+		},{
+			text: 'Center',
+			url: '/center/view',
+			icon: 'block',
 		},
 		{
 			text: 'Group',
@@ -25,14 +24,9 @@ export class AdminLayoutComponent implements OnInit {
 			icon: 'usergroup-add',
 		},
 		{
-			text: 'Center',
-			url: '/center/view',
-			icon: 'block',
-		},
-		{
-			text: 'Loan Process',
-			url: '/loan-process/view',
-			icon: 'credit-card',
+			text: 'Applicant',
+			url: '/applicant',
+			icon: 'user-add',
 		},
 		{
 			text: 'Payment',

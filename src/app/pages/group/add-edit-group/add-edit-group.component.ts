@@ -71,19 +71,13 @@ export class AddEditGroupComponent implements OnInit {
 		if (this.validateForm.valid) {
 			if (this.groupid) {
 				this.groupService.editsave(this.groupid, this.validateForm.value).subscribe(data => {
-					if (data) {
-						this.data = data;
-						this.successService.ResponseMessage("success", "Group Updated");
-						this.router.navigate(['/group/view']);
-					}
+					this.successService.ResponseMessage("success", "Group Updated");
+					this.router.navigate(['/group/view']);
 				})
 			} else {
 				this.groupService.groupCreate(this.validateForm.value).subscribe(data => {
-					if (data) {
-						this.data = data;
-						this.successService.ResponseMessage("success", "Group added");
-						this.router.navigate(['/group/view']);
-					}
+					this.successService.ResponseMessage("success", "Group added");
+					this.router.navigate(['/group/view']);
 				})
 			}
 		}

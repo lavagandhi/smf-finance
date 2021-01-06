@@ -25,12 +25,20 @@ export class ApplicantCreateService {
 	}
 
 	editApplicant(id): Observable<any> {
-		return this.http.get(`${this.API_URL}applicant/` + id).pipe(first(), map((data: any) => data.data));
+		return this.http.get(`${this.API_URL}applicant/byapplicant/` + id).pipe(first(), map((data: any) => data.data));
 	}
 
 	editsave(id, value):Observable<any> {
 		return this.http.put(`${this.API_URL}applicant/` + id, {
 			...value,
 		});
+	}
+
+	getapplicantdetails(id):Observable<any> {
+		return this.http.get(`${this.API_URL}applicant/applicantdetails/${id}`).pipe(first(), map((data: any) => data.data));
+	}
+
+	getallfulldetails():Observable<any> {
+		return this.http.get(`${this.API_URL}applicant/allfulldetails`).pipe(first(), map((data: any) => data.data));
 	}
 }

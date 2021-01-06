@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ApplicantCreateService } from 'src/app/services/applicant-create/applicant-create.service';
+import { CenterService } from 'src/app/services/center/center.service';
+import { GroupService } from 'src/app/services/group/group.service';
 import { SuccessService } from 'src/app/services/success.service';
 import { TokenService } from 'src/app/services/token.service';
 interface Person {
@@ -22,19 +24,35 @@ interface Person {
 })
 export class ViewApplicantComponent implements OnInit {
 
-  listOfData = [];
+  listOfData: any = [];
+  centerdata: any = [];
+  groupdata: any = [];
 
   constructor(
-    private tokenservice:TokenService,
-    private router: Router, 
+    private router: Router,
     private modal: NzModalService,
+    private centerservice: CenterService,
+    private groupservices: GroupService,
     private applicantCreateService: ApplicantCreateService,
     private successService: SuccessService) { }
 
   ngOnInit() {
-    this.applicantCreateService.getAllapplicant().subscribe(data => {
-      this.listOfData = data;
+
+    this.centerservice.getCenter().subscribe(centerdata => {
+      this.centerdata = centerdata;
+      this.groupservices.getGroup().subscribe(groupdata => {
+        this.groupdata = groupdata;
+
+        this.applicantCreateService.getallfulldetails().subscribe(data => {
+          this.listOfData = [...data].map(m=> {
+            m.centername = this.centerdata.find(c=>c.centerid === m.centerid)?.centername;
+            m.groupname = this.groupdata.find(c=>c.groupid === m.groupid)?.groupname;
+            return m;
+          });
+        })
+      })
     })
+
   }
 
   create(): void {

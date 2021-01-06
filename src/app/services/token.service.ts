@@ -56,19 +56,19 @@ export class TokenService {
 	savesteps = (key: string, value: string): void => {
 		switch(key) {
 			case 'applicant':
-				window.localStorage.setItem(applicant, value);
+				window.sessionStorage.setItem(applicant, value);
 				break;
 			case 'co-applicant':
-				window.localStorage.setItem(coapplicant, value);
+				window.sessionStorage.setItem(coapplicant, value);
 				break;
 			case 'loan':
-				window.localStorage.setItem(loan, value);
+				window.sessionStorage.setItem(loan, value);
 				break;
 			case 'business':
-				window.localStorage.setItem(business, value);
+				window.sessionStorage.setItem(business, value);
 				break;
 			case 'bank':
-				window.localStorage.setItem(bank, value);
+				window.sessionStorage.setItem(bank, value);
 				break;
 			default:
 		}
@@ -78,19 +78,19 @@ export class TokenService {
 		let value;
 		switch(key) {
 			case 'applicant':
-				value = window.localStorage.getItem(applicant);
+				value = window.sessionStorage.getItem(applicant);
 				break;
 			case 'co-applicant':
-				value = window.localStorage.getItem(coapplicant);
+				value = window.sessionStorage.getItem(coapplicant);
 				break;
 			case 'loan':
-				value = window.localStorage.getItem(loan);
+				value = window.sessionStorage.getItem(loan);
 				break;
 			case 'business':
-				value = window.localStorage.getItem(business);
+				value = window.sessionStorage.getItem(business);
 				break;
 			case 'bank':
-				value = window.localStorage.getItem(bank);
+				value = window.sessionStorage.getItem(bank);
 				break;
 			default:
 		}

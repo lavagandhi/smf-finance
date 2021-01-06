@@ -14,25 +14,25 @@
     <nz-table #basicTable [nzData]="listOfData">
       <thead>
         <tr>
-          <th>Loan Account Number</th>
-          <th>Gold Loan Branch</th>
-          <th>Micro Pin Branch</th>
-          <th>Existing Center</th>
-          <th>Center Group</th>
-          <th>Existing Group</th>
-          <th>Center Address</th>
+          <th>Applicant Id</th>
+          <th>Applicant Name</th>
+          <th>Loan Id</th>
+          <th>Center Name</th>
+          <th>Group Name</th>
+          <th>Loan Amount</th>
+          <th>Loan Day</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of basicTable.data">
-          <td>{{ data.applicantid }}</td>
+          <td>{{ data.formid }}</td>
           <td>{{ data.applicantname }}</td>
-          <td>{{ data.sidno }}</td>
-          <td>{{ data.mobileno }}</td>
-          <td>{{ data.groupid }}</td>
-          <td>{{ data.pidtype }}</td>
-          <td>{{ data.permanentaddress }}</td>
+          <td>{{ data.loans[0].loanid }}</td>
+          <td>{{ data.centername }}</td>
+          <td>{{ data.groupname }}</td>
+          <td>{{ data.loans[0].loanamount | number:'1.2-2' }}</td>
+          <td>WEDNESDAY</td>
           <td>
             <a (click)="edit(data.applicantid)"><i nz-icon nzType="edit" nzTheme="outline"></i></a>
             <nz-divider nzType="vertical"></nz-divider>

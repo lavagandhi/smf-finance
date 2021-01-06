@@ -13,7 +13,7 @@ import { BusinessDetailsComponent } from './business-details/business-details.co
 import { ViewApplicantComponent } from './view-applicant/view-applicant.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { ViewDetailsComponent } from './view-details/view-details.component';
-
+import { LoanProcessComponent } from 'src/app/pages/finance/loan-process/loan-process.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -22,7 +22,7 @@ import { ViewDetailsComponent } from './view-details/view-details.component';
     IconsProviderModule,
     FinanceRoutingModule
   ],
-  declarations: [AddFinanceComponent, ViewDetailsComponent, ImageUploadComponent, ViewApplicantComponent, ApplicantDetailsComponent, CoApplicantDetailsComponent, BankDetailsComponent, IncomeDetailsComponent, BusinessDetailsComponent, BankDetailsComponent],
+  declarations: [LoanProcessComponent, AddFinanceComponent, ViewDetailsComponent, ImageUploadComponent, ViewApplicantComponent, ApplicantDetailsComponent, CoApplicantDetailsComponent, BankDetailsComponent, IncomeDetailsComponent, BusinessDetailsComponent, BankDetailsComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class FinanceModule { }
