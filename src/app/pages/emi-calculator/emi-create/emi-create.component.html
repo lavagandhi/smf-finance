@@ -76,7 +76,7 @@
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="24">
-      <nz-table #basicTable [nzData]="listOfData">
+      <nz-table>
         <thead>
           <tr>
             <th>sl.no</th>
@@ -91,7 +91,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of basicTable.data; let i=index">
+          <tr *ngFor="let data of listOfData; let i=index">
             <td>{{ i+1 }}</td>
             <td>{{ data.installmentdate | date:'dd-MM-yyyy' }} ({{data.installmentday}})</td>
             <td>{{ data.installmentamount }}</td>

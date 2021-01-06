@@ -4,99 +4,67 @@
       <nz-page-header-title> {{title}} </nz-page-header-title>
     </nz-page-header>
   </div>
-  
+
 </div>
 
 <div class="card-scroll">
 
-<form nz-form [formGroup]="validateForm"   (ngSubmit)="submitForm(validateForm)" nzLayout="horizontal">
-  <div nz-row [nzGutter]="12">
-    <div nz-col nzSpan="12">
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" nzLayout="horizontal">
+    <div nz-row [nzGutter]="12">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired class="p-0" [nzSpan]="24">Applicant Id</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Please input your Applicant Id!" [nzSpan]="24">
+            <input nz-input formControlName="annualinterestrate" placeholder="Applicant Id" name="" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired class="p-0" [nzSpan]="24">Loan Id</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Please input your Loan Id!" [nzSpan]="24">
+            <input nz-input formControlName="annualinterestrate" placeholder="Loan Id" name="" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div class="position-right">
       <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >Name of applicant</nz-form-label
-        >
-        <nz-form-control nzHasFeedback
-        nzErrorTip="Please input your Bank!" [nzSpan]="24">
-          <input nz-input formControlName="nameoftheborrower" placeholder="Name of the Borrower" name="" />
+        <nz-form-control>
+          <button nz-button nzType="primary">Calculate</button>
         </nz-form-control>
       </nz-form-item>
     </div>
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24"
-          >Center</nz-form-label
-        >
-        <nz-form-control nzHasFeedback nzErrorTip="Please input your Center!" [nzSpan]="24">
-          <nz-select nzShowSearch nzAllowClear formControlName="centerid" nzPlaceHolder="Select Center">
-            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-  </div>
-  <div nz-row [nzGutter]="12">
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Group ID</nz-form-label>
-        <nz-form-control nzHasFeedback
-        nzErrorTip="Please input your Group ID!" [nzSpan]="24">
-        <nz-select nzShowSearch nzAllowClear formControlName="groupid" nzPlaceHolder="Select Group">
-          <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-          <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-          <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-        </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-      
-    </div>
-    <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Start Date of Loan</nz-form-label>
-        <nz-form-control nzHasFeedback
-        nzErrorTip="Please input your Start Date of Loan!" [nzSpan]="24">
-        <input nz-input formControlName="startdateloan" placeholder="Start Date of Loan" name="" />
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-   
-  </div>
-  <nz-form-item>
-    <nz-form-control>
-      <button nz-button nzType="primary">Search</button>
-    </nz-form-control>
-  </nz-form-item>
   </form>
-
-
-
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="24">
-      <nz-table #basicTable [nzData]="listOfData">
+      <nz-table>
         <thead>
           <tr>
-            <th>Loan Account Number</th>
-            <th>Gold Loan Branch</th>
-            <th>Micro Pin Branch</th>
-            <th>Existing Center</th>
-            <th>Center Group</th>
-            <th>Existing Group</th>
-            <th>Center Address</th>
+            <th>sl.no</th>
+            <th>Installment Date</th>
+            <th>Installment Amt</th>
+            <th>Principal</th>
+            <th>Int</th>
+            <th>Balance</th>
+            <th>Collected Date</th>
+            <th>Collected Amt</th>
+            <th>Days</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of basicTable.data">
-            <td>{{ data.loanaccountno }}</td>
-            <td>{{ data.goldloanbranch }}</td>
-            <td>{{ data.micropinbranch }}</td>
-            <td>{{ data.existingcenter }}</td>
-            <td>{{ data.centergroup }}</td>
-            <td>{{ data.existinggroup }}</td>
-            <td>{{ data.centeraddress }}</td>
-            
+          <tr *ngFor="let data of listOfData; let i=index">
+            <td>{{ i+1 }}</td>
+            <td>{{ data.installmentdate | date:'dd-MM-yyyy' }} ({{data.installmentday}})</td>
+            <td>{{ data.installmentamount }}</td>
+            <td>{{ data.principal }}</td>
+            <td>{{ data.int }}</td>
+            <td>{{ data.balance }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
         </tbody>
       </nz-table>

@@ -68,80 +68,81 @@ export class EmiCreateComponent implements OnInit {
 				EMI: parseInt(EMI.toFixed(0)),
 				Total: parseInt(Total.toFixed(0))
 			};
-		}
 
-		let permonthinterest = form.annualinterestrate / (12 * form.repayment);
 
-		let balanceamount = form.loanamount;
-		let ishigh = false;
-		let installmentdate = form.emistartdate;
-		for (let i = 1; i <= (12 * form.repayment); i++) {
-			if (form.repayment == 2) {
-				installmentdate = addDays(installmentdate, 15)
-			} else if (form.repayment == 4) {
-				installmentdate = addDays(installmentdate, 7)
-			} else {
-				installmentdate = addMonths(installmentdate, 1)
-			}
+			let permonthinterest = form.annualinterestrate / (12 * form.repayment);
 
-			let monthinterest = ((balanceamount * permonthinterest) / 100);
-			let principal;
-
-			if (i === (12 * form.repayment)) {
-				monthinterest = Math.round(monthinterest);
-				principal = (this.EMIObj.EMI - Math.round(monthinterest))
-			} else {
-				if (Math.round(monthinterest) > monthinterest) {
-					if (!ishigh) {
-						principal = (this.EMIObj.EMI - Math.ceil(monthinterest));
-						ishigh = true;
-					} else {
-						ishigh = false;
-						principal = (this.EMIObj.EMI - Math.floor(monthinterest));
-					}
+			let balanceamount = form.loanamount;
+			let ishigh = false;
+			let installmentdate = form.emistartdate;
+			for (let i = 1; i <= term; i++) {
+				if (form.repayment == 2) {
+					installmentdate = addDays(installmentdate, 15)
+				} else if (form.repayment == 4) {
+					installmentdate = addDays(installmentdate, 7)
 				} else {
+					installmentdate = addMonths(installmentdate, 1)
+				}
+
+				let monthinterest = ((balanceamount * permonthinterest) / 100);
+				let principal;
+
+				if (i === (12 * form.repayment)) {
 					monthinterest = Math.round(monthinterest);
 					principal = (this.EMIObj.EMI - Math.round(monthinterest))
+				} else {
+					if (Math.round(monthinterest) > monthinterest) {
+						if (!ishigh) {
+							principal = (this.EMIObj.EMI - Math.ceil(monthinterest));
+							ishigh = true;
+						} else {
+							ishigh = false;
+							principal = (this.EMIObj.EMI - Math.floor(monthinterest));
+						}
+					} else {
+						monthinterest = Math.round(monthinterest);
+						principal = (this.EMIObj.EMI - Math.round(monthinterest))
+					}
 				}
-			}
 
-			let day = installmentdate.getDay();
-			let installmentday;
-			switch(day) {
-				case 0:
-					installmentday = 'SATURDAY';
-					installmentdate = addDays(installmentdate,-1);
-					break;
-				case 1:
-					installmentday = 'MONDAY';
-					break;
-				case 2:
-					installmentday = 'TUESDAY';
-					break;
-				case 3:
-					installmentday = 'WEDNESDAY';					
-					break;
-				case 4:
-					installmentday = 'THURSDAY';
-					break;
-				case 5:
-					installmentday = 'FRIDAY';
-					break;
-				case 6:
-					installmentday = 'SATURDAY';
-					break;
-				default:
+				let day = installmentdate.getDay();
+				let installmentday;
+				switch (day) {
+					case 0:
+						installmentday = 'SATURDAY';
+						installmentdate = addDays(installmentdate, -1);
+						break;
+					case 1:
+						installmentday = 'MONDAY';
+						break;
+					case 2:
+						installmentday = 'TUESDAY';
+						break;
+					case 3:
+						installmentday = 'WEDNESDAY';
+						break;
+					case 4:
+						installmentday = 'THURSDAY';
+						break;
+					case 5:
+						installmentday = 'FRIDAY';
+						break;
+					case 6:
+						installmentday = 'SATURDAY';
+						break;
+					default:
+				}
+				this.listOfData = [...this.listOfData, {
+					installmentdate,
+					installmentday,
+					installmentamount: this.EMIObj.EMI,
+					principal: principal,
+					int: monthinterest.toFixed(0),
+					balance: balanceamount - principal,
+					monthinterest
+				}]
+				balanceamount = balanceamount - principal;
 			}
-			this.listOfData = [...this.listOfData, {
-				installmentdate,
-				installmentday,
-				installmentamount: this.EMIObj.EMI,
-				principal: principal,
-				int: monthinterest.toFixed(0),
-				balance: balanceamount - principal,
-				monthinterest
-			}]
-			balanceamount = balanceamount - principal;
 		}
 	}
 

@@ -76,4 +76,8 @@ export class LoanProcessComponent implements OnInit {
       }
     }
   }
+
+  setProcessfee(amount) {
+    this.validateForm.get('processfee').setValue(amount/100);
+  }
 }

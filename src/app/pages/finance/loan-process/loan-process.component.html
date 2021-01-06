@@ -4,7 +4,7 @@
       <nz-form-item>
         <nz-form-label  class="p-0" nzRequired [nzSpan]="24">Amount</nz-form-label>
         <nz-form-control nzHasFeedback nzErrorTip="Please Select your Amount!" [nzSpan]="24">
-          <nz-select nzShowSearch nzAllowClear formControlName="loanamount" nzPlaceHolder="Select a Given Amount">
+          <nz-select nzShowSearch nzAllowClear (ngModelChange)="setProcessfee($event)" formControlName="loanamount" nzPlaceHolder="Select a Given Amount">
             <nz-option [nzLabel]="list.name" [nzValue]="list.name" *ngFor="let list of dropDownLists.Amount">
             </nz-option>
           </nz-select>
@@ -51,7 +51,7 @@
       <nz-form-item>
         <nz-form-label  class="p-0" nzRequired [nzSpan]="24">Processing Fee</nz-form-label>
         <nz-form-control nzHasFeedback nzErrorTip="Please input your Processing Fee!" [nzSpan]="24">
-          <input nz-input formControlName="processfee" />
+          <input nz-input disabled formControlName="processfee" />
         </nz-form-control>
       </nz-form-item>
     </div>
