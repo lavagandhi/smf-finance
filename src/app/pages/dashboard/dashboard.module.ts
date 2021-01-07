@@ -5,6 +5,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SharedModule } from 'src/app/shared';
 import { IconsProviderModule } from 'src/app/icons-provider.module';
 import { FormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms';
     SharedModule,
     CommonModule,
     IconsProviderModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   declarations: [ViewDashboardComponent]
 })
