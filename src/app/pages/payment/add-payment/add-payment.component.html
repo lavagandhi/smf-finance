@@ -4,39 +4,81 @@
       <nz-page-header-title> {{title}} </nz-page-header-title>
     </nz-page-header>
   </div>
-  
-</div>
-<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm)" nzLayout="horizontal">
-<div nz-row [nzGutter]="32">
-  <div nz-col nzSpan="24" class="card-scroll">
-      <nz-form-item>
-        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Center ID</nz-form-label>
-        <nz-form-control nzHasFeedback nzErrorTip="Please input your Center ID!" [nzSm]="14" [nzXs]="24" >
-          <nz-select nzShowSearch nzAllowClear formControlName="centerid" nzPlaceHolder="Select Center">
-            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>  
 
+</div>
+
+<div class="card-scroll">
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" nzLayout="horizontal">
+    <div nz-row [nzGutter]="12">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired class="p-0" [nzSpan]="24">Select Center</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Please input your Applicant Id!" [nzSpan]="24">
+            <nz-select (ngModelChange)="loadGroup($event)" nzShowSearch nzAllowClear formControlName="centerid"
+              nzPlaceHolder="Select center">
+              <nz-option *ngFor="let center of centerdata" [nzLabel]="center.centername" [nzValue]="center.centerid">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired class="p-0" [nzSpan]="24">Select Group</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Please input your Loan Id!" [nzSpan]="24">
+            <nz-select nzShowSearch nzAllowClear formControlName="groupid" nzPlaceHolder="Select center">
+              <nz-option *ngFor="let group of groupdata" [nzLabel]="group.groupname" [nzValue]="group.groupid">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div class="position-right">
       <nz-form-item>
-        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Group ID</nz-form-label>
-        <nz-form-control nzHasFeedback nzErrorTip="Please input your Group ID!" [nzSm]="14" [nzXs]="24" >
-          <nz-select nzShowSearch nzAllowClear formControlName="groupid" nzPlaceHolder="Select Group">
-            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>  
- 
-      <nz-form-item nz-row class="register-area">
-        <nz-form-control [nzSpan]="14" [nzOffset]="6">
-          <button nz-button nzType="primary" [disabled]="!validateForm">{{btnName}}</button>
-          <button nz-button (click)="resetForm($event)">Reset</button>
+        <nz-form-control>
+          <button nz-button nzType="primary">Load Members</button>
         </nz-form-control>
       </nz-form-item>
+    </div>
+  </form>
+
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="24">
+      <nz-table #payment [nzData]="listOfData">
+        <thead>
+          <tr>
+            <th>sl.no</th>
+            <th>Applicant Id</th>
+            <th>Applicant Name</th>
+            <th>Payment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of payment.data; let i=index">
+            <td>{{ i+1 }}</td>
+            <td>{{ data.formid }}</td>
+            <td style="text-transform: uppercase;">{{ data.applicantname }}</td>
+            <td>
+              <a (click)="showModal(data.applicantid)">Make Payment</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
   </div>
-</div>
-</form>
+
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="Modal" nzOkText="Ok" nzCancelText="Cancel" (nzOnOk)="handleOk()"
+    (nzOnCancel)="handleCancel()">
+    <ng-container *nzModalContent>
+      <nz-form-item>
+        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Enter Payment</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Applicant Id!" [nzSpan]="24">
+          <nz-input-group nzAddOnBefore="&#8377;">
+            <input nz-input [(ngModel)]="amount" />
+          </nz-input-group>          
+        </nz-form-control>
+      </nz-form-item>
+    </ng-container>
+  </nz-modal>

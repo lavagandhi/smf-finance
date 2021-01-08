@@ -3,45 +3,55 @@
     <nz-page-header nzBackIcon>
       <nz-page-header-title> {{title}} </nz-page-header-title>
     </nz-page-header>
-  </div>  
+  </div>
 </div>
 
-<form nz-form [formGroup]="validateForm"nzLayout="horizontal">
-<div nz-row [nzGutter]="32">
-  <div nz-col nzSpan="24">
+<form nz-form [formGroup]="validateForm" nzLayout="horizontal">
+  <div nz-row [nzGutter]="32">
+    <div nz-col nzSpan="24">
 
-  
-  <nz-form-item>
-    <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Center Name</nz-form-label>
-    <nz-form-control nzHasFeedback nzErrorTip="Please input your Group Name!" [nzSm]="14" [nzXs]="24" >
-      <nz-select
-    nzShowSearch
-    nzAllowClear
-    formControlName="centerid"
-    nzPlaceHolder="Select center"
-  >
-    <nz-option *ngFor="let center of centers" [nzLabel]="center.centername" [nzValue]="center.centerid"></nz-option>
-  </nz-select>
-    </nz-form-control>
-  </nz-form-item>  
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Center Name</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Group Name!" [nzSm]="14" [nzXs]="24">
+          <nz-select nzShowSearch nzAllowClear formControlName="centerid" nzPlaceHolder="Select center">
+            <nz-option *ngFor="let center of centers" [nzLabel]="center.centername" [nzValue]="center.centerid">
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
       <nz-form-item>
         <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Group Name</nz-form-label>
-        <nz-form-control nzHasFeedback nzErrorTip="Please input your Group Name!" [nzSm]="14" [nzXs]="24" >
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Group Name!" [nzSm]="14" [nzXs]="24">
           <input nz-input formControlName="groupname" placeholder="Group Name" id="groupname" />
         </nz-form-control>
-      </nz-form-item>  
+      </nz-form-item>
       <nz-form-item>
         <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">No of Group Members</nz-form-label>
-        <nz-form-control nzHasFeedback nzErrorTip="Please input your Group Members!" [nzSm]="14" [nzXs]="24" >
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Group Members!" [nzSm]="14" [nzXs]="24">
           <input nz-input nzType="Number" formControlName="noofmember" placeholder="No of Members" id="noofmember" />
         </nz-form-control>
-      </nz-form-item>     
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Collection Day</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Group Members!" [nzSm]="14" [nzXs]="24">
+          <nz-select nzShowSearch nzAllowClear formControlName="installmentday" nzPlaceHolder="Select center">
+            <nz-option nzLabel="MONDAY" nzValue="MONDAY"></nz-option>
+            <nz-option nzLabel="TUESDAY" nzValue="TUESDAY"></nz-option>
+            <nz-option nzLabel="WEDNESDAY" nzValue="WEDNESDAY"></nz-option>
+            <nz-option nzLabel="THURSDAY" nzValue="THURSDAY"></nz-option>
+            <nz-option nzLabel="FRIDAY" nzValue="FRIDAY"></nz-option>
+            <nz-option nzLabel="SATURDAY" nzValue="SATURDAY"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
       <nz-form-item nz-row class="register-area">
         <nz-form-control [nzSpan]="14" [nzOffset]="6">
-          <button nz-button nzType="primary" [disabled]="!validateForm.valid" (click)="submitGroupForm()">{{btnName}}</button>
+          <button nz-button nzType="primary" [disabled]="!validateForm.valid"
+            (click)="submitGroupForm()">{{btnName}}</button>
           <button nz-button (click)="resetForm($event)">Reset</button>
         </nz-form-control>
       </nz-form-item>
+    </div>
   </div>
-</div>
 </form>

@@ -18,6 +18,7 @@
           <th>Group Name</th>
           <th>Center Name</th>
           <th>No of Members</th>
+          <th>EMI Day</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -26,6 +27,7 @@
           <td>{{ data.groupname }}</td>
           <td>{{ data.centername }}</td>
           <td>{{ data.noofmember }}</td>
+          <td>{{ data.installmentday }}</td>
           <td>
             <a (click)="edit(data.groupid)"><i nz-icon nzType="edit" nzTheme="outline"></i></a>
             <nz-divider nzType="vertical"></nz-divider>

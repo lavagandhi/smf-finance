@@ -10,7 +10,7 @@
 <div class="card-scroll">
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="12">
-      <nz-table nzBordered>
+      <nz-table nzBordered #exportdata [nzData]="listOfData">
         <thead>
           <tr>
             <th>Name</th>
@@ -18,38 +18,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Applicant</td>
+          <tr *ngFor="let item of exportdata.data">
+            <td>{{item.name}}</td>
             <td>
-              <a><i nz-icon nzType="download" nzTheme="outline"></i> Download</a>
-              <!-- <nz-divider nzType="vertical"></nz-divider>
-              <a><i nz-icon nzType="printer" nzTheme="outline"></i> Print</a> -->
-            </td>
-          </tr>
-          <tr>
-            <td>Co Applicant</td>
-            <td>
-              <a><i nz-icon nzType="download" nzTheme="outline"></i> Download</a>
-              <!-- <nz-divider nzType="vertical"></nz-divider>
-              <a><i nz-icon nzType="printer" nzTheme="outline"></i> Print</a> -->
-            </td>
-          </tr>
-          <tr>
-
-            <td>Bank</td>
-            <td>
-              <a><i nz-icon nzType="download" nzTheme="outline"></i> Download</a>
-              <!-- <nz-divider nzType="vertical"></nz-divider>
-              <a><i nz-icon nzType="printer" nzTheme="outline"></i> Print</a> -->
-            </td>
-          </tr>
-          <tr>
-
-            <td>Business</td>
-            <td>
-              <a><i nz-icon nzType="download" nzTheme="outline"></i> Download</a>
-              <!-- <nz-divider nzType="vertical"></nz-divider>
-              <a><i nz-icon nzType="printer" nzTheme="outline"></i> Print</a> -->
+              <a (click)="ExportData(item.exportname)"><i nz-icon nzType="download" nzTheme="outline"></i> Download</a>
             </td>
           </tr>
         </tbody>

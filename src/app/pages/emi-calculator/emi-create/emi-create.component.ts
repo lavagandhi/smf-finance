@@ -15,8 +15,7 @@ import { addDays, addMonths } from 'date-fns';
 	styleUrls: ['./emi-create.component.scss']
 })
 export class EmiCreateComponent implements OnInit {
-
-	listOfData: any[] = [];
+	listOfData: any = [];
 	title = 'EMI Calculator';
 	btnName = 'Submit';
 	date = null;
@@ -157,4 +156,26 @@ export class EmiCreateComponent implements OnInit {
 		}
 	}
 
+	PrintForm() {
+		const printContent = document.getElementById("print");
+		const htmlToPrint = '' +
+        '<style type="text/css">' +
+        'table th, table td {' +
+        'border:1px solid #000;' +
+        '}' +
+        '</style>';
+		const WindowPrt = window.open('', '', 'left=0,top=0,width=1000,height=900,toolbar=0,scrollbars=0,status=0');
+		WindowPrt.document.write(htmlToPrint+printContent.innerHTML);
+		WindowPrt.document.close();
+		WindowPrt.focus();
+		WindowPrt.print();
+		// WindowPrt.close();
+	}
+
 }
+
+// #print tr th,
+// #print tr td {
+//   border: 1px solid #000;
+// }
+

@@ -37,8 +37,8 @@ export class ReportCreateComponent implements OnInit {
 			this.dropDownLists = data;
 		});
 		this.validateForm = this.fb.group({
-			loanamount: [null, [Validators.required]],
-			annualinterestrate: [null, [Validators.required]]
+			formid: [null, [Validators.required]],
+			loanformid: [null, [Validators.required]]
 		});
 	}
 

@@ -6,11 +6,13 @@
   </div>  
 </div>
 
+<div style="overflow-y: auto; overflow-x: hidden; width: 100%; height: calc(100vh - 190px);">
+
 <nz-row [nzGutter]="16">
-  <nz-col nzSpan="6">
+  <nz-col nzSpan="4">
     <div class="greeting-card">
       <div>
-        <h2 nz-typography class="mb-0"><i>Hi, Administrator</i></h2>
+        <h2 nz-typography class="mb-0"><i>Hi, Admin</i></h2>
         <h1 nz-typography class="second-text">
           Ready to start your day?
         </h1>
@@ -88,5 +90,37 @@
       </nz-col>
     </nz-row>
   </nz-col>
-
+  <nz-col nzSpan="12">
+    <canvas baseChart
+  [datasets]="bubbleChartData"
+  [options]="bubbleChartOptions"
+  [legend]="bubbleChartLegend"
+  [chartType]="bubbleChartType">
+</canvas>
+  </nz-col>
 </nz-row>
+
+
+<br>
+<nz-row [nzGutter]="16">
+  <nz-col nzSpan="12">
+    <canvas
+    baseChart
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [plugins]="barChartPlugins"
+    [chartType]="barChartType"
+  >
+  </canvas>
+  </nz-col>
+  <nz-col nzSpan="12">
+    <canvas baseChart 
+    [data]="doughnutChartData"
+    [labels]="doughnutChartLabels"
+    [chartType]="doughnutChartType">
+  </canvas>
+</nz-col>
+</nz-row>
+
+</div>
