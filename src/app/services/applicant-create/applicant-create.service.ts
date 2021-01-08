@@ -28,17 +28,25 @@ export class ApplicantCreateService {
 		return this.http.get(`${this.API_URL}applicant/byapplicant/` + id).pipe(first(), map((data: any) => data.data));
 	}
 
-	editsave(id, value):Observable<any> {
+	editsave(id, value): Observable<any> {
 		return this.http.put(`${this.API_URL}applicant/` + id, {
 			...value,
 		});
 	}
 
-	getapplicantdetails(id):Observable<any> {
+	getapplicantdetails(id): Observable<any> {
 		return this.http.get(`${this.API_URL}applicant/applicantdetails/${id}`).pipe(first(), map((data: any) => data.data));
 	}
 
-	getallfulldetails():Observable<any> {
+	getallfulldetails(): Observable<any> {
 		return this.http.get(`${this.API_URL}applicant/allfulldetails`).pipe(first(), map((data: any) => data.data));
+	}
+
+	exportData(exportname): Observable<any> {
+		return this.http.get(`${this.API_URL}applicant/export/${exportname}`).pipe(first(), map((data: any) => data.data));
+	}
+
+	getapplicantbygroup(groupid: string): Observable<any> {
+		return this.http.get(`${this.API_URL}applicant/groupapplicants/${groupid}`).pipe(first(), map((data: any) => data.data));
 	}
 }

@@ -41,6 +41,7 @@ export class AddEditGroupComponent implements OnInit {
 			groupname: [null, [Validators.required]],
 			noofmember: [null, [Validators.required]],
 			centerid: [null, [Validators.required]],
+			installmentday: [null, [Validators.required]],
 		});
 
 		this.groupid = this.activatedRoute.snapshot.paramMap.get('id');
@@ -52,7 +53,8 @@ export class AddEditGroupComponent implements OnInit {
 					this.validateForm.patchValue({
 						groupname: this.editdata.groupname,
 						noofmember: this.editdata.noofmember,
-						centerid: this.editdata.centerid
+						centerid: this.editdata.centerid,
+						installmentday: this.editdata.installmentday
 					});
 				}
 			})

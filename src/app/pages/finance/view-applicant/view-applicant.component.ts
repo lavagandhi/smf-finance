@@ -47,6 +47,7 @@ export class ViewApplicantComponent implements OnInit {
           this.listOfData = [...data].map(m=> {
             m.centername = this.centerdata.find(c=>c.centerid === m.centerid)?.centername;
             m.groupname = this.groupdata.find(c=>c.groupid === m.groupid)?.groupname;
+            m.installmentday =this.groupdata.find(c=>c.groupid === m.groupid)?.installmentday;
             return m;
           });
         })

@@ -5,6 +5,7 @@ import { ExportRoutingModule } from './export-routine.module';
 import { IconsProviderModule } from 'src/app/icons-provider.module';
 import { SharedModule } from 'src/app/shared';
 import { FormsModule } from '@angular/forms';
+import { ExportService } from 'src/app/pages/export/export.service';
 
 @NgModule({
   imports: [
@@ -16,5 +17,6 @@ import { FormsModule } from '@angular/forms';
   ],
   declarations: [ExportFormComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [ExportService]
 })
 export class ExportModule { }

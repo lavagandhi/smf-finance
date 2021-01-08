@@ -38,7 +38,8 @@
           <nz-form-label nzRequired class="p-0" [nzSpan]="24">Loan Duration</nz-form-label>
           <nz-form-control nzHasFeedback nzErrorTip="Please input your Loan Period 1 Year!" [nzSpan]="24">
             <nz-select nzShowSearch nzAllowClear formControlName="loanperiod" nzPlaceHolder="Select a Given Amount">
-              <nz-option [nzLabel]="list.name" [nzValue]="list.id" *ngFor="let list of dropDownLists.Duration"></nz-option>
+              <nz-option [nzLabel]="list.name" [nzValue]="list.id" *ngFor="let list of dropDownLists.Duration">
+              </nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
@@ -49,7 +50,8 @@
           <nz-form-label nzRequired class="p-0" [nzSpan]="24">Loan Repayment</nz-form-label>
           <nz-form-control nzHasFeedback nzErrorTip="Please input your Total Interest!" [nzSpan]="24">
             <nz-select nzShowSearch nzAllowClear formControlName="repayment" nzPlaceHolder="Select a Given Amount">
-              <nz-option [nzLabel]="list.name" [nzValue]="list.id" *ngFor="let list of dropDownLists.Repayment"></nz-option>
+              <nz-option [nzLabel]="list.name" [nzValue]="list.id" *ngFor="let list of dropDownLists.Repayment">
+              </nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
@@ -70,13 +72,17 @@
         <nz-form-control>
           <button nz-button nzType="primary">Calculate</button>
         </nz-form-control>
+
+        <nz-form-control>
+          <button nz-button nzType="primary" (click)="PrintForm()">Print</button>
+        </nz-form-control>
       </nz-form-item>
     </div>
   </form>
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="24">
-      <nz-table>
+      <nz-table #emicalc [nzData]="listOfData" nzBorder="1">
         <thead>
           <tr>
             <th>sl.no</th>
@@ -91,7 +97,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of listOfData; let i=index">
+          <tr *ngFor="let data of emicalc.data; let i=index">
             <td>{{ i+1 }}</td>
             <td>{{ data.installmentdate | date:'dd-MM-yyyy' }} ({{data.installmentday}})</td>
             <td>{{ data.installmentamount }}</td>
@@ -105,4 +111,43 @@
         </tbody>
       </nz-table>
     </div>
+  </div>
+
+  <div id="print">
+    <div nz-row [nzGutter]="12">
+      <div nz-col nzSpan="12">
+        Loan Process Fee: &#8377;{{300}}
+      </div>
+      <div nz-col nzSpan="12">
+        Insurance Fee: &#8377;{{400}}
+      </div>
+    </div>
+    <table style="border:1px solid #000; width: 100%; text-align: center;">
+      <thead>
+        <tr>
+          <th>sl.no</th>
+          <th>Installment Date</th>
+          <th>Installment Amt</th>
+          <th>Principal</th>
+          <th>Int</th>
+          <th>Balance</th>
+          <th>Collected Date</th>
+          <th>Collected Amt</th>
+          <th>Days</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of listOfData; let i=index">
+          <td>{{ i+1 }}</td>
+          <td>{{ data.installmentdate | date:'dd-MM-yyyy' }} ({{data.installmentday}})</td>
+          <td>{{ data.installmentamount }}</td>
+          <td>{{ data.principal }}</td>
+          <td>{{ data.int }}</td>
+          <td>{{ data.balance }}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
   </div>

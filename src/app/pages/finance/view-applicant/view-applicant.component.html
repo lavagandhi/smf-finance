@@ -6,7 +6,7 @@
         <button nz-button nzType="primary" (click)="create()">Add Applicant</button>
       </nz-page-header-extra>
     </nz-page-header>
-  </div>  
+  </div>
 </div>
 
 <div nz-row [nzGutter]="16">
@@ -32,7 +32,7 @@
           <td>{{ data.centername }}</td>
           <td>{{ data.groupname }}</td>
           <td>{{ data.loans[0].loanamount | number:'1.2-2' }}</td>
-          <td>WEDNESDAY</td>
+          <td>{{data.installmentday}}</td>
           <td>
             <a (click)="edit(data.applicantid)"><i nz-icon nzType="edit" nzTheme="outline"></i></a>
             <nz-divider nzType="vertical"></nz-divider>
