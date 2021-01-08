@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApplicantCreateService } from 'src/app/services/applicant-create/applicant-create.service';
 import { DropdownService } from 'src/app/services/dropdown/dropdown.service';
 import { LoanProgressService } from 'src/app/services/loan-progress/loan-progress.service';
 import { SuccessService } from 'src/app/services/success.service';
@@ -23,13 +24,20 @@ export class LoanProcessComponent implements OnInit {
   btnName = 'Submit';
   validateForm: FormGroup;
   dropDownLists: any;
+  applicantid: any;
+  bankapplicantid:any;
+  data:any;
   constructor(
     private successService: SuccessService,
     private loanservice:LoanProgressService, 
     private tokenservice:TokenService, 
     private fb: FormBuilder, 
     private activatedRoute: ActivatedRoute,
-    private dropdownService: DropdownService) { }
+    private dropdownService: DropdownService,
+		private applicantCreateService: ApplicantCreateService) {
+      
+    this.applicantid = this.activatedRoute.snapshot.paramMap.get('id');
+     }
 
   ngOnInit() {
     this.dropdownService.getEducation().subscribe(data => {
@@ -44,6 +52,19 @@ export class LoanProcessComponent implements OnInit {
       processfee: [null, [Validators.required]],
       purpose: [null, [Validators.required]]
     });
+    this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(data=>{
+      this.bankapplicantid = data.loandata.loanid;
+      if (this.applicantid !== null) {
+        this.loanservice.editloan(this.bankapplicantid).subscribe(data => {
+        console.log(data)
+        delete data._id;
+				delete data.createdate;
+				delete data.applicantid;
+          this.data = data;
+        this.validateForm.patchValue(this.data);
+        })
+      }
+    })
   }
 
   submitForm(): void {
@@ -57,12 +78,22 @@ export class LoanProcessComponent implements OnInit {
       let sendData = {
         ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
       }
+      if (this.applicantid) {
+      this.loanservice.editsave(this.bankapplicantid,sendData).subscribe(data => {
+        if (data) {
+          this.tokenservice.savesteps('loan', (data.loanid));
+          this.successService.ResponseMessage("success", "Loan Process updated");
+        }
+      })
+    }
+    else{
       this.loanservice.loanCreate(sendData).subscribe(data => {
         if (data) {
           this.tokenservice.savesteps('loan', (data.loanid));
           this.successService.ResponseMessage("success", "Loan Process added");
         }
       })
+    }
     }
   }
 

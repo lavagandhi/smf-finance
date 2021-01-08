@@ -17,5 +17,14 @@ bankCreate(value: any): Observable<any> {
     ...value,
   }).pipe(first(), map((data: any) => data.data));
 }
+editbank(id): Observable<any> {
+  return this.http.get(`${this.API_URL}bank/` + id).pipe(first(), map((data: any) => data.data));
+}
+
+editbanksave(id, value):Observable<any> {
+  return this.http.put(`${this.API_URL}bank/` + id, {
+    ...value,
+  });
+}
 
 }

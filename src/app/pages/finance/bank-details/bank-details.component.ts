@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ApplicantCreateService } from 'src/app/services/applicant-create/applicant-create.service';
 import { BankDetailsService } from 'src/app/services/bank-details/bank-details.service';
 import { DropdownService } from 'src/app/services/dropdown/dropdown.service';
 import { SuccessService } from 'src/app/services/success.service';
@@ -26,11 +27,14 @@ export class BankDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private successService: SuccessService,
     private tokenservice: TokenService,
-    private dropdownService: DropdownService) {
+    private dropdownService: DropdownService,
+    
+		private applicantCreateService: ApplicantCreateService,) {
     this.applicantid = this.activatedRoute.snapshot.paramMap.get('id');
   }
   validateForm: FormGroup;
-
+  bankapplicantid:any;
+	data:any;
   ngOnInit() {
     this.id = sessionStorage.getItem("id");
     this.validateForm = this.fb.group({
@@ -52,6 +56,19 @@ export class BankDetailsComponent implements OnInit {
         this.parentdata.emit(false);
       }
     });
+    // this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(data=>{
+		// 	this.bankapplicantid = data.bussinessdata.businessid;
+		// 	if (this.applicantid !== null) {
+		// 	  this.bankDetailsService.editbusiness(this.bankapplicantid).subscribe(data => {
+		// 	  console.log(data)
+		// 	  delete data._id;
+		// 			  delete data.createdate;
+		// 			  delete data.applicantid;
+		// 		this.data = data;
+		// 	  this.validateForm.patchValue(this.data);
+		// 	  })
+		// 	}
+		//   })
   }
   submitBankForm() {
     for (const key in this.validateForm.controls) {
@@ -64,6 +81,7 @@ export class BankDetailsComponent implements OnInit {
       let sendData = {
         ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
       }
+      
       this.bankDetailsService.bankCreate(sendData).subscribe(data => {
         if (data) {
           this.tokenservice.savesteps('bank', (data.bankid));

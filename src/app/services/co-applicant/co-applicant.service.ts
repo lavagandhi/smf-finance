@@ -17,4 +17,13 @@ export class CoApplicantService {
 			...value,
 		}).pipe(first(), map((data: any) => data.data));
 	};
+	editcoApplicant(id): Observable<any> {
+		return this.http.get(`${this.API_URL}coapplicant/` + id).pipe(first(), map((data: any) => data.data));
+	}
+
+	editcosave(id, value):Observable<any> {
+		return this.http.put(`${this.API_URL}coapplicant/` + id, {
+			...value,
+		});
+	}
 }

@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NzLayoutComponent } from 'ng-zorro-antd/layout';
+import { ApplicantCreateService } from 'src/app/services/applicant-create/applicant-create.service';
 import { BusinessDetailsService } from 'src/app/services/business-details/business-details.service';
 import { DropdownService } from 'src/app/services/dropdown/dropdown.service';
 import { SuccessService } from 'src/app/services/success.service';
@@ -26,11 +27,13 @@ export class BusinessDetailsComponent implements OnInit {
 		private businessDetailsService: BusinessDetailsService,
 		private successService: SuccessService,
 		private tokenservice:TokenService,
-		private activatedRoute: ActivatedRoute) {
+		private activatedRoute: ActivatedRoute,
+		private applicantCreateService: ApplicantCreateService,) {
 		this.applicantid = this.activatedRoute.snapshot.paramMap.get('id');
 	}
 	validateForm: FormGroup;
-
+	businessapplicantid:any;
+	data:any;
 	@Output() parentdata: EventEmitter<boolean> = new EventEmitter<boolean>();
 	ngOnInit() {
 		this.id = sessionStorage.getItem("id");
@@ -53,6 +56,19 @@ export class BusinessDetailsComponent implements OnInit {
 				this.parentdata.emit(false);
 			}
 		});
+		this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(data=>{
+			this.businessapplicantid = data.bussinessdata.businessid;
+			if (this.applicantid !== null) {
+			  this.businessDetailsService.editbusiness(this.businessapplicantid).subscribe(data => {
+			  console.log(data)
+			  delete data._id;
+					  delete data.createdate;
+					  delete data.applicantid;
+				this.data = data;
+			  this.validateForm.patchValue(this.data);
+			  })
+			}
+		  })
 
 	}
 
@@ -64,9 +80,20 @@ export class BusinessDetailsComponent implements OnInit {
 			}
 		}
 		if (this.validateForm.valid) {
+			
 			let sendData = {
 				...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
 			  }
+			  if (this.applicantid) {
+			this.businessDetailsService.editbusinesssave(this.businessapplicantid,sendData).subscribe(data => {
+				if (data) {
+					this.tokenservice.savesteps('business', (data.businessid));
+					this.successService.ResponseMessage("success", "Business details updated");
+				}
+
+			})
+		}
+		else{
 			this.businessDetailsService.businessCreate(sendData).subscribe(data => {
 				if (data) {
 					this.tokenservice.savesteps('business', (data.businessid));
@@ -74,6 +101,7 @@ export class BusinessDetailsComponent implements OnInit {
 				}
 
 			})
+		}
 		}
 	}
 }

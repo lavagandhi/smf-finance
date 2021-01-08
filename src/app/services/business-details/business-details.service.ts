@@ -17,5 +17,13 @@ constructor(private http:HttpClient) { }
 			...value,
 		}).pipe(first(), map((data: any) => data.data));
 	}
-
+	editbusiness(id): Observable<any> {
+		return this.http.get(`${this.API_URL}business/` + id).pipe(first(), map((data: any) => data.data));
+	  }
+	  
+	  editbusinesssave(id, value):Observable<any> {
+		return this.http.put(`${this.API_URL}business/` + id, {
+		  ...value,
+		});
+	  }
 }
