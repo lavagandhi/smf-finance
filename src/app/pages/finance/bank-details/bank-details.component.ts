@@ -28,13 +28,13 @@ export class BankDetailsComponent implements OnInit {
     private successService: SuccessService,
     private tokenservice: TokenService,
     private dropdownService: DropdownService,
-    
-		private applicantCreateService: ApplicantCreateService,) {
+
+    private applicantCreateService: ApplicantCreateService,) {
     this.applicantid = this.activatedRoute.snapshot.paramMap.get('id');
   }
   validateForm: FormGroup;
-  bankapplicantid:any;
-	data:any;
+  bankapplicantid: any;
+  data: any;
   ngOnInit() {
     this.id = sessionStorage.getItem("id");
     this.validateForm = this.fb.group({
@@ -56,19 +56,20 @@ export class BankDetailsComponent implements OnInit {
         this.parentdata.emit(false);
       }
     });
-    // this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(data=>{
-		// 	this.bankapplicantid = data.bussinessdata.businessid;
-		// 	if (this.applicantid !== null) {
-		// 	  this.bankDetailsService.editbusiness(this.bankapplicantid).subscribe(data => {
-		// 	  console.log(data)
-		// 	  delete data._id;
-		// 			  delete data.createdate;
-		// 			  delete data.applicantid;
-		// 		this.data = data;
-		// 	  this.validateForm.patchValue(this.data);
-		// 	  })
-		// 	}
-		//   })
+
+    this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(data => {
+      this.bankapplicantid = data.bussinessdata.businessid;
+      if (this.applicantid !== null) {
+        this.bankDetailsService.editbank(this.bankapplicantid).subscribe(data => {
+          console.log(data)
+          delete data._id;
+          delete data.createdate;
+          delete data.applicantid;
+          this.data = data;
+          this.validateForm.patchValue(this.data);
+        })
+      }
+    })
   }
   submitBankForm() {
     for (const key in this.validateForm.controls) {
@@ -81,7 +82,7 @@ export class BankDetailsComponent implements OnInit {
       let sendData = {
         ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
       }
-      
+
       this.bankDetailsService.bankCreate(sendData).subscribe(data => {
         if (data) {
           this.tokenservice.savesteps('bank', (data.bankid));

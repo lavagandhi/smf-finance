@@ -26,14 +26,14 @@ export class BusinessDetailsComponent implements OnInit {
 		private dropdownService: DropdownService,
 		private businessDetailsService: BusinessDetailsService,
 		private successService: SuccessService,
-		private tokenservice:TokenService,
+		private tokenservice: TokenService,
 		private activatedRoute: ActivatedRoute,
 		private applicantCreateService: ApplicantCreateService,) {
 		this.applicantid = this.activatedRoute.snapshot.paramMap.get('id');
 	}
 	validateForm: FormGroup;
-	businessapplicantid:any;
-	data:any;
+	businessapplicantid: any;
+	data: any;
 	@Output() parentdata: EventEmitter<boolean> = new EventEmitter<boolean>();
 	ngOnInit() {
 		this.id = sessionStorage.getItem("id");
@@ -56,19 +56,19 @@ export class BusinessDetailsComponent implements OnInit {
 				this.parentdata.emit(false);
 			}
 		});
-		this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(data=>{
+		this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(data => {
+			console.log(data)
 			this.businessapplicantid = data.bussinessdata.businessid;
-			if (this.applicantid !== null) {
-			  this.businessDetailsService.editbusiness(this.businessapplicantid).subscribe(data => {
-			  console.log(data)
-			  delete data._id;
-					  delete data.createdate;
-					  delete data.applicantid;
-				this.data = data;
-			  this.validateForm.patchValue(this.data);
-			  })
+			if (this.businessapplicantid !== null) {
+				this.businessDetailsService.editbusiness(this.businessapplicantid).subscribe(data => {
+					delete data._id;
+					delete data.createdate;
+					delete data.applicantid;
+					this.data = data;
+					this.validateForm.patchValue(this.data);
+				})
 			}
-		  })
+		})
 
 	}
 
@@ -80,28 +80,28 @@ export class BusinessDetailsComponent implements OnInit {
 			}
 		}
 		if (this.validateForm.valid) {
-			
+
 			let sendData = {
 				...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
-			  }
-			  if (this.applicantid) {
-			this.businessDetailsService.editbusinesssave(this.businessapplicantid,sendData).subscribe(data => {
-				if (data) {
-					this.tokenservice.savesteps('business', (data.businessid));
-					this.successService.ResponseMessage("success", "Business details updated");
-				}
+			}
+			if (this.applicantid) {
+				this.businessDetailsService.editbusinesssave(this.businessapplicantid, sendData).subscribe(data => {
+					if (data) {
+						this.tokenservice.savesteps('business', (data.businessid));
+						this.successService.ResponseMessage("success", "Business details updated");
+					}
 
-			})
-		}
-		else{
-			this.businessDetailsService.businessCreate(sendData).subscribe(data => {
-				if (data) {
-					this.tokenservice.savesteps('business', (data.businessid));
-					this.successService.ResponseMessage("success", "Business details added");
-				}
+				})
+			}
+			else {
+				this.businessDetailsService.businessCreate(sendData).subscribe(data => {
+					if (data) {
+						this.tokenservice.savesteps('business', (data.businessid));
+						this.successService.ResponseMessage("success", "Business details added");
+					}
 
-			})
-		}
+				})
+			}
 		}
 	}
 }

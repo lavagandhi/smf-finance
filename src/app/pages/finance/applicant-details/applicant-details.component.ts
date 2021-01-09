@@ -70,9 +70,9 @@ export class ApplicantDetailsComponent implements OnInit {
 		});
 
 		if (this.applicantid !== null) {
-			this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(x=>{
-				console.log(x)
-			})
+			// this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(x=>{
+			// 	console.log(x)
+			// })
 			this.applicantCreateService.editApplicant(this.applicantid).subscribe(data => {
 				delete data._id;
 				delete data.createdate;
@@ -111,7 +111,6 @@ export class ApplicantDetailsComponent implements OnInit {
 					}
 				})
 			} else {
-				console.log(sendData)
 				this.applicantCreateService.applicantCreate(sendData).subscribe((data: any) => {
 					if (data) {
 						this.tokenservice.savesteps('applicant', (data.applicantid).toString());
@@ -125,7 +124,6 @@ export class ApplicantDetailsComponent implements OnInit {
 	selectCenter(event: string): void {
 		this.validateForm.get('groupid').setValue('');
 		this.groupService.getGroupByCenter(event).subscribe(data => {
-			console.log(data)
 			this.GrouplistOfData = data;
 			if (this.applicantid) {
 				this.validateForm.get('groupid').setValue(this.data.groupid)

@@ -25,7 +25,7 @@ editloan(id){
   return this.http.get(`${this.API_URL}loan/`+id).pipe(first(), map((data: any) => data.data));
 }
 editsave(id,value){
-  return this.http.post(`${this.API_URL}loan/`+id ,{
+  return this.http.put(`${this.API_URL}loan/`+id ,{
     ...value,
   }).pipe(first(), map((data: any) => data.data));
 }

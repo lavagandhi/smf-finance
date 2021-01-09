@@ -56,7 +56,6 @@ export class LoanProcessComponent implements OnInit {
       this.bankapplicantid = data.loandata.loanid;
       if (this.applicantid !== null) {
         this.loanservice.editloan(this.bankapplicantid).subscribe(data => {
-        console.log(data)
         delete data._id;
 				delete data.createdate;
 				delete data.applicantid;
