@@ -5,6 +5,7 @@ import { BankDetailsComponent } from '../bank-details/bank-details.component';
 import { BusinessDetailsComponent } from '../business-details/business-details.component';
 import { CoApplicantDetailsComponent } from '../co-applicant-details/co-applicant-details.component';
 import { LoanProcessComponent } from '../loan-process/loan-process.component';
+import { ImageUploadComponent } from '../image-upload/image-upload.component';
 
 @Component({
   selector: 'app-add-finance',
@@ -17,6 +18,8 @@ export class AddFinanceComponent implements OnInit {
   @ViewChild(BusinessDetailsComponent) businessDetailsComponent: BusinessDetailsComponent;
   @ViewChild(CoApplicantDetailsComponent) coApplicantDetailsComponent: CoApplicantDetailsComponent;
   @ViewChild(LoanProcessComponent) loanProcessComponent: LoanProcessComponent;
+  @ViewChild(ImageUploadComponent) imageUploadComponent: ImageUploadComponent;
+  
 
   current = 0;
   index = 'first-content';
@@ -73,7 +76,7 @@ export class AddFinanceComponent implements OnInit {
     this.nextbutton = event;
   }
   done() {
-    this.bankDetailsComponent.submitBankForm();
+    this.imageUploadComponent.saveimage();
     localStorage.clear();
     sessionStorage.clear();
   }
