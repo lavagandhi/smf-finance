@@ -5,7 +5,7 @@
       <nz-form-item>
         <nz-form-label nzRequired class="p-0" [nzSpan]="24">Applicant Photo Upload</nz-form-label>
         <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please upload image !">
-          <nz-upload nzListType="picture"  [nzTransformFile]="transformFile">
+          <nz-upload   nzListType="picture"  [nzMultiple]="false" [nzFileList]="fileList" (nzChange)="handleChange($event,'applicantsign')">
             <button nz-button>
               <i nz-icon nzType="upload"></i>Click to Upload
             </button>
@@ -17,7 +17,7 @@
       <nz-form-item>
         <nz-form-label nzRequired class="p-0" [nzSpan]="24">Co-Applicant Photo Upload</nz-form-label>
         <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please upload image !">
-          <nz-upload nzListType="picture"  [nzTransformFile]="transformFileCo">
+          <nz-upload nzListType="picture"  [nzMultiple]="false" [nzFileList]="fileList" (nzChange)="handleChange($event,'coapplicant')">
             <button nz-button>
               <i nz-icon nzType="upload"></i>Click to Upload
             </button>
@@ -31,7 +31,7 @@
       <nz-form-item>
         <nz-form-label nzRequired class="p-0" [nzSpan]="24">Applicant Signature Upload</nz-form-label>
         <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please upload image !">
-          <nz-upload nzListType="picture"  [nzTransformFile]="transformFileSign">
+          <nz-upload nzListType="picture"  [nzMultiple]="false" [nzFileList]="fileList" (nzChange)="handleChange($event,'applicantsign')">
             <button nz-button>
               <i nz-icon nzType="upload"></i>Click to Upload
             </button>
@@ -43,7 +43,7 @@
       <nz-form-item>
         <nz-form-label nzRequired class="p-0" [nzSpan]="24">Co-Applicant Signature Upload</nz-form-label>
         <nz-form-control [nzSpan]="24" nzHasFeedback nzErrorTip="Please upload image !">
-          <nz-upload nzListType="picture"  [nzTransformFile]="transformFileCoSign">
+          <nz-upload nzListType="picture"  [nzMultiple]="false" [nzFileList]="fileList" (nzChange)="handleChange($event,'coapplicantsign')">
             <button nz-button>
               <i nz-icon nzType="upload"></i>Click to Upload
             </button>
