@@ -34,13 +34,17 @@ export class ApplicantDetailsComponent implements OnInit {
 		private centerService: CenterService,
 		private groupService: GroupService,
 		private dropdownService: DropdownService) {
-		this.applicantid = this.activatedRoute.snapshot.paramMap.get('id');
+			if(this.activatedRoute.snapshot.paramMap.get('id') !=null || this.activatedRoute.snapshot.paramMap.get('id') !=undefined){
+				this.applicantid=this.activatedRoute.snapshot.paramMap.get('id')
+			}
+			else if(this.tokenservice.getstep('applicant') !=null || this.tokenservice.getstep('applicant') !=undefined){
+				this.applicantid = this.tokenservice.getstep('applicant');
+			}
+		console.log(this.applicantid,this.tokenservice.getstep('applicant'))
+
 	}
 
 	ngOnInit() {
-		localStorage.clear();
-		sessionStorage.clear();
-
 		this.getIntialLoad();
 		this.validateForm = this.fb.group({
 			applicantname: [, [Validators.required]],
@@ -102,15 +106,20 @@ export class ApplicantDetailsComponent implements OnInit {
 			}
 		}
 		if (this.validateForm.valid) {
+			
+		console.log("inside if save")
 			let sendData = { ...this.validateForm.value };
 			if (this.applicantid) {
-				this.applicantCreateService.editsave(this.applicantid, sendData).subscribe((data: any) => {
+				
+		console.log("update if save")
+				this.applicantCreateService.editsave(this.applicantid,sendData).subscribe((data: any) => {
 					if (data) {
-						this.tokenservice.savesteps('applicant', (data.applicantid).toString());
 						this.successService.ResponseMessage("success", "Applicant updated")
 					}
 				})
 			} else {
+				
+		console.log("save")
 				this.applicantCreateService.applicantCreate(sendData).subscribe((data: any) => {
 					if (data) {
 						this.tokenservice.savesteps('applicant', (data.applicantid).toString());

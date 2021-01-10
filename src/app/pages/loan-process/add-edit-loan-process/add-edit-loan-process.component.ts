@@ -20,6 +20,8 @@ export class AddEditLoanProcessComponent implements OnInit {
   validateForm: FormGroup;
 
   ngOnInit() {
+	localStorage.clear();
+    sessionStorage.clear();
     this.validateForm = this.fb.group({
 			loangetlocation: [null, [Validators.required]],
 			loangetreason: [null, [Validators.required]],       

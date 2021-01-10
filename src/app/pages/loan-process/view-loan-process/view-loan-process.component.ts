@@ -53,7 +53,10 @@ export class ViewLoanProcessComponent implements OnInit {
 
   constructor(private router: Router, private modal: NzModalService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    localStorage.clear();
+    sessionStorage.clear();
+  }
 
   create(): void {
     this.router.navigate(['/loan-process/create']);

@@ -8,6 +8,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Observer } from 'rxjs';
 
 import { DomSanitizer } from '@angular/platform-browser';
+import { CoApplicantService } from 'src/app/services/co-applicant/co-applicant.service';
+import { SuccessService } from 'src/app/services/success.service';
+import { TokenService } from 'src/app/services/token.service';
+import { DropdownService } from 'src/app/services/dropdown/dropdown.service';
+import { ActivatedRoute } from '@angular/router';
+import { ApplicantCreateService } from 'src/app/services/applicant-create/applicant-create.service';
 
 @Component({
   selector: 'app-image-upload',
@@ -18,8 +24,24 @@ export class ImageUploadComponent implements OnInit {
 
   uploading = false;
   fileList = [];
+  applicantid: any;
   constructor(private http: HttpClient, private msg: NzMessageService,
-		private sanitizer: DomSanitizer) {}
+    
+    private coApplicantService: CoApplicantService,
+    private successService: SuccessService,
+    private tokenservice: TokenService,
+    private dropdownservice: DropdownService,
+    private activatedRoute: ActivatedRoute,
+    private applicantCreateService: ApplicantCreateService,
+		private sanitizer: DomSanitizer) {
+      if(this.activatedRoute.snapshot.paramMap.get('id') !=null || this.activatedRoute.snapshot.paramMap.get('id') !=undefined){
+				this.applicantid=this.activatedRoute.snapshot.paramMap.get('id')
+			}
+			else if(this.tokenservice.getstep('applicant') !=null || this.tokenservice.getstep('applicant') !=undefined){
+				this.applicantid = this.tokenservice.getstep('applicant');
+			}
+		console.log(this.applicantid,this.tokenservice.getstep('applicant'))
+    }
   ngOnInit(){
   
   }

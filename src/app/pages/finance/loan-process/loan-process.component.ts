@@ -36,7 +36,12 @@ export class LoanProcessComponent implements OnInit {
     private dropdownService: DropdownService,
 		private applicantCreateService: ApplicantCreateService) {
       
-    this.applicantid = this.activatedRoute.snapshot.paramMap.get('id');
+      if(this.activatedRoute.snapshot.paramMap.get('id') !=null || this.activatedRoute.snapshot.paramMap.get('id') !=undefined){
+				this.applicantid=this.activatedRoute.snapshot.paramMap.get('id')
+			}
+			else if(this.tokenservice.getstep('applicant') !=null || this.tokenservice.getstep('applicant') !=undefined){
+				this.applicantid = this.tokenservice.getstep('applicant');
+			}
      }
 
   ngOnInit() {
@@ -75,12 +80,11 @@ export class LoanProcessComponent implements OnInit {
     }
     if (this.validateForm.valid) {
       let sendData = {
-        ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
+        ...this.validateForm.value
       }
-      if (this.applicantid) {
+      if (this.applicantid && this.bankapplicantid) {
       this.loanservice.editsave(this.bankapplicantid,sendData).subscribe(data => {
         if (data) {
-          this.tokenservice.savesteps('loan', (data.loanid));
           this.successService.ResponseMessage("success", "Loan Process updated");
         }
       })

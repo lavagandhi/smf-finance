@@ -29,7 +29,13 @@ export class BusinessDetailsComponent implements OnInit {
 		private tokenservice: TokenService,
 		private activatedRoute: ActivatedRoute,
 		private applicantCreateService: ApplicantCreateService,) {
-		this.applicantid = this.activatedRoute.snapshot.paramMap.get('id');
+			if(this.activatedRoute.snapshot.paramMap.get('id') !=null || this.activatedRoute.snapshot.paramMap.get('id') !=undefined){
+				this.applicantid=this.activatedRoute.snapshot.paramMap.get('id')
+			}
+			else if(this.tokenservice.getstep('applicant') !=null || this.tokenservice.getstep('applicant') !=undefined){
+				this.applicantid = this.tokenservice.getstep('applicant');
+			}
+		console.log(this.applicantid,this.tokenservice.getstep('applicant'))
 	}
 	validateForm: FormGroup;
 	businessapplicantid: any;
@@ -84,10 +90,9 @@ export class BusinessDetailsComponent implements OnInit {
 			let sendData = {
 				...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
 			}
-			if (this.applicantid) {
+			if (this.applicantid && this.businessapplicantid) {
 				this.businessDetailsService.editbusinesssave(this.businessapplicantid, sendData).subscribe(data => {
 					if (data) {
-						this.tokenservice.savesteps('business', (data.businessid));
 						this.successService.ResponseMessage("success", "Business details updated");
 					}
 

@@ -18,7 +18,6 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class CoApplicantDetailsComponent implements OnInit {
   data: any = [];
-  id: any;
   dropDownLists: any;
   applicantid: any;
   coapplicantid: any
@@ -29,14 +28,18 @@ export class CoApplicantDetailsComponent implements OnInit {
     private dropdownservice: DropdownService,
     private activatedRoute: ActivatedRoute,
     private applicantCreateService: ApplicantCreateService,) {
-    this.applicantid = this.activatedRoute.snapshot.paramMap.get('id');
+      if(this.activatedRoute.snapshot.paramMap.get('id') !=null || this.activatedRoute.snapshot.paramMap.get('id') !=undefined){
+				this.applicantid=this.activatedRoute.snapshot.paramMap.get('id')
+			}
+			else if(this.tokenservice.getstep('applicant') !=null || this.tokenservice.getstep('applicant') !=undefined){
+				this.applicantid = this.tokenservice.getstep('applicant');
+			}
+		console.log(this.applicantid,this.tokenservice.getstep('applicant'))
   }
   validateForm: FormGroup;
 
   @Output() parentdata: EventEmitter<boolean> = new EventEmitter<boolean>();
   ngOnInit() {
-
-    this.id = sessionStorage.getItem("id");
 
     this.dropdownservice.getEducation().subscribe(data => {
       this.dropDownLists = data;
@@ -78,11 +81,10 @@ export class CoApplicantDetailsComponent implements OnInit {
       let sendData = {
         ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
       }
-      if (this.applicantid) {
+      if (this.applicantid && this.coapplicantid) {
         this.coApplicantService.editcosave(this.coapplicantid, sendData).subscribe(data => {
           if (data) {
-            this.tokenservice.savesteps('co-applicant', (data.coapplicantid));
-            this.successService.ResponseMessage("success", "Co Applicant added");
+            this.successService.ResponseMessage("success", "Co Applicant updated added");
           }
         })
       }
@@ -90,7 +92,7 @@ export class CoApplicantDetailsComponent implements OnInit {
         this.coApplicantService.coapplicantCreate(sendData).subscribe(data => {
           if (data) {
             this.tokenservice.savesteps('co-applicant', (data.coapplicantid));
-            this.successService.ResponseMessage("success", "Co Applicant updated added");
+            this.successService.ResponseMessage("success", "Co Applicant  added");
           }
         })
       }

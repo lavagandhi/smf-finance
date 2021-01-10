@@ -37,7 +37,8 @@ export class ViewApplicantComponent implements OnInit {
     private successService: SuccessService) { }
 
   ngOnInit() {
-
+    localStorage.clear();
+    sessionStorage.clear();
     this.centerservice.getCenter().subscribe(centerdata => {
       this.centerdata = centerdata;
       this.groupservices.getGroup().subscribe(groupdata => {

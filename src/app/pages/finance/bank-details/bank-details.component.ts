@@ -30,7 +30,13 @@ export class BankDetailsComponent implements OnInit {
     private dropdownService: DropdownService,
 
     private applicantCreateService: ApplicantCreateService,) {
-    this.applicantid = this.activatedRoute.snapshot.paramMap.get('id');
+      if(this.activatedRoute.snapshot.paramMap.get('id') !=null || this.activatedRoute.snapshot.paramMap.get('id') !=undefined){
+				this.applicantid=this.activatedRoute.snapshot.paramMap.get('id')
+			}
+			else if(this.tokenservice.getstep('applicant') !=null || this.tokenservice.getstep('applicant') !=undefined){
+				this.applicantid = this.tokenservice.getstep('applicant');
+			}
+		console.log(this.applicantid,this.tokenservice.getstep('applicant'))
   }
   validateForm: FormGroup;
   bankapplicantid: any;
@@ -80,15 +86,24 @@ export class BankDetailsComponent implements OnInit {
     }
     if (this.validateForm.valid) {
       let sendData = {
-        ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
+        ...this.validateForm.value	
       }
-
-      this.bankDetailsService.bankCreate(sendData).subscribe(data => {
-        if (data) {
-          this.tokenservice.savesteps('bank', (data.bankid));
-          this.successService.ResponseMessage("success", "Bank details added");
-        }
-      })
+      if (this.applicantid && this.bankapplicantid) {
+        this.bankDetailsService.editbanksave(this.applicantid,sendData).subscribe(data => {
+          if (data) {
+            this.successService.ResponseMessage("success", "Bank details Updated");
+          }
+        })
+      }
+      else{
+        this.bankDetailsService.bankCreate(sendData).subscribe(data => {
+          if (data) {
+            this.tokenservice.savesteps('bank', (data.bankid));
+            this.successService.ResponseMessage("success", "Bank details added");
+          }
+        })
+      }
+      
     }
   }
 

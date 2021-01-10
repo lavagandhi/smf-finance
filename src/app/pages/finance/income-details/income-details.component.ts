@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DropdownService } from 'src/app/services/dropdown/dropdown.service';
 import { IncomeService } from 'src/app/services/income/income.service';
 import { SuccessService } from 'src/app/services/success.service';
+import { TokenService } from 'src/app/services/token.service';
 @Component({
   selector: 'app-income-details',
   templateUrl: './income-details.component.html',
@@ -23,9 +24,15 @@ export class IncomeDetailsComponent implements OnInit {
     private incomeService:IncomeService,
     private successService :SuccessService,
     private activatedRoute :ActivatedRoute,
-    private dropdownService :DropdownService) {
+    private dropdownService :DropdownService,
+    private tokenservice: TokenService,) {
       
-      this.applicantid=this.activatedRoute.snapshot.paramMap.get('id');
+    if(this.activatedRoute.snapshot.paramMap.get('id') !=null || this.activatedRoute.snapshot.paramMap.get('id') !=undefined){
+				this.applicantid=this.activatedRoute.snapshot.paramMap.get('id')
+			}
+			else if(this.tokenservice.getstep('applicant') !=null || this.tokenservice.getstep('applicant') !=undefined){
+				this.applicantid = this.tokenservice.getstep('applicant');
+			}
      }
   validateForm: FormGroup;
 

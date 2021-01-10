@@ -27,6 +27,8 @@ export class ViewGroupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    localStorage.clear();
+    sessionStorage.clear();
     this.centerservice.getCenter().subscribe(centerdata => {
       this.groupService.getGroup().subscribe(data => {
         this.listOfData = data.map(m => {
