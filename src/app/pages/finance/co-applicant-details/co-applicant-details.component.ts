@@ -19,26 +19,16 @@ import { TokenService } from 'src/app/services/token.service';
 export class CoApplicantDetailsComponent implements OnInit {
   data: any = [];
   dropDownLists: any;
-  applicantid: any;
   coapplicantid: any
   constructor(private fb: FormBuilder,
     private coApplicantService: CoApplicantService,
     private successService: SuccessService,
     private tokenservice: TokenService,
-    private dropdownservice: DropdownService,
-    private activatedRoute: ActivatedRoute,
-    private applicantCreateService: ApplicantCreateService,) {
-      if(this.activatedRoute.snapshot.paramMap.get('id') !=null || this.activatedRoute.snapshot.paramMap.get('id') !=undefined){
-				this.applicantid=this.activatedRoute.snapshot.paramMap.get('id')
-			}
-			else if(this.tokenservice.getstep('applicant') !=null || this.tokenservice.getstep('applicant') !=undefined){
-				this.applicantid = this.tokenservice.getstep('applicant');
-			}
-		console.log(this.applicantid,this.tokenservice.getstep('applicant'))
-  }
-  validateForm: FormGroup;
+    private dropdownservice: DropdownService) { }
 
+  validateForm: FormGroup;
   @Output() parentdata: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   ngOnInit() {
 
     this.dropdownservice.getEducation().subscribe(data => {
@@ -56,18 +46,17 @@ export class CoApplicantDetailsComponent implements OnInit {
         this.parentdata.emit(false);
       }
     });
-    this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(data => {
-      this.coapplicantid = data.coapplicantdata.coapplicantid;
-      if (this.applicantid !== null) {
-        this.coApplicantService.editcoApplicant(this.coapplicantid).subscribe(data => {
-          delete data._id;
-          delete data.createdate;
-          delete data.applicantid;
-          this.data = data;
-          this.validateForm.patchValue(this.data);
-        })
-      }
-    })
+
+    this.coapplicantid = this.tokenservice.getstep('co-applicant');
+    if (this.coapplicantid !== null) {
+      this.coApplicantService.editcoApplicant(this.coapplicantid).subscribe(data => {
+        delete data._id;
+        delete data.createdate;
+        delete data.applicantid;
+        this.data = data;
+        this.validateForm.patchValue(this.data);
+      })
+    }
   }
 
   submitCoApplicantForm() {
@@ -81,7 +70,7 @@ export class CoApplicantDetailsComponent implements OnInit {
       let sendData = {
         ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
       }
-      if (this.applicantid && this.coapplicantid) {
+      if (this.coapplicantid) {
         this.coApplicantService.editcosave(this.coapplicantid, sendData).subscribe(data => {
           if (data) {
             this.successService.ResponseMessage("success", "Co Applicant updated added");

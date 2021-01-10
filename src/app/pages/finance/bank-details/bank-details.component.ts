@@ -27,20 +27,12 @@ export class BankDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private successService: SuccessService,
     private tokenservice: TokenService,
-    private dropdownService: DropdownService,
+    private dropdownService: DropdownService) { }
 
-    private applicantCreateService: ApplicantCreateService,) {
-      if(this.activatedRoute.snapshot.paramMap.get('id') !=null || this.activatedRoute.snapshot.paramMap.get('id') !=undefined){
-				this.applicantid=this.activatedRoute.snapshot.paramMap.get('id')
-			}
-			else if(this.tokenservice.getstep('applicant') !=null || this.tokenservice.getstep('applicant') !=undefined){
-				this.applicantid = this.tokenservice.getstep('applicant');
-			}
-		console.log(this.applicantid,this.tokenservice.getstep('applicant'))
-  }
   validateForm: FormGroup;
-  bankapplicantid: any;
+  bankid: any;
   data: any;
+
   ngOnInit() {
     this.id = sessionStorage.getItem("id");
     this.validateForm = this.fb.group({
@@ -50,33 +42,32 @@ export class BankDetailsComponent implements OnInit {
       branchname: [null, [Validators.required]],
       accountmode: [null, [Validators.required]],
       accno: [null, [Validators.required]],
-      ifsccode: [null, [Validators.required]],
-
+      ifsccode: [null, [Validators.required]]
     });
+
     this.dropdownService.getEducation()
       .subscribe(data => {
         this.dropdownValue = data;
       });
+
     this.validateForm.valueChanges.subscribe(() => {
       if (this.validateForm.valid) {
         this.parentdata.emit(false);
       }
     });
 
-    this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(data => {
-      this.bankapplicantid = data.bussinessdata.businessid;
-      if (this.applicantid !== null) {
-        this.bankDetailsService.editbank(this.bankapplicantid).subscribe(data => {
-          console.log(data)
-          delete data._id;
-          delete data.createdate;
-          delete data.applicantid;
-          this.data = data;
-          this.validateForm.patchValue(this.data);
-        })
-      }
-    })
+    this.bankid = this.tokenservice.getstep('bank');
+    if (this.bankid !== null) {
+      this.bankDetailsService.editbank(this.bankid).subscribe(data => {
+        delete data._id;
+        delete data.createdate;
+        delete data.applicantid;
+        this.data = data;
+        this.validateForm.patchValue(this.data);
+      })
+    }
   }
+
   submitBankForm() {
     for (const key in this.validateForm.controls) {
       if (this.validateForm.controls.hasOwnProperty(key)) {
@@ -88,14 +79,14 @@ export class BankDetailsComponent implements OnInit {
       let sendData = {
         ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
       }
-      if (this.applicantid && this.bankapplicantid) {
-        this.bankDetailsService.editbanksave(this.applicantid,sendData).subscribe(data => {
+      if (this.bankid) {
+        this.bankDetailsService.editbanksave(this.bankid, sendData).subscribe(data => {
           if (data) {
             this.successService.ResponseMessage("success", "Bank details Updated");
           }
         })
       }
-      else{
+      else {
         this.bankDetailsService.bankCreate(sendData).subscribe(data => {
           if (data) {
             this.tokenservice.savesteps('bank', (data.bankid));
@@ -103,7 +94,7 @@ export class BankDetailsComponent implements OnInit {
           }
         })
       }
-      
+
     }
   }
 

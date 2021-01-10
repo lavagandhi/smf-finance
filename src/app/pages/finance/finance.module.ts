@@ -8,7 +8,6 @@ import { FinanceRoutingModule } from './finance-routing.module';
 import { ApplicantDetailsComponent } from './applicant-details/applicant-details.component';
 import { CoApplicantDetailsComponent } from './co-applicant-details/co-applicant-details.component';
 import { BankDetailsComponent } from './bank-details/bank-details.component';
-import { IncomeDetailsComponent } from './income-details/income-details.component';
 import { BusinessDetailsComponent } from './business-details/business-details.component';
 import { ViewApplicantComponent } from './view-applicant/view-applicant.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
@@ -22,7 +21,7 @@ import { LoanProcessComponent } from 'src/app/pages/finance/loan-process/loan-pr
     IconsProviderModule,
     FinanceRoutingModule
   ],
-  declarations: [LoanProcessComponent, AddFinanceComponent, ViewDetailsComponent, ImageUploadComponent, ViewApplicantComponent, ApplicantDetailsComponent, CoApplicantDetailsComponent, BankDetailsComponent, IncomeDetailsComponent, BusinessDetailsComponent, BankDetailsComponent],
+  declarations: [LoanProcessComponent, AddFinanceComponent, ViewDetailsComponent, ImageUploadComponent, ViewApplicantComponent, ApplicantDetailsComponent, CoApplicantDetailsComponent, BankDetailsComponent, BusinessDetailsComponent, BankDetailsComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class FinanceModule { }

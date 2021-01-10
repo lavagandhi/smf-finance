@@ -34,13 +34,12 @@ export class ApplicantDetailsComponent implements OnInit {
 		private centerService: CenterService,
 		private groupService: GroupService,
 		private dropdownService: DropdownService) {
-			if(this.activatedRoute.snapshot.paramMap.get('id') !=null || this.activatedRoute.snapshot.paramMap.get('id') !=undefined){
-				this.applicantid=this.activatedRoute.snapshot.paramMap.get('id')
-			}
-			else if(this.tokenservice.getstep('applicant') !=null || this.tokenservice.getstep('applicant') !=undefined){
-				this.applicantid = this.tokenservice.getstep('applicant');
-			}
-		console.log(this.applicantid,this.tokenservice.getstep('applicant'))
+		if (this.activatedRoute.snapshot.paramMap.get('id') != null || this.activatedRoute.snapshot.paramMap.get('id') != undefined) {
+			this.applicantid = this.activatedRoute.snapshot.paramMap.get('id')
+		}
+		else if (this.tokenservice.getstep('applicant') != null || this.tokenservice.getstep('applicant') != undefined) {
+			this.applicantid = this.tokenservice.getstep('applicant');
+		}
 
 	}
 
@@ -74,9 +73,6 @@ export class ApplicantDetailsComponent implements OnInit {
 		});
 
 		if (this.applicantid !== null) {
-			// this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(x=>{
-			// 	console.log(x)
-			// })
 			this.applicantCreateService.editApplicant(this.applicantid).subscribe(data => {
 				delete data._id;
 				delete data.createdate;
@@ -84,6 +80,15 @@ export class ApplicantDetailsComponent implements OnInit {
 				this.data = data;
 				this.validateForm.patchValue(this.data);
 			})
+
+			this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(data => {
+
+				this.tokenservice.savesteps('applicant', data.applicantdata.applicantid)
+				this.tokenservice.savesteps('co-applicant', data.coapplicantdata.coapplicantid)
+				this.tokenservice.savesteps('loan', data.loandata.loanid)
+				this.tokenservice.savesteps('business', data.bussinessdata.businessid)
+				this.tokenservice.savesteps('bank', data.bankdata.bankid)
+			});
 		}
 	}
 
@@ -106,20 +111,14 @@ export class ApplicantDetailsComponent implements OnInit {
 			}
 		}
 		if (this.validateForm.valid) {
-			
-		console.log("inside if save")
 			let sendData = { ...this.validateForm.value };
 			if (this.applicantid) {
-				
-		console.log("update if save")
-				this.applicantCreateService.editsave(this.applicantid,sendData).subscribe((data: any) => {
+				this.applicantCreateService.editsave(this.applicantid, sendData).subscribe((data: any) => {
 					if (data) {
 						this.successService.ResponseMessage("success", "Applicant updated")
 					}
 				})
 			} else {
-				
-		console.log("save")
 				this.applicantCreateService.applicantCreate(sendData).subscribe((data: any) => {
 					if (data) {
 						this.tokenservice.savesteps('applicant', (data.applicantid).toString());

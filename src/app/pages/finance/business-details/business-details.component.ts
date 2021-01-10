@@ -26,19 +26,10 @@ export class BusinessDetailsComponent implements OnInit {
 		private dropdownService: DropdownService,
 		private businessDetailsService: BusinessDetailsService,
 		private successService: SuccessService,
-		private tokenservice: TokenService,
-		private activatedRoute: ActivatedRoute,
-		private applicantCreateService: ApplicantCreateService,) {
-			if(this.activatedRoute.snapshot.paramMap.get('id') !=null || this.activatedRoute.snapshot.paramMap.get('id') !=undefined){
-				this.applicantid=this.activatedRoute.snapshot.paramMap.get('id')
-			}
-			else if(this.tokenservice.getstep('applicant') !=null || this.tokenservice.getstep('applicant') !=undefined){
-				this.applicantid = this.tokenservice.getstep('applicant');
-			}
-		console.log(this.applicantid,this.tokenservice.getstep('applicant'))
-	}
+		private tokenservice: TokenService){}
+
 	validateForm: FormGroup;
-	businessapplicantid: any;
+	businessid: any;
 	data: any;
 	@Output() parentdata: EventEmitter<boolean> = new EventEmitter<boolean>();
 	ngOnInit() {
@@ -62,19 +53,18 @@ export class BusinessDetailsComponent implements OnInit {
 				this.parentdata.emit(false);
 			}
 		});
-		this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(data => {
-			console.log(data)
-			this.businessapplicantid = data.bussinessdata.businessid;
-			if (this.businessapplicantid !== null) {
-				this.businessDetailsService.editbusiness(this.businessapplicantid).subscribe(data => {
-					delete data._id;
-					delete data.createdate;
-					delete data.applicantid;
-					this.data = data;
-					this.validateForm.patchValue(this.data);
-				})
-			}
-		})
+
+		this.businessid = this.tokenservice.getstep('business');
+		if (this.businessid !== null) {
+			this.businessDetailsService.editbusiness(this.businessid).subscribe(data => {
+				delete data._id;
+				delete data.createdate;
+				delete data.applicantid;
+				this.data = data;
+				this.validateForm.patchValue(this.data);
+			})
+		}
+
 
 	}
 
@@ -90,8 +80,8 @@ export class BusinessDetailsComponent implements OnInit {
 			let sendData = {
 				...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
 			}
-			if (this.applicantid && this.businessapplicantid) {
-				this.businessDetailsService.editbusinesssave(this.businessapplicantid, sendData).subscribe(data => {
+			if (this.businessid) {
+				this.businessDetailsService.editbusinesssave(this.businessid, sendData).subscribe(data => {
 					if (data) {
 						this.successService.ResponseMessage("success", "Business details updated");
 					}
