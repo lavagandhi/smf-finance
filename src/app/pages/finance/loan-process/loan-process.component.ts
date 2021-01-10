@@ -80,7 +80,7 @@ export class LoanProcessComponent implements OnInit {
     }
     if (this.validateForm.valid) {
       let sendData = {
-        ...this.validateForm.value
+        ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
       }
       if (this.applicantid && this.bankapplicantid) {
       this.loanservice.editsave(this.bankapplicantid,sendData).subscribe(data => {

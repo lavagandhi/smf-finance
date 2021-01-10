@@ -86,7 +86,7 @@ export class BankDetailsComponent implements OnInit {
     }
     if (this.validateForm.valid) {
       let sendData = {
-        ...this.validateForm.value	
+        ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
       }
       if (this.applicantid && this.bankapplicantid) {
         this.bankDetailsService.editbanksave(this.applicantid,sendData).subscribe(data => {
