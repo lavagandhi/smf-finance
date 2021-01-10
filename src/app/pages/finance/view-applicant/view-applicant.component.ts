@@ -27,7 +27,11 @@ export class ViewApplicantComponent implements OnInit {
   listOfData: any = [];
   centerdata: any = [];
   groupdata: any = [];
-
+  searchValue = '';
+  searchid = '';
+  visible = false;
+  visibleid=false;
+  listOfDisplayData :any= [];
   constructor(
     private router: Router,
     private modal: NzModalService,
@@ -45,12 +49,14 @@ export class ViewApplicantComponent implements OnInit {
         this.groupdata = groupdata;
 
         this.applicantCreateService.getallfulldetails().subscribe(data => {
+         
           this.listOfData = [...data].map(m=> {
             m.centername = this.centerdata.find(c=>c.centerid === m.centerid)?.centername;
             m.groupname = this.groupdata.find(c=>c.groupid === m.groupid)?.groupname;
             m.installmentday =this.groupdata.find(c=>c.groupid === m.groupid)?.installmentday;
             return m;
           });
+          this.listOfDisplayData = [...this.listOfData];
         })
       })
     })
@@ -63,6 +69,22 @@ export class ViewApplicantComponent implements OnInit {
 
   edit(id): void {
     this.router.navigate(['/applicant/edit/' + id]);
+  }
+  search(): void {
+    this.visible = false;
+    this.listOfDisplayData = this.listOfData.filter((item) => item.applicantname.indexOf(this.searchValue) !== -1);
+  }
+  searchbyid(): void {
+    this.visibleid = false;
+    this.listOfDisplayData = this.listOfData.filter((item) => item.formid.indexOf(this.searchid) !== -1);
+  }
+  resetid(){
+    this.searchid = '';
+    this.searchbyid();
+  }
+  reset(): void {
+    this.searchValue = '';
+    this.search();
   }
 
   delete(id): void {

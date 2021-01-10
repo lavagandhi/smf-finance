@@ -11,11 +11,15 @@
 
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="24">
-    <nz-table #basicTable [nzData]="listOfData">
+    <nz-table #basicTable [nzData]="listOfDisplayData">
       <thead>
         <tr>
-          <th>Applicant Id</th>
-          <th>Applicant Name</th>
+          <th nzCustomFilter>Applicant Id<nz-filter-trigger [(nzVisible)]="visibleid" [nzActive]="searchid.length > 0" [nzDropdownMenu]="menuid">
+            <i nz-icon nzType="search"></i>
+          </nz-filter-trigger></th>
+          <th nzCustomFilter>Applicant Name<nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+            <i nz-icon nzType="search"></i>
+          </nz-filter-trigger></th>
           <th>Loan Id</th>
           <th>Center Name</th>
           <th>Group Name</th>
@@ -41,5 +45,27 @@
         </tr>
       </tbody>
     </nz-table>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+          <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+          <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+            Search
+          </button>
+          <button nz-button nzSize="small" (click)="reset()">Reset</button>
+        </div>
+      </div>
+    </nz-dropdown-menu>
+    <nz-dropdown-menu #menuid="nzDropdownMenu">
+      <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+          <input type="text" nz-input placeholder="Search By id" [(ngModel)]="searchid" />
+          <button nz-button nzSize="small" nzType="primary" (click)="searchbyid()" class="search-button">
+            Search
+          </button>
+          <button nz-button nzSize="small" (click)="resetid()">Reset</button>
+        </div>
+      </div>
+    </nz-dropdown-menu>
   </div>
 </div>
