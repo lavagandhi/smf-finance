@@ -24,25 +24,15 @@ export class LoanProcessComponent implements OnInit {
   btnName = 'Submit';
   validateForm: FormGroup;
   dropDownLists: any;
-  applicantid: any;
-  bankapplicantid:any;
-  data:any;
+  loanid: any;
+  data: any;
   constructor(
     private successService: SuccessService,
-    private loanservice:LoanProgressService, 
-    private tokenservice:TokenService, 
-    private fb: FormBuilder, 
+    private loanservice: LoanProgressService,
+    private tokenservice: TokenService,
+    private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private dropdownService: DropdownService,
-		private applicantCreateService: ApplicantCreateService) {
-      
-      if(this.activatedRoute.snapshot.paramMap.get('id') !=null || this.activatedRoute.snapshot.paramMap.get('id') !=undefined){
-				this.applicantid=this.activatedRoute.snapshot.paramMap.get('id')
-			}
-			else if(this.tokenservice.getstep('applicant') !=null || this.tokenservice.getstep('applicant') !=undefined){
-				this.applicantid = this.tokenservice.getstep('applicant');
-			}
-     }
+    private dropdownService: DropdownService) { }
 
   ngOnInit() {
     this.dropdownService.getEducation().subscribe(data => {
@@ -57,18 +47,18 @@ export class LoanProcessComponent implements OnInit {
       processfee: [null, [Validators.required]],
       purpose: [null, [Validators.required]]
     });
-    this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(data=>{
-      this.bankapplicantid = data.loandata.loanid;
-      if (this.applicantid !== null) {
-        this.loanservice.editloan(this.bankapplicantid).subscribe(data => {
+
+    this.loanid = this.tokenservice.getstep('loan');
+    if (this.loanid !== null) {
+      this.loanservice.editloan(this.loanid).subscribe(data => {
         delete data._id;
-				delete data.createdate;
-				delete data.applicantid;
-          this.data = data;
+        delete data.createdate;
+        delete data.applicantid;
+        this.data = data;
         this.validateForm.patchValue(this.data);
-        })
-      }
-    })
+      })
+    }
+
   }
 
   submitForm(): void {
@@ -80,23 +70,23 @@ export class LoanProcessComponent implements OnInit {
     }
     if (this.validateForm.valid) {
       let sendData = {
-        ...this.validateForm.value
+        ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
       }
-      if (this.applicantid && this.bankapplicantid) {
-      this.loanservice.editsave(this.bankapplicantid,sendData).subscribe(data => {
-        if (data) {
-          this.successService.ResponseMessage("success", "Loan Process updated");
-        }
-      })
-    }
-    else{
-      this.loanservice.loanCreate(sendData).subscribe(data => {
-        if (data) {
-          this.tokenservice.savesteps('loan', (data.loanid));
-          this.successService.ResponseMessage("success", "Loan Process added");
-        }
-      })
-    }
+      if (this.loanid) {
+        this.loanservice.editsave(this.loanid, sendData).subscribe(data => {
+          if (data) {
+            this.successService.ResponseMessage("success", "Loan Process updated");
+          }
+        })
+      }
+      else {
+        this.loanservice.loanCreate(sendData).subscribe(data => {
+          if (data) {
+            this.tokenservice.savesteps('loan', (data.loanid));
+            this.successService.ResponseMessage("success", "Loan Process added");
+          }
+        })
+      }
     }
   }
 
@@ -112,6 +102,6 @@ export class LoanProcessComponent implements OnInit {
   }
 
   setProcessfee(amount) {
-    this.validateForm.get('processfee').setValue(amount/100);
+    this.validateForm.get('processfee').setValue(amount / 100);
   }
 }

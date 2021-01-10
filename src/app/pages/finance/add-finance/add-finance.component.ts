@@ -4,7 +4,6 @@ import { ApplicantDetailsComponent } from '../applicant-details/applicant-detail
 import { BankDetailsComponent } from '../bank-details/bank-details.component';
 import { BusinessDetailsComponent } from '../business-details/business-details.component';
 import { CoApplicantDetailsComponent } from '../co-applicant-details/co-applicant-details.component';
-import { IncomeDetailsComponent } from '../income-details/income-details.component';
 import { LoanProcessComponent } from '../loan-process/loan-process.component';
 
 @Component({
@@ -17,7 +16,6 @@ export class AddFinanceComponent implements OnInit {
   @ViewChild(BankDetailsComponent) bankDetailsComponent: BankDetailsComponent;
   @ViewChild(BusinessDetailsComponent) businessDetailsComponent: BusinessDetailsComponent;
   @ViewChild(CoApplicantDetailsComponent) coApplicantDetailsComponent: CoApplicantDetailsComponent;
-  @ViewChild(IncomeDetailsComponent) incomeDetailsComponent: IncomeDetailsComponent;
   @ViewChild(LoanProcessComponent) loanProcessComponent: LoanProcessComponent;
 
   current = 0;
