@@ -89,19 +89,21 @@ export class EmiCreateComponent implements OnInit {
 				let monthinterest = ((balanceamount * permonthinterest) / 100);
 				let principal = (this.EMIObj.EMI - Math.round(monthinterest))
 				totalmonthinterest += Math.round(monthinterest);
-				console.log(monthinterest, Math.round(monthinterest))
+				monthinterest = Math.round(monthinterest);
 				// if (i === (12 * form.repayment)) {
 				// 	monthinterest = Math.round(monthinterest);
 				// 	principal = (this.EMIObj.EMI - Math.round(monthinterest))
 				// } else {
 				// 	if (Math.round(monthinterest) > monthinterest) {
 				// 		if (!ishigh) {
-				// 			principal = (this.EMIObj.EMI - Math.ceil(monthinterest));
+				// 			monthinterest = Math.ceil(monthinterest);
+				// 			principal = (this.EMIObj.EMI - monthinterest);
 				// 			ishigh = true;
 				// 			morecount++;
 				// 		} else {
+				// 			monthinterest = Math.floor(monthinterest);
+				// 			principal = (this.EMIObj.EMI - monthinterest);
 				// 			ishigh = false;
-				// 			principal = (this.EMIObj.EMI - Math.floor(monthinterest));
 				// 			lesscount++;
 				// 		}
 				// 	} else {
@@ -142,9 +144,8 @@ export class EmiCreateComponent implements OnInit {
 					installmentday,
 					installmentamount: this.EMIObj.EMI,
 					principal: principal,
-					int:  Math.round(monthinterest),
-					balance: balanceamount - principal,
-					monthinterest
+					int: monthinterest,
+					balance: balanceamount - principal
 				}]
 				balanceamount = balanceamount - principal;
 			}

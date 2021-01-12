@@ -48,9 +48,7 @@ export class AddPaymentComponent implements OnInit {
 			}
 		}
 		if (this.validateForm.valid) {
-			console.log(this.validateForm.value.groupid)
 			this.applicatservice.getapplicantbygroup(this.validateForm.value.groupid).subscribe(data => {
-				console.log(data);
 				this.listOfData = data;
 			})
 		}
@@ -79,7 +77,6 @@ export class AddPaymentComponent implements OnInit {
 
 	handleOk(): void {
 		this.paymentservice.paymentCreate({ applicantid: this.applicantid, amount: this.amount }).subscribe(data => {
-			console.log(data)
 		})
 		this.isVisible = false;
 	}
