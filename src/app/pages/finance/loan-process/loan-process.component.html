@@ -74,5 +74,13 @@
         </nz-form-control>
       </nz-form-item>
     </div>
+    <div nz-col nzSpan="12" >
+      <nz-form-item>
+        <nz-form-label  class="p-0" nzRequired [nzSpan]="24">Loan Starting Date</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Purpose!" [nzSpan]="24">
+          <input type="date"  formControlName="loanstartingdate" nz-input rows="2" placeholder="Loan Starting Date" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
   </div>
 </form>

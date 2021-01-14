@@ -45,7 +45,8 @@ export class LoanProcessComponent implements OnInit {
       interest: [null, [Validators.required]],
       insurance: [null, [Validators.required]],
       processfee: [null, [Validators.required]],
-      purpose: [null, [Validators.required]]
+      purpose: [null, [Validators.required]],
+      loanstartingdate: [null,[Validators.required]]
     });
 
     this.loanid = this.tokenservice.getstep('loan');

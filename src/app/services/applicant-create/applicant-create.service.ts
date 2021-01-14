@@ -49,4 +49,8 @@ export class ApplicantCreateService {
 	getapplicantbygroup(groupid: string): Observable<any> {
 		return this.http.get(`${this.API_URL}applicant/groupapplicants/${groupid}`).pipe(first(), map((data: any) => data.data));
 	}
+
+	uploadimage(imagedata: any): Observable<any> {
+		return this.http.post(`${this.API_URL}applicant/uploadimage`, imagedata).pipe(first(), map((data: any) => data.data));
+	}
 }

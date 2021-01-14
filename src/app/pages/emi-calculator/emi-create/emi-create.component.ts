@@ -87,9 +87,10 @@ export class EmiCreateComponent implements OnInit {
 				}
 
 				let monthinterest = ((balanceamount * permonthinterest) / 100);
-				let principal = (this.EMIObj.EMI - Math.round(monthinterest))
-				totalmonthinterest += Math.round(monthinterest);
-				monthinterest = Math.round(monthinterest);
+				let principal = (this.EMIObj.EMI - Math.floor(monthinterest))
+				totalmonthinterest += Math.floor(monthinterest);
+				monthinterest = Math.floor(monthinterest);
+				// monthinterest = Math.ceil(monthinterest);
 				// if (i === (12 * form.repayment)) {
 				// 	monthinterest = Math.round(monthinterest);
 				// 	principal = (this.EMIObj.EMI - Math.round(monthinterest))
@@ -145,11 +146,10 @@ export class EmiCreateComponent implements OnInit {
 					installmentamount: this.EMIObj.EMI,
 					principal: principal,
 					int: monthinterest,
-					balance: balanceamount - principal
+					balance: (i === term) ? 0: balanceamount - principal
 				}]
 				balanceamount = balanceamount - principal;
 			}
-			console.log(this.EMIObj.Total, this.EMIObj.Total - totalmonthinterest);
 		}
 	}
 
