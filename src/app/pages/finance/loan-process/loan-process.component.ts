@@ -74,8 +74,9 @@ export class LoanProcessComponent implements OnInit {
       mode: null
     };
     if (this.validateForm.valid) {
+      const calculatedint = this.validateForm.value.interest / (12 * this.validateForm.value.repayment);
       let sendData = {
-        ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
+        ...this.validateForm.value, calculatedint, applicantid: this.tokenservice.getstep('applicant')
       }
       if (this.loanid) {
         subscribedata.returnobj = this.loanservice.editsave(this.loanid, sendData);
