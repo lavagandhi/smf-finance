@@ -35,7 +35,6 @@ export class ImageUploadComponent implements OnInit {
   constructor(private http: HttpClient, private msg: NzMessageService,
 
     private coApplicantService: CoApplicantService,
-    private successService: SuccessService,
     private tokenservice: TokenService,
     private dropdownservice: DropdownService,
     private activatedRoute: ActivatedRoute,
@@ -46,13 +45,12 @@ export class ImageUploadComponent implements OnInit {
   ngOnInit() {
     this.coapplicantid = this.tokenservice.getstep('co-applicant');
     this.applicantid = this.tokenservice.getstep('applicant');
-    console.log(this.coapplicantid, this.applicantid)
   }
 
   handleChange(info: NzUploadChangeParam, type): void {
     let fileList = [...info.fileList];
     fileList = fileList.slice(-1);
-    
+
     if (type === 'applicant') {
       this.fileLista = fileList
     }
@@ -79,13 +77,6 @@ export class ImageUploadComponent implements OnInit {
       coapplicantimage: this.fileListco[0]?.thumbUrl,
       coapplicantsign: this.fileListcos[0]?.thumbUrl
     };
-    this.applicantCreateService
-    console.log(obj);
-    if (obj) {
-      this.applicantCreateService.uploadimage(obj).subscribe(data=> {
-        console.log(data)
-        this.successService.ResponseMessage("success", "Image added");
-      })
-    }
+    return this.applicantCreateService.uploadimage(obj)
   }
 }

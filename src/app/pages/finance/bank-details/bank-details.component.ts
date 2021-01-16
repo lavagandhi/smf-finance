@@ -69,33 +69,30 @@ export class BankDetailsComponent implements OnInit {
   }
 
   submitBankForm() {
+    let subscribedata = {
+      returnobj: null,
+      mode: null
+    };
+
     for (const key in this.validateForm.controls) {
       if (this.validateForm.controls.hasOwnProperty(key)) {
         this.validateForm.controls[key].markAsDirty();
         this.validateForm.controls[key].updateValueAndValidity();
       }
     }
-    if (this.validateForm.valid) {
+    if (this.validateForm.valid) {      
       let sendData = {
         ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
       }
       if (this.bankid) {
-        this.bankDetailsService.editbanksave(this.bankid, sendData).subscribe(data => {
-          if (data) {
-            this.successService.ResponseMessage("success", "Bank details Updated");
-          }
-        })
+        subscribedata.returnobj = this.bankDetailsService.editbanksave(this.bankid, sendData);
+        subscribedata.mode = 'Updated';
       }
       else {
-        this.bankDetailsService.bankCreate(sendData).subscribe(data => {
-          if (data) {
-            this.tokenservice.savesteps('bank', (data.bankid));
-            this.successService.ResponseMessage("success", "Bank details added");
-          }
-        })
+        subscribedata.returnobj = this.bankDetailsService.bankCreate(sendData);
+        subscribedata.mode = 'Added';
       }
-
     }
+    return subscribedata;
   }
-
 }

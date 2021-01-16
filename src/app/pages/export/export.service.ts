@@ -4,7 +4,6 @@ export class ExportService {
     downloadFile(data, filename) {
         let headers = Object.keys(data[0]);
         let csvData = this.ConvertToCSV(data, headers);
-        console.log(csvData)
         let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
         let dwldLink = document.createElement("a");
         let url = URL.createObjectURL(blob);

@@ -34,10 +34,10 @@ export class ApplicantDetailsComponent implements OnInit {
 		private centerService: CenterService,
 		private groupService: GroupService,
 		private dropdownService: DropdownService) {
-		if (this.activatedRoute.snapshot.paramMap.get('id') != null || this.activatedRoute.snapshot.paramMap.get('id') != undefined) {
+		if (this.activatedRoute.snapshot.paramMap.get('id') !== null && this.activatedRoute.snapshot.paramMap.get('id') !== undefined) {
 			this.applicantid = this.activatedRoute.snapshot.paramMap.get('id')
 		}
-		else if (this.tokenservice.getstep('applicant') != null || this.tokenservice.getstep('applicant') != undefined) {
+		else if (this.tokenservice.getstep('applicant') !== null && this.tokenservice.getstep('applicant') !== undefined) {
 			this.applicantid = this.tokenservice.getstep('applicant');
 		}
 
@@ -82,7 +82,6 @@ export class ApplicantDetailsComponent implements OnInit {
 			})
 
 			this.applicantCreateService.getapplicantdetails(this.applicantid).subscribe(data => {
-
 				this.tokenservice.savesteps('applicant', data.applicantdata.applicantid)
 				this.tokenservice.savesteps('co-applicant', data.coapplicantdata.coapplicantid)
 				this.tokenservice.savesteps('loan', data.loandata.loanid)
@@ -103,7 +102,11 @@ export class ApplicantDetailsComponent implements OnInit {
 		})
 	}
 
-	submitApplicantForm() {
+	submitApplicantForm():any {
+		let subscribedata = {
+			returnobj: null,
+			mode: null
+		};
 		for (const key in this.validateForm.controls) {
 			if (this.validateForm.controls.hasOwnProperty(key)) {
 				this.validateForm.controls[key].markAsDirty();
@@ -113,20 +116,14 @@ export class ApplicantDetailsComponent implements OnInit {
 		if (this.validateForm.valid) {
 			let sendData = { ...this.validateForm.value };
 			if (this.applicantid) {
-				this.applicantCreateService.editsave(this.applicantid, sendData).subscribe((data: any) => {
-					if (data) {
-						this.successService.ResponseMessage("success", "Applicant updated")
-					}
-				})
+				subscribedata.returnobj = this.applicantCreateService.editsave(this.applicantid, sendData);
+				subscribedata.mode = 'Updated';
 			} else {
-				this.applicantCreateService.applicantCreate(sendData).subscribe((data: any) => {
-					if (data) {
-						this.tokenservice.savesteps('applicant', (data.applicantid).toString());
-						this.successService.ResponseMessage("success", "Applicant added")
-					}
-				})
+				subscribedata.returnobj = this.applicantCreateService.applicantCreate(sendData);
+				subscribedata.mode = 'Added';
 			}
 		}
+		return subscribedata;
 	}
 
 	selectCenter(event: string): void {

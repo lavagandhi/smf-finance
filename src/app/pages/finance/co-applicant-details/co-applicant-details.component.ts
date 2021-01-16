@@ -60,6 +60,10 @@ export class CoApplicantDetailsComponent implements OnInit {
   }
 
   submitCoApplicantForm() {
+    let subscribedata = {
+			returnobj: null,
+			mode: null
+		};
     for (const key in this.validateForm.controls) {
       if (this.validateForm.controls.hasOwnProperty(key)) {
         this.validateForm.controls[key].markAsDirty();
@@ -71,21 +75,15 @@ export class CoApplicantDetailsComponent implements OnInit {
         ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
       }
       if (this.coapplicantid) {
-        this.coApplicantService.editcosave(this.coapplicantid, sendData).subscribe(data => {
-          if (data) {
-            this.successService.ResponseMessage("success", "Co Applicant updated added");
-          }
-        })
+        subscribedata.returnobj = this.coApplicantService.editcosave(this.coapplicantid, sendData);
+				subscribedata.mode = 'Updated';
       }
       else {
-        this.coApplicantService.coapplicantCreate(sendData).subscribe(data => {
-          if (data) {
-            this.tokenservice.savesteps('co-applicant', (data.coapplicantid));
-            this.successService.ResponseMessage("success", "Co Applicant  added");
-          }
-        })
+        subscribedata.returnobj = this.coApplicantService.coapplicantCreate(sendData);
+				subscribedata.mode = 'Added';
       }
     }
+    return subscribedata;
   }
 
 }

@@ -46,7 +46,7 @@ export class LoanProcessComponent implements OnInit {
       insurance: [null, [Validators.required]],
       processfee: [null, [Validators.required]],
       purpose: [null, [Validators.required]],
-      loanstartingdate: [null,[Validators.required]]
+      loanstartingdate: [null, [Validators.required]]
     });
 
     this.loanid = this.tokenservice.getstep('loan');
@@ -62,33 +62,31 @@ export class LoanProcessComponent implements OnInit {
 
   }
 
-  submitForm(): void {
+  submitForm() {
     for (const key in this.validateForm.controls) {
       if (this.validateForm.controls.hasOwnProperty(key)) {
         this.validateForm.controls[key].markAsDirty();
         this.validateForm.controls[key].updateValueAndValidity();
       }
     }
+    let subscribedata = {
+      returnobj: null,
+      mode: null
+    };
     if (this.validateForm.valid) {
       let sendData = {
         ...this.validateForm.value, applicantid: this.tokenservice.getstep('applicant')
       }
       if (this.loanid) {
-        this.loanservice.editsave(this.loanid, sendData).subscribe(data => {
-          if (data) {
-            this.successService.ResponseMessage("success", "Loan Process updated");
-          }
-        })
+        subscribedata.returnobj = this.loanservice.editsave(this.loanid, sendData);
+        subscribedata.mode = 'Updated';
       }
       else {
-        this.loanservice.loanCreate(sendData).subscribe(data => {
-          if (data) {
-            this.tokenservice.savesteps('loan', (data.loanid));
-            this.successService.ResponseMessage("success", "Loan Process added");
-          }
-        })
+        subscribedata.returnobj = this.loanservice.loanCreate(sendData);
+        subscribedata.mode = 'Added';
       }
     }
+    return subscribedata;
   }
 
   resetForm(e: MouseEvent): void {
