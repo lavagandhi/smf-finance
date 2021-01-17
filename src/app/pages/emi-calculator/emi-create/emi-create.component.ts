@@ -72,10 +72,7 @@ export class EmiCreateComponent implements OnInit {
 			let permonthinterest = form.annualinterestrate / (12 * form.repayment);
 
 			let balanceamount = form.loanamount;
-			let ishigh = false;
 			let installmentdate = form.emistartdate;
-			let lesscount = 0;
-			let morecount = 0;
 			let totalmonthinterest = 0;
 			for (let i = 1; i <= term; i++) {
 				if (form.repayment == 2) {
@@ -89,29 +86,7 @@ export class EmiCreateComponent implements OnInit {
 				let monthinterest = ((balanceamount * permonthinterest) / 100);
 				let principal = (this.EMIObj.EMI - Math.floor(monthinterest))
 				totalmonthinterest += Math.floor(monthinterest);
-				monthinterest = Math.floor(monthinterest);
-				// monthinterest = Math.ceil(monthinterest);
-				// if (i === (12 * form.repayment)) {
-				// 	monthinterest = Math.round(monthinterest);
-				// 	principal = (this.EMIObj.EMI - Math.round(monthinterest))
-				// } else {
-				// 	if (Math.round(monthinterest) > monthinterest) {
-				// 		if (!ishigh) {
-				// 			monthinterest = Math.ceil(monthinterest);
-				// 			principal = (this.EMIObj.EMI - monthinterest);
-				// 			ishigh = true;
-				// 			morecount++;
-				// 		} else {
-				// 			monthinterest = Math.floor(monthinterest);
-				// 			principal = (this.EMIObj.EMI - monthinterest);
-				// 			ishigh = false;
-				// 			lesscount++;
-				// 		}
-				// 	} else {
-				// 		monthinterest = Math.round(monthinterest);
-				// 		principal = (this.EMIObj.EMI - Math.round(monthinterest))
-				// 	}
-				// }
+				monthinterest = Math.floor(monthinterest);				
 
 				let day = installmentdate.getDay();
 				let installmentday;

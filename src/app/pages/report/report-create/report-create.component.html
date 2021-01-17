@@ -13,15 +13,6 @@
     <div nz-row [nzGutter]="12">
       <div nz-col nzSpan="12">
         <nz-form-item>
-          <nz-form-label nzRequired class="p-0" [nzSpan]="24">Applicant Id</nz-form-label>
-          <nz-form-control nzHasFeedback nzErrorTip="Please input your Applicant Id!" [nzSpan]="24">
-            <input nz-input formControlName="formid" placeholder="Applicant Id" name="" />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-
-      <div nz-col nzSpan="12">
-        <nz-form-item>
           <nz-form-label nzRequired class="p-0" [nzSpan]="24">Loan Id</nz-form-label>
           <nz-form-control nzHasFeedback nzErrorTip="Please input your Loan Id!" [nzSpan]="24">
             <input nz-input formControlName="loanformid" placeholder="Loan Id" name="" />
@@ -40,7 +31,7 @@
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="24">
-      <nz-table>
+      <nz-table #emireport [nzData]="listOfData">
         <thead>
           <tr>
             <th>sl.no</th>
@@ -55,15 +46,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of listOfData; let i=index">
+          <tr *ngFor="let data of emireport.data; let i=index">
             <td>{{ i+1 }}</td>
             <td>{{ data.installmentdate | date:'dd-MM-yyyy' }} ({{data.installmentday}})</td>
             <td>{{ data.installmentamount }}</td>
             <td>{{ data.principal }}</td>
             <td>{{ data.int }}</td>
             <td>{{ data.balance }}</td>
-            <td></td>
-            <td></td>
+            <td>{{ data.collecteddate | date:'dd-MM-yyyy'}} ({{data.collectedday}})</td>
+            <td>{{ data.collectedamount }}</td>
             <td></td>
           </tr>
         </tbody>
