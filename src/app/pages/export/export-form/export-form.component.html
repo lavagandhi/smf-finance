@@ -22,10 +22,17 @@
             <td>{{item.name}}</td>
             <td>
               <a (click)="ExportData(item.exportname)"><i nz-icon nzType="download" nzTheme="outline"></i> Download</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a><i nz-icon nzType="printer" nzTheme="outline"></i> Print</a>
             </td>
           </tr>
         </tbody>
       </nz-table>
     </div>
   </div>
+</div>
+
+
+<div id="printdiv" style="display: none;"> 
+  Here is your html content for print
 </div>
