@@ -48,6 +48,11 @@ export class AdminLayoutComponent implements OnInit {
 			url: '/report/create',
 			icon: 'file-excel',
 		},
+		{
+			text: 'Employee',
+			url: '/employee/view',
+			icon: 'file-excel',
+		},
 	];
 	constructor(private tokenservice: TokenService) {}
 

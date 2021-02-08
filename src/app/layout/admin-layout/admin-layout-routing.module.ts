@@ -63,6 +63,13 @@ export const routes: Routes = [
 				(m) => m.EmiCalculatorModule
 			),
 	},
+	{
+		path: 'employee',
+		loadChildren: () =>
+			import('./../../pages/employee/employee.module').then(
+				(m) => m.EmployeeModule
+			),
+	},
 ];
 
 @NgModule({

@@ -30,6 +30,7 @@ export class AddEditCenterComponent implements OnInit {
 		this.validateForm = this.fb.group({
 			centername: [null, [Validators.required]],
 			centeraddress: [null, [Validators.required]],
+			employeeid: [null, [Validators.required]],
 		});
 		this.groupid = this.activatedRoute.snapshot.paramMap.get('id');
 		if (this.groupid) {

@@ -1,19 +1,20 @@
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="24">
-    <nz-page-header nzBackIcon class="site-page-header" >
+    <nz-page-header nzBackIcon class="site-page-header">
       <nz-page-header-title>View Applicant Details</nz-page-header-title>
       <nz-page-header-extra>
-        <button nz-button nzType="primary"> <i nz-icon nzType="printer" nzTheme="outline"></i> Print</button>
+        <button nz-button nzType="primary" [useExistingCss]="true" printSectionId="print-section" ngxPrint> <i nz-icon
+            nzType="printer" nzTheme="outline"></i> Print</button>
       </nz-page-header-extra>
     </nz-page-header>
-  </div>  
+  </div>
 </div>
 
-<div style="height: 90%; overflow-y: auto;">
+<div id="print-section" style="height: 90%; overflow-y: auto;">
 
-<h3 class="mb-0" nz-typography>Applicant Details</h3>
+  <h3 class="mb-0" nz-typography>Applicant Details</h3>
 
-<nz-page-header  [nzGhost]="false">
+  <nz-page-header [nzGhost]="false">
 
     <nz-page-header-content>
       <nz-descriptions nzSize="small" [nzColumn]="3">
@@ -42,7 +43,7 @@
   <nz-divider></nz-divider>
   <h3 class="mb-0" nz-typography>Co Applicant Details</h3>
 
-  <nz-page-header  [nzGhost]="false">
+  <nz-page-header [nzGhost]="false">
 
     <nz-page-header-content>
       <nz-descriptions nzSize="small" [nzColumn]="3">
@@ -57,7 +58,7 @@
   <nz-divider></nz-divider>
   <h3 class="mb-0" nz-typography>Business Details</h3>
 
-  <nz-page-header  [nzGhost]="false">
+  <nz-page-header [nzGhost]="false">
 
     <nz-page-header-content>
       <nz-descriptions nzSize="small" [nzColumn]="3">
@@ -70,11 +71,11 @@
   </nz-page-header>
 
 
-  
+
   <nz-divider></nz-divider>
   <h3 class="mb-0" nz-typography>Income Details</h3>
 
-  <nz-page-header  [nzGhost]="false">
+  <nz-page-header [nzGhost]="false">
 
     <nz-page-header-content>
       <nz-descriptions nzSize="small" [nzColumn]="3">
@@ -88,7 +89,7 @@
   <nz-divider></nz-divider>
   <h3 class="mb-0" nz-typography>Bank Account Details</h3>
 
-  <nz-page-header  [nzGhost]="false">
+  <nz-page-header [nzGhost]="false">
 
     <nz-page-header-content>
       <nz-descriptions nzSize="small" [nzColumn]="3">
@@ -105,24 +106,16 @@
   <nz-divider></nz-divider>
   <h3 class="mb-0" nz-typography>Bank Account Details</h3>
 
-  <nz-page-header  [nzGhost]="false">
+  <nz-page-header [nzGhost]="false">
 
     <nz-page-header-content>
       <nz-descriptions nzSize="small" [nzColumn]="3">
-        <nz-descriptions-item nzTitle="Applicant Photo" [nzSpan]="1"> <img
-          nz-image
-          width="200px"
-          height="200px"
-          nzSrc="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          alt=""
-        /></nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Co Applicant Photo" [nzSpan]="1"> <img
-          nz-image
-          width="200px"
-          height="200px"
-          nzSrc="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          alt=""
-        /></nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Applicant Photo" [nzSpan]="1"> <img nz-image width="200px" height="200px"
+            nzSrc="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" alt="" />
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Co Applicant Photo" [nzSpan]="1"> <img nz-image width="200px" height="200px"
+            nzSrc="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" alt="" />
+        </nz-descriptions-item>
       </nz-descriptions>
     </nz-page-header-content>
   </nz-page-header>

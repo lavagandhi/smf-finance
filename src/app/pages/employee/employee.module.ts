@@ -1,21 +1,21 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EmiCreateComponent } from './emi-create/emi-create.component';
-import { EmiRoutingModule } from './emi-routing.module';
 import { IconsProviderModule } from 'src/app/icons-provider.module';
 import { SharedModule } from 'src/app/shared';
 import { FormsModule } from '@angular/forms';
-import { NgxPrintModule } from 'ngx-print';
+import { EmployeeRoutingModule } from './employee-routing.module';
+import { EmployeeViewComponent } from './employee-view/employee-view.component';
+import { EmployeeCreateComponent } from './employee-create/employee-create.component';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     SharedModule,
     IconsProviderModule,
-    EmiRoutingModule,
-    NgxPrintModule
+    EmployeeRoutingModule
   ],
-  declarations: [EmiCreateComponent],
+  declarations: [EmployeeViewComponent,EmployeeCreateComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class EmiCalculatorModule { }
+export class EmployeeModule { }

@@ -75,8 +75,21 @@ export class LoanProcessComponent implements OnInit {
     };
     if (this.validateForm.valid) {
       const calculatedint = this.validateForm.value.interest / (12 * this.validateForm.value.repayment);
+
+      const EMIDetails = this.calculatedEMI({
+        annualinterestrate: this.validateForm.value.interest,
+        loanamount: this.validateForm.value.loanamount,
+        repayment: this.validateForm.value.repayment,
+        loanperiod: this.validateForm.value.duration
+      })
+
       let sendData = {
-        ...this.validateForm.value, remainingamount: this.validateForm.value.loanamount, calculatedint, applicantid: this.tokenservice.getstep('applicant')
+        ...this.validateForm.value,
+        remainingamount: this.validateForm.value.loanamount,
+        calculatedint,
+        applicantid: this.tokenservice.getstep('applicant'),
+        emiamount: EMIDetails.EMI,
+        totalemiamount: EMIDetails.Total
       }
       if (this.loanid) {
         subscribedata.returnobj = this.loanservice.editsave(this.loanid, sendData);
@@ -99,6 +112,23 @@ export class LoanProcessComponent implements OnInit {
         this.validateForm.controls[key].updateValueAndValidity();
       }
     }
+  }
+
+  calculatedEMI(form: any): any {
+    const annualInterestrate = (form.annualinterestrate / form.repayment);
+    let interest = (annualInterestrate / 1200);
+    let term = form.loanperiod * 12 * form.repayment;
+    let top = Math.pow((1 + interest), term);
+    let bottom = top - 1;
+    let ratio = top / bottom;
+    const EMI = form.loanamount * interest * ratio;
+    const Total = EMI * term;
+    const EMIObj = {
+      EMI: parseInt(EMI.toFixed(0)),
+      Total: parseInt(Total.toFixed(0))
+    };
+
+    return EMIObj;
   }
 
   setProcessfee(amount) {

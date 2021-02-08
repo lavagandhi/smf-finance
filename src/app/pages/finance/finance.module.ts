@@ -13,13 +13,15 @@ import { ViewApplicantComponent } from './view-applicant/view-applicant.componen
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { ViewDetailsComponent } from './view-details/view-details.component';
 import { LoanProcessComponent } from 'src/app/pages/finance/loan-process/loan-process.component';
+import { NgxPrintModule } from 'ngx-print';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     SharedModule,
     IconsProviderModule,
-    FinanceRoutingModule
+    FinanceRoutingModule,
+    NgxPrintModule
   ],
   declarations: [LoanProcessComponent, AddFinanceComponent, ViewDetailsComponent, ImageUploadComponent, ViewApplicantComponent, ApplicantDetailsComponent, CoApplicantDetailsComponent, BankDetailsComponent, BusinessDetailsComponent, BankDetailsComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

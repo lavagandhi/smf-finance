@@ -1,12 +1,12 @@
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="24">
     <nz-page-header>
-      <nz-page-header-title>Center List</nz-page-header-title>
+      <nz-page-header-title>Employee List</nz-page-header-title>
       <nz-page-header-extra>
-        <button nz-button nzType="primary" (click)="create()">Add Center</button>
+        <button nz-button nzType="primary" (click)="create()">Add Employee</button>
       </nz-page-header-extra>
     </nz-page-header>
-  </div>  
+  </div>
 </div>
 
 <div nz-row [nzGutter]="16">
@@ -14,21 +14,21 @@
     <nz-table #basicTable [nzData]="listOfData">
       <thead>
         <tr>
-          <th>Center Name</th>
-          <th>Center Address</th>
           <th>Employee Name</th>
+          <th>Employee Gender</th>
+          <th>Employee Salary</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of basicTable.data">
-          <td>{{ data.centername }}</td>
-          <td>{{ data.centeraddress }}</td>
-          <td>Emp Name</td>
+          <td>{{ data.employeename }}</td>
+          <td>{{ data.employeegender }}</td>
+          <td>{{ data.employeesalary }}</td>
           <td>
-            <a (click)="edit(data.centerid)"><i nz-icon nzType="edit" nzTheme="outline"></i></a>
+            <a (click)="edit(data.employeeid)"><i nz-icon nzType="edit" nzTheme="outline"></i></a>
             <nz-divider nzType="vertical"></nz-divider>
-            <a (click)="delete(data.centerid)"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
+            <a (click)="delete(data.employeeid)"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
           </td>
         </tr>
       </tbody>

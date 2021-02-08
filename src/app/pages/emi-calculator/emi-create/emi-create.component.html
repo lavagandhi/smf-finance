@@ -74,7 +74,7 @@
         </nz-form-control>
 
         <nz-form-control>
-          <button nz-button nzType="primary" (click)="PrintForm()">Print</button>
+          <button nz-button nzType="primary" [useExistingCss]="true" printSectionId="print-section" ngxPrint>Print</button>
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -113,7 +113,7 @@
     </div>
   </div>
 
-  <div id="print">
+  <div id="print-section">
     <div nz-row [nzGutter]="12">
       <div nz-col nzSpan="12">
         Loan Process Fee: &#8377;{{300}}
@@ -124,29 +124,29 @@
     </div>
     <table style="border:1px solid #000; width: 100%; text-align: center;">
       <thead>
-        <tr>
-          <th>sl.no</th>
-          <th>Installment Date</th>
-          <th>Installment Amt</th>
-          <th>Principal</th>
-          <th>Int</th>
-          <th>Balance</th>
-          <th>Collected Date</th>
-          <th>Collected Amt</th>
-          <th>Days</th>
+        <tr style="border:1px solid #000;">
+          <th style="border:1px solid #000;">sl.no</th>
+          <th style="border:1px solid #000;">Installment Date</th>
+          <th style="border:1px solid #000;">Installment Amt</th>
+          <th style="border:1px solid #000;">Principal</th>
+          <th style="border:1px solid #000;">Int</th>
+          <th style="border:1px solid #000;">Balance</th>
+          <th style="border:1px solid #000;">Collected Date</th>
+          <th style="border:1px solid #000;">Collected Amt</th>
+          <th style="border:1px solid #000;">Days</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of listOfData; let i=index">
-          <td>{{ i+1 }}</td>
-          <td>{{ data.installmentdate | date:'dd-MM-yyyy' }} ({{data.installmentday}})</td>
-          <td>{{ data.installmentamount }}</td>
-          <td>{{ data.principal }}</td>
-          <td>{{ data.int }}</td>
-          <td>{{ data.balance }}</td>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr style="border:1px solid #000;" *ngFor="let data of listOfData; let i=index">
+          <td style="border:1px solid #000;">{{ i+1 }}</td>
+          <td style="border:1px solid #000;">{{ data.installmentdate | date:'dd-MM-yyyy' }} ({{data.installmentday}})</td>
+          <td style="border:1px solid #000;">{{ data.installmentamount }}</td>
+          <td style="border:1px solid #000;">{{ data.principal }}</td>
+          <td style="border:1px solid #000;">{{ data.int }}</td>
+          <td style="border:1px solid #000;">{{ data.balance }}</td>
+          <td style="border:1px solid #000;"></td>
+          <td style="border:1px solid #000;"></td>
+          <td style="border:1px solid #000;"></td>
         </tr>
       </tbody>
     </table>

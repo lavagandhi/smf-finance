@@ -1,0 +1,73 @@
+<div nz-row [nzGutter]="32">
+    <div nz-col nzSpan="24">
+        <nz-page-header>
+            <nz-page-header-title> Employee {{title}} </nz-page-header-title>
+        </nz-page-header>
+    </div>
+</div>
+<div class="card-scroll">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitEmployeeForm(validateForm)" nzLayout="horizontal">
+        <div nz-row [nzGutter]="12">
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label nzRequired class="p-0" [nzSpan]="24">Employee First Name</nz-form-label>
+                    <nz-form-control nzHasFeedback nzErrorTip="Please enter your Employee Name!" [nzSpan]="24">
+                        <input nz-input type="text" formControlName="employeename" placeholder="First Name"
+                            name="" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label nzRequired class="p-0" [nzSpan]="24">Employee Last Name</nz-form-label>
+                    <nz-form-control nzHasFeedback nzErrorTip="Please input your Annual Interest Rate!" [nzSpan]="24">
+                        <input nz-input type="text" formControlName="employeelastname" placeholder="Last Name"
+                            name="" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row [nzGutter]="12">
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label nzRequired class="p-0" [nzSpan]="24">Employee Gender</nz-form-label>
+                    <nz-form-control nzHasFeedback nzErrorTip="Please input your Loan Period 1 Year!" [nzSpan]="24">
+                        <nz-select nzShowSearch nzAllowClear formControlName="employeegender"
+                            nzPlaceHolder="Select a Gender">
+                            <nz-option [nzLabel]="list.name" [nzValue]="list.name"
+                                *ngFor="let list of dropDownLists.Gender">
+                            </nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label nzRequired class="p-0" [nzSpan]="24">Employee DOB</nz-form-label>
+                    <nz-form-control nzHasFeedback nzErrorTip="Please input your Employee DOB!" [nzSpan]="24">
+                        <nz-date-picker formControlName="employeedob">
+                        </nz-date-picker>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label nzRequired class="p-0" [nzSpan]="24">Employee Salary</nz-form-label>
+                <nz-form-control nzHasFeedback nzErrorTip="Please input your Salary!" [nzSpan]="24">
+                    <input nz-input type="number" formControlName="employeesalary" placeholder="Employee Salary" name="" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+        <div class="position-right">
+            <nz-form-item>
+                <nz-form-control>
+                    <button nz-button nzType="primary">Submit</button>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </form>
+</div>
