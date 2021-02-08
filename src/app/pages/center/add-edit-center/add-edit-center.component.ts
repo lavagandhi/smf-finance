@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SuccessService } from 'src/app/services/success.service';
+import { EmployeeService } from 'src/app/services/employee/employee.service';
 @Component({
 	selector: 'app-add-edit-center',
 	templateUrl: './add-edit-center.component.html',
@@ -19,10 +20,13 @@ export class AddEditCenterComponent implements OnInit {
 	data: any;
 	groupid: string;
 	editdata: any;
+	employeedetails:any = [];
+
 	constructor(private fb: FormBuilder,
 		private activatedRoute: ActivatedRoute,
 		private router: Router,
 		private successService: SuccessService,
+		private employeeService: EmployeeService,
 		private centerService: CenterService) { }
 	validateForm: FormGroup;
 
@@ -33,6 +37,11 @@ export class AddEditCenterComponent implements OnInit {
 			employeeid: [null, [Validators.required]],
 		});
 		this.groupid = this.activatedRoute.snapshot.paramMap.get('id');
+
+		this.employeeService.getallemployee().subscribe(data => {
+			this.employeedetails = data;
+		})
+
 		if (this.groupid) {
 			this.title = 'Edit';
 			this.btnName = 'Update';

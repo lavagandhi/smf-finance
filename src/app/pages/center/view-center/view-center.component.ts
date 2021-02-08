@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { CenterService } from 'src/app/services/center/center.service';
+import { EmployeeService } from 'src/app/services/employee/employee.service';
 import { SuccessService } from 'src/app/services/success.service';
 interface Person {
   id: string;
@@ -15,18 +16,25 @@ interface Person {
 })
 export class ViewCenterComponent implements OnInit {
   listOfData: any = [];
+  employeedetails: any = [];
 
   constructor(
     private router: Router,
     private successService: SuccessService,
     private centerService: CenterService,
-    private modal: NzModalService
+    private modal: NzModalService,
+    private employeeService: EmployeeService
   ) { }
 
   ngOnInit() {
     this.centerService.getCenter().subscribe(data => {
-        this.listOfData = data;
+      this.listOfData = data;
     })
+
+    this.employeeService.getallemployee().subscribe(data => {
+      this.employeedetails = data;
+    })
+
   }
 
   create(): void {
@@ -53,5 +61,13 @@ export class ViewCenterComponent implements OnInit {
       nzCancelText: 'No',
       nzOnCancel: () => { },
     });
+  }
+
+  getemployeename(employeeid) {
+    const obj = this.employeedetails.find(f => f.employeeid === employeeid);
+    if (obj) {
+      return obj.employeename;
+    }
+    return '-';
   }
 }
