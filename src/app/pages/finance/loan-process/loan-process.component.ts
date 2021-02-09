@@ -82,7 +82,7 @@ export class LoanProcessComponent implements OnInit {
         repayment: this.validateForm.value.repayment,
         loanperiod: this.validateForm.value.duration
       })
-
+      
       let sendData = {
         ...this.validateForm.value,
         remainingamount: this.validateForm.value.loanamount,
@@ -115,6 +115,8 @@ export class LoanProcessComponent implements OnInit {
   }
 
   calculatedEMI(form: any): any {
+    form.loanperiod = parseInt(form.loanperiod.replace(" Year",""));
+    form.repayment = parseInt(form.repayment.replace(" Week",""));
     const annualInterestrate = (form.annualinterestrate / form.repayment);
     let interest = (annualInterestrate / 1200);
     let term = form.loanperiod * 12 * form.repayment;

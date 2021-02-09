@@ -105,4 +105,8 @@ export class ViewApplicantComponent implements OnInit {
     });
   }
 
+  gotoViewdetail(applicantid) {
+    this.router.navigate(['/view-details/'+applicantid])
+  }
+
 }

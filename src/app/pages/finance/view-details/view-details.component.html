@@ -18,69 +18,108 @@
 
     <nz-page-header-content>
       <nz-descriptions nzSize="small" [nzColumn]="3">
-        <nz-descriptions-item nzTitle="Name" [nzSpan]="1">Lava Gandhi</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Education" [nzSpan]="1">MCA</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Marriage Details" [nzSpan]="1">Yes</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Husband/Father Name" [nzSpan]="1">Chinnasamy</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Religion" [nzSpan]="1">Hindhu</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Phone Number" [nzSpan]="1">9090232323</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Telephone Number" [nzSpan]="1">-</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Present Address" [nzSpan]="1">Zhejiang, India</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Permanent Address" [nzSpan]="1">Zhejiang, India</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="State Permanent" [nzSpan]="1">Hangzhou</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="State Present" [nzSpan]="1">Hangzhou</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Pincode Permanent" [nzSpan]="1">121212</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Pincode Present" [nzSpan]="1">121212</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="No.of year of stay in Present Area" [nzSpan]="1">10 year</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="House Status" [nzSpan]="1">Yes</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Primary ID Type" [nzSpan]="1">Aadhar Number</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Primary ID Number" [nzSpan]="1">1234/1234/1234</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Secondary ID Type" [nzSpan]="1">Voter Id</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Secondary ID Number" [nzSpan]="1">ABC12345</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Form Number" [nzSpan]="1">{{applicantdetails?.applicantdata?.formid}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Name" [nzSpan]="1">{{applicantdetails?.applicantdata?.applicantname}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Center" [nzSpan]="1">{{applicantdetails?.centerdata?.centername}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Group" [nzSpan]="1">{{applicantdetails?.groupdata?.groupname}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Installment Day" [nzSpan]="1">{{applicantdetails?.groupdata?.installmentday}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Education" [nzSpan]="1">{{applicantdetails?.applicantdata?.education}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Marriage Details" [nzSpan]="1">
+          {{applicantdetails?.applicantdata?.marriagedetail}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Husband/Father Name" [nzSpan]="1">
+          {{applicantdetails?.applicantdata?.husbandname}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Religion" [nzSpan]="1">{{applicantdetails?.applicantdata?.religion}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Caste" [nzSpan]="1">{{applicantdetails?.applicantdata?.caste}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Phone Number" [nzSpan]="1">{{applicantdetails?.applicantdata?.mobileno}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Telephone Number" [nzSpan]="1">{{applicantdetails?.applicantdata?.applicantname}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Present Address" [nzSpan]="1">{{applicantdetails?.applicantdata?.presentaddress}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Permanent Address" [nzSpan]="1">
+          {{applicantdetails?.applicantdata?.permanentaddress}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="No.of year of stay in Present Area" [nzSpan]="1">
+          {{applicantdetails?.applicantdata?.noofyearstayed}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="House Status" [nzSpan]="1">{{applicantdetails?.applicantdata?.housestatus}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Primary ID Type" [nzSpan]="1">{{applicantdetails?.applicantdata?.pidtype}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Primary ID Number" [nzSpan]="1">{{applicantdetails?.applicantdata?.pidno}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Secondary ID Type" [nzSpan]="1">{{applicantdetails?.applicantdata?.sidtype}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Secondary ID Number" [nzSpan]="1">{{applicantdetails?.applicantdata?.sidno}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Financial Category" [nzSpan]="1">{{applicantdetails?.applicantdata?.fintype}}
+        </nz-descriptions-item>
       </nz-descriptions>
     </nz-page-header-content>
   </nz-page-header>
   <nz-divider></nz-divider>
   <h3 class="mb-0" nz-typography>Co Applicant Details</h3>
-
   <nz-page-header [nzGhost]="false">
-
     <nz-page-header-content>
       <nz-descriptions nzSize="small" [nzColumn]="3">
-        <nz-descriptions-item nzTitle="Co Applicant Name" [nzSpan]="1">Lava</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Co Applicant Gender" [nzSpan]="1">Female</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Relationship with Applicant" [nzSpan]="1">Wife</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Age & DOB" [nzSpan]="1">28</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Co Applicant Name" [nzSpan]="1">
+          {{applicantdetails?.coapplicantdata?.coapplicantname}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Co Applicant Gender" [nzSpan]="1">{{applicantdetails?.coapplicantdata?.gender}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Relationship with Applicant" [nzSpan]="1">
+          {{applicantdetails?.coapplicantdata?.relationtype}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Age & DOB" [nzSpan]="1">{{calculateAge(applicantdetails?.coapplicantdata?.dob)}} & {{applicantdetails?.coapplicantdata?.dob | date:'dd-MM-yyyy'}}
+        </nz-descriptions-item>
       </nz-descriptions>
     </nz-page-header-content>
   </nz-page-header>
 
   <nz-divider></nz-divider>
-  <h3 class="mb-0" nz-typography>Business Details</h3>
+  <h3 class="mb-0" nz-typography>Business & Income Details</h3>
 
   <nz-page-header [nzGhost]="false">
 
     <nz-page-header-content>
       <nz-descriptions nzSize="small" [nzColumn]="3">
-        <nz-descriptions-item nzTitle="Nature of Business" [nzSpan]="1">IT</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Year of Experience" [nzSpan]="1">6</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Distance from Residence" [nzSpan]="1">12</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Address" [nzSpan]="1">Oddapatti, Dharmapuri.</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Nature of Business" [nzSpan]="1">
+          {{applicantdetails?.bussinessdata?.businessname}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Year of Experience" [nzSpan]="1">{{applicantdetails?.bussinessdata?.yearofexp}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Distance from Residence" [nzSpan]="1">
+          {{applicantdetails?.bussinessdata?.distance}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Address" [nzSpan]="1">{{applicantdetails?.bussinessdata?.address}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="No of family members including applicant" [nzSpan]="1">
+          {{applicantdetails?.bussinessdata?.nooffamilymember}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Approximate Yearly Family Income" [nzSpan]="1">
+          {{applicantdetails?.bussinessdata?.income}}</nz-descriptions-item>
       </nz-descriptions>
     </nz-page-header-content>
   </nz-page-header>
 
-
-
   <nz-divider></nz-divider>
-  <h3 class="mb-0" nz-typography>Income Details</h3>
+  <h3 class="mb-0" nz-typography>Loan Details</h3>
 
   <nz-page-header [nzGhost]="false">
-
     <nz-page-header-content>
       <nz-descriptions nzSize="small" [nzColumn]="3">
-        <nz-descriptions-item nzTitle="No of family members including applicant" [nzSpan]="1">2</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Approximate Yearly Family Income" [nzSpan]="1">6 Laks</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Loan Number" [nzSpan]="1">{{applicantdetails?.loandata?.loanformid}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Loan Amount" [nzSpan]="1">{{applicantdetails?.loandata?.loanamount}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Duration" [nzSpan]="1">{{applicantdetails?.loandata?.duration}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Annual Interest" [nzSpan]="1">{{applicantdetails?.loandata?.interest}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Process Fee" [nzSpan]="1">{{applicantdetails?.loandata?.processfee}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Insurance Amount" [nzSpan]="1">{{applicantdetails?.loandata?.insurance}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Repayment" [nzSpan]="1">{{applicantdetails?.loandata?.repayment}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Loan Purpose" [nzSpan]="1">{{applicantdetails?.loandata?.purpose}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Loan Starttime Date" [nzSpan]="1">{{applicantdetails?.loandata?.loanstartingdate}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="EMI" [nzSpan]="1">{{applicantdetails?.loandata?.emiamount}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Remaining Amount" [nzSpan]="1">{{applicantdetails?.loandata?.totalemiamount}}</nz-descriptions-item>        
       </nz-descriptions>
     </nz-page-header-content>
   </nz-page-header>
@@ -93,28 +132,28 @@
 
     <nz-page-header-content>
       <nz-descriptions nzSize="small" [nzColumn]="3">
-        <nz-descriptions-item nzTitle="Name of the Bank" [nzSpan]="1">Bank of Baroda</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Branch" [nzSpan]="1">Thudiyalur</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="A/C Number" [nzSpan]="1">123123123</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="IFSC Code" [nzSpan]="1">THU2323</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Type of Account" [nzSpan]="1">SB</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Mode of Operation" [nzSpan]="1">RTGS</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Name" [nzSpan]="1">Gandhi C</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Name of the Bank" [nzSpan]="1">{{applicantdetails?.bankdata?.bankname}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Branch" [nzSpan]="1">{{applicantdetails?.bankdata?.branchname}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="A/C Number" [nzSpan]="1">{{applicantdetails?.bankdata?.accno}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="IFSC Code" [nzSpan]="1">{{applicantdetails?.bankdata?.ifsccode}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Type of Account" [nzSpan]="1">{{applicantdetails?.bankdata?.accountype}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Mode of Operation" [nzSpan]="1">{{applicantdetails?.bankdata?.accountmode}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Account holder Name" [nzSpan]="1">{{applicantdetails?.bankdata?.accountholdername}}</nz-descriptions-item>
       </nz-descriptions>
     </nz-page-header-content>
   </nz-page-header>
   <nz-divider></nz-divider>
-  <h3 class="mb-0" nz-typography>Bank Account Details</h3>
+  <h3 class="mb-0" nz-typography>Image and Signature</h3>
 
   <nz-page-header [nzGhost]="false">
 
     <nz-page-header-content>
       <nz-descriptions nzSize="small" [nzColumn]="3">
         <nz-descriptions-item nzTitle="Applicant Photo" [nzSpan]="1"> <img nz-image width="200px" height="200px"
-            nzSrc="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" alt="" />
+            [src]="applicantdetails?.applicantdata?.applicantphoto" alt="applicant photo" />
         </nz-descriptions-item>
         <nz-descriptions-item nzTitle="Co Applicant Photo" [nzSpan]="1"> <img nz-image width="200px" height="200px"
-            nzSrc="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" alt="" />
+            [src]="applicantdetails?.coapplicantdata?.coapplicantphoto" alt="co applicant photo" />
         </nz-descriptions-item>
       </nz-descriptions>
     </nz-page-header-content>

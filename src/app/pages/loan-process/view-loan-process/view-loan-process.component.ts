@@ -72,7 +72,6 @@ export class ViewLoanProcessComponent implements OnInit {
       nzOkText: 'Yes',
       nzOkType: 'danger',
       nzOnOk: () => {
-        console.log('success');
       },
       nzCancelText: 'No',
       nzOnCancel: () => {},

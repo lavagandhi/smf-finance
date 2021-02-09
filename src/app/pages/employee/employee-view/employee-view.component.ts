@@ -16,7 +16,6 @@ export class EmployeeViewComponent implements OnInit {
 	ngOnInit() {
 		this.employeeService.getallemployee().subscribe(data => {
 			this.listOfData = data;
-			console.log(data)
 		})
 	}
 
