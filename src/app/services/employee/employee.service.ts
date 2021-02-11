@@ -25,6 +25,10 @@ export class EmployeeService {
     return this.http.get(`${this.API_URL}employee/` + id).pipe(first(), map((data: any) => data.data));
   }
 
+  deleteemployee(id): Observable<any> {
+    return this.http.delete(`${this.API_URL}employee/` + id).pipe(first(), map((data: any) => data.data));
+  }
+
   editemployeesave(id, value): Observable<any> {
     return this.http.put(`${this.API_URL}employee/` + id, {
       ...value,

@@ -12,8 +12,7 @@
                 <nz-form-item>
                     <nz-form-label nzRequired class="p-0" [nzSpan]="24">Employee First Name</nz-form-label>
                     <nz-form-control nzHasFeedback nzErrorTip="Please enter your Employee Name!" [nzSpan]="24">
-                        <input nz-input type="text" formControlName="employeename" placeholder="First Name"
-                            name="" />
+                        <input nz-input type="text" formControlName="employeename" placeholder="First Name" name="" />
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -53,15 +52,69 @@
                 </nz-form-item>
             </div>
         </div>
-        <div nz-col nzSpan="12">
-            <nz-form-item>
-                <nz-form-label nzRequired class="p-0" [nzSpan]="24">Employee Salary</nz-form-label>
-                <nz-form-control nzHasFeedback nzErrorTip="Please input your Salary!" [nzSpan]="24">
-                    <input nz-input type="number" formControlName="employeesalary" placeholder="Employee Salary" name="" />
-                </nz-form-control>
-            </nz-form-item>
-        </div>
 
+        <div nz-row [nzGutter]="12">
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label nzRequired class="p-0" [nzSpan]="24">Employee Salary</nz-form-label>
+                    <nz-form-control nzHasFeedback nzErrorTip="Please input your Salary!" [nzSpan]="24">
+                        <input nz-input type="number" formControlName="employeesalary" placeholder="Employee Salary"
+                            name="" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label nzRequired class="p-0" [nzSpan]="24">Employee PF</nz-form-label>
+                    <nz-form-control nzHasFeedback nzErrorTip="Please input your Salary!" [nzSpan]="24">
+                        <input nz-input type="number" formControlName="pf" placeholder="Employee PF"
+                            name="" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row [nzGutter]="12">
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label nzRequired class="p-0" [nzSpan]="24">Employee Desgination</nz-form-label>
+                    <nz-form-control nzHasFeedback nzErrorTip="Please input your Salary!" [nzSpan]="24">
+                        <input nz-input type="text" formControlName="designation" placeholder="Employee Desgination"
+                            name="" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label nzRequired class="p-0" [nzSpan]="24">Employee Mobileno</nz-form-label>
+                    <nz-form-control nzHasFeedback nzErrorTip="Please input your Salary!" [nzSpan]="24">
+                        <input nz-input type="text" formControlName="mobileno" placeholder="Employee Mobileno"
+                            name="" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row [nzGutter]="12">
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label nzRequired class="p-0" [nzSpan]="24">Employee Blood Group</nz-form-label>
+                    <nz-form-control nzHasFeedback nzErrorTip="Please input your Salary!" [nzSpan]="24">
+                        <input nz-input type="text" formControlName="bloodgroup" placeholder="Employee Blood Group"
+                            name="" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label nzRequired class="p-0" [nzSpan]="24">Employee Address</nz-form-label>
+                    <nz-form-control nzHasFeedback nzErrorTip="Please input your Salary!" [nzSpan]="24">
+                        <textarea nz-input formControlName="employeeaddress" rows="2" placeholder="Employee Address"></textarea>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
         <div class="position-right">
             <nz-form-item>
                 <nz-form-control>

@@ -14,6 +14,7 @@
     <nz-table #basicTable [nzData]="listOfData">
       <thead>
         <tr>
+          <th>Employee Code</th>
           <th>Employee Name</th>
           <th>Employee Gender</th>
           <th>Employee Salary</th>
@@ -22,6 +23,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let data of basicTable.data">
+          <td>{{ data.employeecode }}</td>
           <td>{{ data.employeename }}</td>
           <td>{{ data.employeegender }}</td>
           <td>{{ data.employeesalary }}</td>

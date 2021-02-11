@@ -27,7 +27,9 @@
         <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Select Employee Name</nz-form-label>
         <nz-form-control nzHasFeedback nzErrorTip="Please input your center Name!" [nzSm]="14" [nzXs]="24">
           <nz-select nzShowSearch nzAllowClear formControlName="employeeid" nzPlaceHolder="Select employee name">
-            <nz-option *ngFor="let employee of employeedetails" [nzLabel]="employee.employeename" [nzValue]="employee.employeeid"></nz-option>\
+            <nz-option *ngFor="let employee of employeedetails"
+              [nzLabel]="employee.employeecode +' - '+employee.employeename " [nzValue]="employee.employeeid">
+            </nz-option>\
           </nz-select>
         </nz-form-control>
       </nz-form-item>

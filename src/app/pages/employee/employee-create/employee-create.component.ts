@@ -43,6 +43,12 @@ export class EmployeeCreateComponent implements OnInit {
 			employeegender: [null, [Validators.required]],
 			employeedob: [null, [Validators.required]],
 			employeesalary: [null, [Validators.required]],
+
+			employeeaddress: [null, [Validators.required]],
+			designation: [null, [Validators.required]],
+			mobileno: [null, [Validators.required]],
+			bloodgroup: [null, [Validators.required]],
+			pf: [null, [Validators.required]]
 		});
 
 
