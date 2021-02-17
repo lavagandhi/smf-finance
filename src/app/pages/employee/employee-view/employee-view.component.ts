@@ -26,6 +26,10 @@ export class EmployeeViewComponent implements OnInit {
 		this.router.navigate(['/employee/create'])
 	}
 
+	edit(id): void {
+		this.router.navigate(['/employee/edit/' + id]);
+	}
+
 	delete(employeeid) {
 
 		this.modal.confirm({
@@ -38,14 +42,14 @@ export class EmployeeViewComponent implements OnInit {
 					if (data) {
 						this.successService.ResponseMessage("success", "Employee Deleted");
 						this.ngOnInit();
-					  }
+					}
 				})
 			},
 			nzCancelText: 'No',
 			nzOnCancel: () => { },
-		  });
+		});
 
-		
+
 	}
 
 }

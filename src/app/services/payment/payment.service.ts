@@ -17,6 +17,10 @@ export class PaymentService {
     });
   }
 
+  GrouppaymentCreate(groupid: string, value: any): Observable<any> {
+    return this.http.put(`${this.API_URL}payment/grouppayment/${groupid}`, value);
+  }
+
   getPayment(applicantid: string): Observable<any> {
     return this.http.get(`${this.API_URL}payment/getapplicantpayemnt/${applicantid}`).pipe(first(), map((data: any) => data.data));
   };

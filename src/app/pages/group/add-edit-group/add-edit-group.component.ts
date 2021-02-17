@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupService } from 'src/app/services/group/group.service';
 import { CenterService } from 'src/app/services/center/center.service';
+import { DropdownService } from 'src/app/services/dropdown/dropdown.service';
 
 @Component({
 	selector: 'app-add-edit-group',
@@ -22,26 +23,34 @@ export class AddEditGroupComponent implements OnInit {
 	groupid: any;
 	editdata: any;
 	centers: Array<any>;
+	dropDownLists: any;
 	constructor(
 		private fb: FormBuilder,
 		private centerservice: CenterService,
 		private activatedRoute: ActivatedRoute,
 		private groupService: GroupService,
 		private successService: SuccessService,
-		private router: Router
+		private router: Router,
+		private dropdownService: DropdownService,
 	) { }
 	validateForm: FormGroup;
 
 	ngOnInit() {
+		this.dropdownService.getEducation().subscribe(data => {
+			this.dropDownLists = data;
+		})
+
 		this.centerservice.getCenter().subscribe(data => {
 			this.centers = [...data];
 		})
 
 		this.validateForm = this.fb.group({
 			groupname: [null, [Validators.required]],
-			noofmember: [null, [Validators.required]],
 			centerid: [null, [Validators.required]],
 			installmentday: [null, [Validators.required]],
+			repayment: [null, [Validators.required]],
+			loanstartdate: [null, [Validators.required]],
+			emiamount: [null, [Validators.required]],
 		});
 
 		this.groupid = this.activatedRoute.snapshot.paramMap.get('id');
@@ -54,7 +63,9 @@ export class AddEditGroupComponent implements OnInit {
 						groupname: this.editdata.groupname,
 						noofmember: this.editdata.noofmember,
 						centerid: this.editdata.centerid,
-						installmentday: this.editdata.installmentday
+						installmentday: this.editdata.installmentday,
+						repayment: this.editdata.repayment,
+						loanstartdate: this.editdata.loanstartdate
 					});
 				}
 			})

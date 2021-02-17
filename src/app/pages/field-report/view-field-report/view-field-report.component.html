@@ -12,9 +12,9 @@
     <div nz-row [nzGutter]="12">
       <div nz-col nzSpan="12">
         <nz-form-item>
-          <nz-form-label nzRequired class="p-0" [nzSpan]="24">Select Center</nz-form-label>
+          <nz-form-label nzRequired class="p-0" [nzSpan]="24">Select Employee</nz-form-label>
           <nz-form-control nzHasFeedback nzErrorTip="Please input your Applicant Id!" [nzSpan]="24">
-            <nz-select (ngModelChange)="loadGroup($event)" nzShowSearch nzAllowClear formControlName="centerid"
+            <nz-select (ngModelChange)="loadGroup($event)" nzShowSearch nzAllowClear formControlName="employeeid"
               nzPlaceHolder="Select center">
               <nz-option *ngFor="let center of centerdata" [nzLabel]="center.centername" [nzValue]="center.centerid">
               </nz-option>
@@ -25,12 +25,9 @@
 
       <div nz-col nzSpan="12">
         <nz-form-item>
-          <nz-form-label nzRequired class="p-0" [nzSpan]="24">Select Group</nz-form-label>
+          <nz-form-label nzRequired class="p-0" [nzSpan]="24">Select Collection Date</nz-form-label>
           <nz-form-control nzHasFeedback nzErrorTip="Please input your Loan Id!" [nzSpan]="24">
-            <nz-select nzShowSearch nzAllowClear formControlName="groupid" nzPlaceHolder="Select center">
-              <nz-option *ngFor="let group of groupdata" [nzLabel]="group.groupname" [nzValue]="group.groupid">
-              </nz-option>
-            </nz-select>
+            <nz-date-picker formControlName="collectiondate" (ngModelChange)="onChange($event)"></nz-date-picker>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -38,10 +35,7 @@
     <div class="position-right">
       <nz-form-item>
         <nz-form-control>
-          <button nz-button nzType="primary">Load Members</button>
-        </nz-form-control>
-        <nz-form-control>
-          <button nz-button nzType="primary" (click)="grouppayment()">Group Payment</button>
+          <button nz-button nzType="primary">Load Report</button>
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -76,8 +70,8 @@
     (nzOnCancel)="handleCancel()">
     <ng-container *nzModalContent>
       <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Enter EMI Amount</nz-form-label>
-        <nz-form-control nzHasFeedback nzErrorTip="Please input EMI Amount!" [nzSpan]="24">
+        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Enter Payment</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Applicant Id!" [nzSpan]="24">
           <nz-input-group nzAddOnBefore="&#8377;">
             <input nz-input [(ngModel)]="amount" />
           </nz-input-group>          

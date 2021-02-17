@@ -70,6 +70,13 @@ export const routes: Routes = [
 				(m) => m.EmployeeModule
 			),
 	},
+	{
+		path: 'field-report',
+		loadChildren: () =>
+			import('./../../pages/field-report/field-report.module').then(
+				(m) => m.FieldReportModule
+			),
+	},
 ];
 
 @NgModule({

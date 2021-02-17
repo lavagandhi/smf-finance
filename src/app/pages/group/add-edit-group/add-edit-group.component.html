@@ -27,14 +27,8 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">No of Group Members</nz-form-label>
-        <nz-form-control nzHasFeedback nzErrorTip="Please input your Group Members!" [nzSm]="14" [nzXs]="24">
-          <input nz-input nzType="Number" formControlName="noofmember" placeholder="No of Members" id="noofmember" />
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
         <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Collection Day</nz-form-label>
-        <nz-form-control nzHasFeedback nzErrorTip="Please input your Group Members!" [nzSm]="14" [nzXs]="24">
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Collection Day!" [nzSm]="14" [nzXs]="24">
           <nz-select nzShowSearch nzAllowClear formControlName="installmentday" nzPlaceHolder="Select center">
             <nz-option nzLabel="MONDAY" nzValue="MONDAY"></nz-option>
             <nz-option nzLabel="TUESDAY" nzValue="TUESDAY"></nz-option>
@@ -45,10 +39,30 @@
           </nz-select>
         </nz-form-control>
       </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Repaymant</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Repaymant!" [nzSm]="14" [nzXs]="24">
+          <nz-select nzShowSearch nzAllowClear formControlName="repayment" nzPlaceHolder="Select center">
+            <nz-option *ngFor="let item of dropDownLists.Repayment" [nzLabel]="item.name" [nzValue]="item.name">
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">EMI Amount</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your EMI Amount!" [nzSm]="14" [nzXs]="24">
+          <input nz-input formControlName="emiamount" placeholder="EMI Amount" id="emiamount" type="number"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Loan Start Date</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input your Loan Start Date!" [nzSm]="14" [nzXs]="24">
+          <nz-date-picker formControlName="loanstartdate"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
       <nz-form-item nz-row class="register-area">
         <nz-form-control [nzSpan]="14" [nzOffset]="6">
-          <button nz-button nzType="primary" [disabled]="!validateForm.valid"
-            (click)="submitGroupForm()">{{btnName}}</button>
+          <button nz-button nzType="primary" (click)="submitGroupForm()">{{btnName}}</button>
           <button nz-button (click)="resetForm($event)">Reset</button>
         </nz-form-control>
       </nz-form-item>

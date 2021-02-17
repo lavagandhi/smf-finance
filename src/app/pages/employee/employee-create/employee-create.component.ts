@@ -23,11 +23,11 @@ export class EmployeeCreateComponent implements OnInit {
 	editdata: any;
 
 	constructor(
-		private activatedRoute: ActivatedRoute, 
-		private dropdownService: DropdownService, 
+		private activatedRoute: ActivatedRoute,
+		private dropdownService: DropdownService,
 		private fb: FormBuilder,
 		private successService: SuccessService,
-		private router:Router,
+		private router: Router,
 		private employeeService: EmployeeService
 	) { }
 
@@ -62,7 +62,13 @@ export class EmployeeCreateComponent implements OnInit {
 						employeelastname: this.editdata.employeelastname,
 						employeegender: this.editdata.employeegender,
 						employeedob: this.editdata.employeedob,
-						employeesalary: this.editdata.employeesalary
+						employeesalary: this.editdata.employeesalary,
+
+						employeeaddress: this.editdata.employeeaddress,
+						designation: this.editdata.designation,
+						mobileno: this.editdata.mobileno,
+						bloodgroup: this.editdata.bloodgroup,
+						pf: this.editdata.pf,
 					});
 				}
 			})

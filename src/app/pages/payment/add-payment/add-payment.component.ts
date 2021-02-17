@@ -5,7 +5,6 @@ import {
 	FormGroup,
 	Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicantCreateService } from 'src/app/services/applicant-create/applicant-create.service';
 import { CenterService } from 'src/app/services/center/center.service';
 import { GroupService } from 'src/app/services/group/group.service';
@@ -21,6 +20,7 @@ export class AddPaymentComponent implements OnInit {
 	applicantid: any;
 	amount: number;
 	isVisible: boolean = false;
+	isgrouppayment: boolean = false;
 	listOfData: any = [];
 	title: string = 'Payment';
 	btnName: string = 'Submit';
@@ -59,6 +59,7 @@ export class AddPaymentComponent implements OnInit {
 			this.groupdata = groupdata;
 		})
 	}
+
 	resetForm(e: MouseEvent): void {
 		e.preventDefault();
 		this.validateForm.reset();
@@ -73,16 +74,30 @@ export class AddPaymentComponent implements OnInit {
 	showModal(applicantid): void {
 		this.isVisible = true;
 		this.applicantid = applicantid;
+		this.amount = this.groupdata[0].emiamount;
 	}
 
 	handleOk(): void {
-		this.paymentservice.paymentCreate({ applicantid: this.applicantid, amount: this.amount }).subscribe(data => {
-		})
+		if (this.isgrouppayment) {
+			const applicantids = this.listOfData.map(m => m.applicantid);
+			this.paymentservice.GrouppaymentCreate(this.validateForm.get('groupid').value, { applicantids, amount: this.amount }).subscribe(() => {
+			})
+		} else {
+			this.paymentservice.paymentCreate({ applicantid: this.applicantid, amount: this.amount }).subscribe(() => {
+			})
+		}
 		this.isVisible = false;
 	}
 
 	handleCancel(): void {
 		this.isVisible = false;
+	}
+
+	grouppayment(): void {
+		this.isVisible = true;
+		this.isgrouppayment = true;
+		this.amount = this.groupdata[0].emiamount;
+		this.submitForm();
 	}
 
 }
