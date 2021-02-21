@@ -14,9 +14,9 @@
         <nz-form-item>
           <nz-form-label nzRequired class="p-0" [nzSpan]="24">Select Employee</nz-form-label>
           <nz-form-control nzHasFeedback nzErrorTip="Please input your Applicant Id!" [nzSpan]="24">
-            <nz-select (ngModelChange)="loadGroup($event)" nzShowSearch nzAllowClear formControlName="employeeid"
-              nzPlaceHolder="Select center">
-              <nz-option *ngFor="let center of centerdata" [nzLabel]="center.centername" [nzValue]="center.centerid">
+            <nz-select nzShowSearch nzAllowClear formControlName="employeeid" nzPlaceHolder="Select center">
+              <nz-option *ngFor="let employee of employies"
+                [nzLabel]="employee.employeename+' - '+employee.employeecode" [nzValue]="employee.employeeid">
               </nz-option>
             </nz-select>
           </nz-form-control>
@@ -27,7 +27,7 @@
         <nz-form-item>
           <nz-form-label nzRequired class="p-0" [nzSpan]="24">Select Collection Date</nz-form-label>
           <nz-form-control nzHasFeedback nzErrorTip="Please input your Loan Id!" [nzSpan]="24">
-            <nz-date-picker formControlName="collectiondate" (ngModelChange)="onChange($event)"></nz-date-picker>
+            <nz-date-picker formControlName="collectiondate"></nz-date-picker>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -37,45 +37,71 @@
         <nz-form-control>
           <button nz-button nzType="primary">Load Report</button>
         </nz-form-control>
+        <nz-form-control>
+          <button nz-button nzType="primary" [useExistingCss]="true" printSectionId="print-section"
+            ngxPrint>Print</button>
+        </nz-form-control>
       </nz-form-item>
     </div>
   </form>
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="24">
-      <nz-table #payment [nzData]="listOfData">
+      <nz-table #fieldreport [nzData]="listOfData">
         <thead>
           <tr>
             <th>sl.no</th>
-            <th>Applicant Id</th>
-            <th>Applicant Name</th>
+            <th>Center Name</th>
+            <th>Group Name</th>
             <th>Payment</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of payment.data; let i=index">
+          <tr *ngFor="let data of fieldreport.data; let i=index">
             <td>{{ i+1 }}</td>
-            <td>{{ data.formid }}</td>
-            <td style="text-transform: uppercase;">{{ data.applicantname }}</td>
-            <td>
-              <a (click)="showModal(data.applicantid)">Make Payment</a>
-            </td>
+            <td>{{ data.centername }}</td>
+            <td style="text-transform: uppercase;">{{ data.groupname }}</td>
+            <td>{{ data.amount }}</td>
           </tr>
         </tbody>
       </nz-table>
     </div>
   </div>
 
-  <nz-modal [(nzVisible)]="isVisible" nzTitle="Payment" nzOkText="Ok" nzCancelText="Cancel" (nzOnOk)="handleOk()"
-    (nzOnCancel)="handleCancel()">
-    <ng-container *nzModalContent>
-      <nz-form-item>
-        <nz-form-label nzRequired class="p-0" [nzSpan]="24">Enter Payment</nz-form-label>
-        <nz-form-control nzHasFeedback nzErrorTip="Please input your Applicant Id!" [nzSpan]="24">
-          <nz-input-group nzAddOnBefore="&#8377;">
-            <input nz-input [(ngModel)]="amount" />
-          </nz-input-group>          
-        </nz-form-control>
-      </nz-form-item>
-    </ng-container>
-  </nz-modal>
+
+  <div id="print-section">
+    <div nz-row [nzGutter]="12">
+      <div nz-col nzSpan="12" style="width: 100%;
+      line-height: 40px;
+      padding: 6px;
+      font-size: 16px;">
+        Employee Id: {{displayobj?.employeename}}
+      </div>
+      <div nz-col nzSpan="12" style="width: 100%;
+      line-height: 40px;
+      padding: 6px;
+      font-size: 16px;">
+        Collection Date: {{displayobj?.collectiondate | date:'dd-MM-yyyy'}}
+      </div>
+    </div>
+    <table style="border:1px solid #000; width: 100%; text-align: center;">
+      <thead>
+        <tr style="border:1px solid #000;">
+          <th style="border:1px solid #000;">sl.no</th>
+          <th style="border:1px solid #000;">Center Name</th>
+          <th style="border:1px solid #000;">Group Name</th>
+          <th style="border:1px solid #000;">Amount</th>
+          <th style="border:1px solid #000;">Signature</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border:1px solid #000;" *ngFor="let data of listOfData; let i=index">
+          <td style="border:1px solid #000;">{{ i+1 }}</td>
+          <td style="border:1px solid #000;">{{ data.centername}}</td>
+          <td style="border:1px solid #000;">{{ data.groupname }}</td>
+          <td style="border:1px solid #000;">{{ data.amount }}</td>
+          <td style="border:1px solid #000;"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

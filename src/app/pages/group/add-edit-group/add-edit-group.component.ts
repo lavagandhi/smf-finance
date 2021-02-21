@@ -49,7 +49,7 @@ export class AddEditGroupComponent implements OnInit {
 			centerid: [null, [Validators.required]],
 			installmentday: [null, [Validators.required]],
 			repayment: [null, [Validators.required]],
-			loanstartdate: [null, [Validators.required]],
+			nextcollectiondate: [null, [Validators.required]],
 			emiamount: [null, [Validators.required]],
 		});
 
@@ -65,7 +65,7 @@ export class AddEditGroupComponent implements OnInit {
 						centerid: this.editdata.centerid,
 						installmentday: this.editdata.installmentday,
 						repayment: this.editdata.repayment,
-						loanstartdate: this.editdata.loanstartdate
+						nextcollectiondate: this.editdata.nextcollectiondate
 					});
 				}
 			})

@@ -5,6 +5,7 @@ import { SharedModule } from 'src/app/shared';
 import { IconsProviderModule } from 'src/app/icons-provider.module';
 import { ViewFieldReportComponent } from './view-field-report/view-field-report.component';
 import { FieldReportRoutingModule } from './field-report-routing.module';
+import { NgxPrintModule } from 'ngx-print';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { FieldReportRoutingModule } from './field-report-routing.module';
     CommonModule,
     SharedModule,
     IconsProviderModule,
-    FieldReportRoutingModule
+    FieldReportRoutingModule,
+    NgxPrintModule
   ],
   declarations: [ViewFieldReportComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

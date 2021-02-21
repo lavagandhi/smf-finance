@@ -35,4 +35,8 @@ export class EmployeeService {
     });
   }
 
+  getfieldreport(data): Observable<any> {
+    return this.http.post(`${this.API_URL}employee/fieldreport`, data).pipe(first(), map((data: any) => data.data));
+  }
+
 }
