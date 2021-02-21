@@ -14,17 +14,21 @@
     <nz-table #basicTable [nzData]="listOfDisplayData">
       <thead>
         <tr>
-          <th nzCustomFilter>Applicant Id<nz-filter-trigger [(nzVisible)]="visibleid" [nzActive]="searchid.length > 0" [nzDropdownMenu]="menuid">
-            <i nz-icon nzType="search"></i>
-          </nz-filter-trigger></th>
-          <th nzCustomFilter>Applicant Name<nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-            <i nz-icon nzType="search"></i>
-          </nz-filter-trigger></th>
+          <th nzCustomFilter>Applicant Id<nz-filter-trigger [(nzVisible)]="visibleid" [nzActive]="searchid.length > 0"
+              [nzDropdownMenu]="menuid">
+              <i nz-icon nzType="search"></i>
+            </nz-filter-trigger>
+          </th>
+          <th nzCustomFilter>Applicant Name<nz-filter-trigger [(nzVisible)]="visible"
+              [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+              <i nz-icon nzType="search"></i>
+            </nz-filter-trigger>
+          </th>
           <th>Loan Id</th>
           <th>Center Name</th>
           <th>Group Name</th>
           <th>Loan Amount</th>
-          <th>Loan Day</th>
+          <th>Loan Status</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -36,13 +40,15 @@
           <td>{{ data.centername }}</td>
           <td>{{ data.groupname }}</td>
           <td>{{ (data?.loans[0]?.loanamount | number:'1.2-2') || '-' }}</td>
-          <td>{{data?.installmentday || '-'}}</td>
+          <td>{{data?.loanstatus}}</td>
           <td>
             <a (click)="edit(data.applicantid)"><i nz-icon nzType="edit" nzTheme="outline"></i></a>
             <nz-divider nzType="vertical"></nz-divider>
             <a (click)="delete(data.applicantid)"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
             <nz-divider nzType="vertical"></nz-divider>
             <a (click)="gotoViewdetail(data.applicantid)"><i nz-icon nzType="eye" nzTheme="outline"></i></a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a *ngIf="data?.processmode" (click)="chooseLoanStatus(data.applicantid)"><i nz-icon nzType="check-circle" nzTheme="outline"></i></a>
           </td>
         </tr>
       </tbody>
@@ -71,3 +77,19 @@
     </nz-dropdown-menu>
   </div>
 </div>
+
+<nz-modal [(nzVisible)]="modalvisible" nzTitle="Loan Status" nzOkText="Ok" nzCancelText="Cancel" (nzOnOk)="handleOk()"
+  (nzOnCancel)="handleCancel()">
+  <ng-container *nzModalContent>
+    <nz-form-item>
+      <nz-form-label nzRequired class="p-0" [nzSpan]="24">Select Loan Status</nz-form-label>
+      <nz-form-control nzHasFeedback nzErrorTip="Please input EMI Amount!" [nzSpan]="24">
+        <nz-select [(ngModel)]="loanstatus" nzShowSearch nzAllowClear nzPlaceHolder="Select Loan Status">
+          <nz-option nzLabel="Approved" nzValue="approved"></nz-option>
+          <nz-option nzLabel="Pending" nzValue="pending"></nz-option>
+          <nz-option nzLabel="Cancelled" nzValue="cancelled"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+</nz-modal>

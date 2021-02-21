@@ -19,7 +19,6 @@
           <th>Center Name</th>
           <th>Next Collection Date</th>
           <th>EMI Day</th>
-          <th>Status</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -27,9 +26,8 @@
         <tr *ngFor="let data of basicTable.data">
           <td>{{ data.groupname }}</td>
           <td>{{ data.centername }}</td>
-          <td>{{ data.nextcollectiondate }}</td>
+          <td>{{ data.nextcollectiondate | date: 'dd-MM-yyyy'}}</td>
           <td>{{ data.installmentday }}</td>
-          <td>PAID</td>
           <td>
             <a (click)="edit(data.groupid)"><i nz-icon nzType="edit" nzTheme="outline"></i></a>
             <nz-divider nzType="vertical"></nz-divider>

@@ -30,8 +30,11 @@ export class ViewApplicantComponent implements OnInit {
   searchValue = '';
   searchid = '';
   visible = false;
-  visibleid=false;
-  listOfDisplayData :any= [];
+  modalvisible: boolean = false;
+  visibleid = false;
+  loanstatus: string;
+  applicantid: string;
+  listOfDisplayData: any = [];
   constructor(
     private router: Router,
     private modal: NzModalService,
@@ -49,11 +52,11 @@ export class ViewApplicantComponent implements OnInit {
         this.groupdata = groupdata;
 
         this.applicantCreateService.getallfulldetails().subscribe(data => {
-         
-          this.listOfData = [...data].map(m=> {
-            m.centername = this.centerdata.find(c=>c.centerid === m.centerid)?.centername;
-            m.groupname = this.groupdata.find(c=>c.groupid === m.groupid)?.groupname;
-            m.installmentday =this.groupdata.find(c=>c.groupid === m.groupid)?.installmentday;
+
+          this.listOfData = [...data].map(m => {
+            m.centername = this.centerdata.find(c => c.centerid === m.centerid)?.centername;
+            m.groupname = this.groupdata.find(c => c.groupid === m.groupid)?.groupname;
+            m.installmentday = this.groupdata.find(c => c.groupid === m.groupid)?.installmentday;
             return m;
           });
           this.listOfDisplayData = [...this.listOfData];
@@ -78,7 +81,7 @@ export class ViewApplicantComponent implements OnInit {
     this.visibleid = false;
     this.listOfDisplayData = this.listOfData.filter((item) => item.formid.indexOf(this.searchid) !== -1);
   }
-  resetid(){
+  resetid() {
     this.searchid = '';
     this.searchbyid();
   }
@@ -106,7 +109,24 @@ export class ViewApplicantComponent implements OnInit {
   }
 
   gotoViewdetail(applicantid) {
-    this.router.navigate(['/view-details/'+applicantid])
+    this.router.navigate(['/view-details/' + applicantid])
   }
 
+  chooseLoanStatus(applicantid) {
+    this.applicantid = applicantid;
+    this.modalvisible = true;
+  }
+
+  handleOk() {
+    this.applicantCreateService.loanstatusupdate(this.applicantid, this.loanstatus).subscribe(data => {
+      if (data) {
+        this.successService.ResponseMessage("success", "Applicant Loan Status Update");
+        this.ngOnInit();
+      }
+    })
+  }
+
+  handleCancel() {
+    this.modalvisible = false;
+  }
 }

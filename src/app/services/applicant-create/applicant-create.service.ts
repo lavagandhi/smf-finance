@@ -53,4 +53,8 @@ export class ApplicantCreateService {
 	uploadimage(imagedata: any): Observable<any> {
 		return this.http.post(`${this.API_URL}applicant/uploadimage`, imagedata).pipe(first(), map((data: any) => data.data));
 	}
+
+	loanstatusupdate(applicantid: string, loanstatus: string): Observable<any> {
+		return this.http.put(`${this.API_URL}applicant/loanstatusupdate/${applicantid}`, { loanstatus }).pipe(first(), map((data: any) => data.data));
+	}
 }
