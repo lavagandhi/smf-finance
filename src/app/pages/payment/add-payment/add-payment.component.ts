@@ -49,7 +49,7 @@ export class AddPaymentComponent implements OnInit {
 		}
 		if (this.validateForm.valid) {
 			this.applicatservice.getapplicantbygroup(this.validateForm.value.groupid).subscribe(data => {
-				this.listOfData = data.filter(f => f.processmode);
+				this.listOfData = data.filter(f => f.loanstatus === "approved");
 			})
 		}
 	}
