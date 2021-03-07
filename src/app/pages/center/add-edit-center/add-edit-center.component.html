@@ -22,14 +22,19 @@
           <textarea formControlName="centeraddress" nz-input rows="2" placeholder="write any thing"></textarea>
         </nz-form-control>
       </nz-form-item>
-
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Mobile Number</nz-form-label>
+        <nz-form-control nzHasFeedback [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Center Mobile No !">
+          <input nz-input formControlName="mobileno" placeholder="Mobile Number" name="" />
+        </nz-form-control>
+      </nz-form-item>
       <nz-form-item>
         <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Select Employee Name</nz-form-label>
         <nz-form-control nzHasFeedback nzErrorTip="Please input your center Name!" [nzSm]="14" [nzXs]="24">
           <nz-select nzShowSearch nzAllowClear formControlName="employeeid" nzPlaceHolder="Select employee name">
             <nz-option *ngFor="let employee of employeedetails"
               [nzLabel]="employee.employeecode +' - '+employee.employeename " [nzValue]="employee.employeeid">
-            </nz-option>\
+            </nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>

@@ -11,7 +11,7 @@
 
   <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" nzLayout="horizontal">
     <div nz-row [nzGutter]="12">
-      <div nz-col nzSpan="12">
+      <div nz-col nzSpan="24">
         <nz-form-item>
           <nz-form-label nzRequired class="p-0" [nzSpan]="24">Loan Id</nz-form-label>
           <nz-form-control nzHasFeedback nzErrorTip="Please input your Loan Id!" [nzSpan]="24">
@@ -19,13 +19,15 @@
           </nz-form-control>
         </nz-form-item>
       </div>
-    </div>
-    <div class="position-right">
-      <nz-form-item>
-        <nz-form-control>
-          <button nz-button nzType="primary">Calculate</button>
-        </nz-form-control>
-      </nz-form-item>
+
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-control>
+            <button nz-button nzType="primary">Calculate</button>
+            <button style="margin-left: 5px;" nz-button nzType="primary" [useExistingCss]="true" printSectionId="print-section" ngxPrint>Print</button>
+          </nz-form-control>
+        </nz-form-item>       
+      </div>
     </div>
   </form>
 
@@ -60,4 +62,35 @@
         </tbody>
       </nz-table>
     </div>
+  </div>
+
+  <div id="print-section">
+    <table style="border:1px solid #000; width: 100%; text-align: center;">
+      <thead>
+        <tr style="border:1px solid #000;">
+          <th style="border:1px solid #000;">sl.no</th>
+          <th style="border:1px solid #000;">Installment Date</th>
+          <th style="border:1px solid #000;">Installment Amt</th>
+          <th style="border:1px solid #000;">Principal</th>
+          <th style="border:1px solid #000;">Int</th>
+          <th style="border:1px solid #000;">Balance</th>
+          <th style="border:1px solid #000;">Collected Date</th>
+          <th style="border:1px solid #000;">Collected Amt</th>
+          <th style="border:1px solid #000;">Days</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border:1px solid #000;" *ngFor="let data of listOfData; let i=index">
+          <td style="border:1px solid #000;">{{ i+1 }}</td>
+          <td style="border:1px solid #000;">{{ data.installmentdate | date:'dd-MM-yyyy' }} ({{data.installmentday}})</td>
+          <td style="border:1px solid #000;">{{ data.installmentamount }}</td>
+          <td style="border:1px solid #000;">{{ data.principal }}</td>
+          <td style="border:1px solid #000;">{{ data.int }}</td>
+          <td style="border:1px solid #000;">{{ data.balance }}</td>
+          <td style="border:1px solid #000;">{{ data.collecteddate | date:'dd-MM-yyyy'}} ({{data.collectedday}})</td>
+          <td style="border:1px solid #000;">{{ data.collectedamount }}</td>
+          <td style="border:1px solid #000;"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>

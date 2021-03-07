@@ -35,6 +35,7 @@ export class AddEditCenterComponent implements OnInit {
 			centername: [null, [Validators.required]],
 			centeraddress: [null, [Validators.required]],
 			employeeid: [null, [Validators.required]],
+			mobileno: [null, [Validators.required]],
 		});
 		this.groupid = this.activatedRoute.snapshot.paramMap.get('id');
 
@@ -50,8 +51,9 @@ export class AddEditCenterComponent implements OnInit {
 					this.editdata = data;
 					this.validateForm.patchValue({
 						centername: this.editdata.centername,
-						centeraddress: this.editdata.centeraddress
-
+						centeraddress: this.editdata.centeraddress,
+						employeeid: this.editdata.employeeid,
+						mobileno: this.editdata.mobileno
 					});
 				}
 			});

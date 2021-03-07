@@ -65,7 +65,8 @@ export class AddEditGroupComponent implements OnInit {
 						centerid: this.editdata.centerid,
 						installmentday: this.editdata.installmentday,
 						repayment: this.editdata.repayment,
-						nextcollectiondate: this.editdata.nextcollectiondate
+						nextcollectiondate: this.editdata.nextcollectiondate,
+						emiamount: this.editdata.emiamount
 					});
 				}
 			})
